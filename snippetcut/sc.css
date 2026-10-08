@@ -120,3 +120,19 @@ h2{font-size:clamp(34px,5.4vw,60px);line-height:1.08;font-weight:800;letter-spac
 body{overflow-wrap:break-word}
 h1,h2,h3{text-wrap:balance}
 p,li,.lead,summary{text-wrap:pretty}
+
+/* 다크 모드: 기기 설정(어둡게)을 따라간다 */
+@media (prefers-color-scheme: dark){
+  :root{--ink:#f5f5f7; --mute:#a1a1a6; --line:#2c2c2e; --bg:#000; --soft:#161617}
+  a,.link{color:#2997ff}
+  .nav{background:rgba(0,0,0,.72);border-bottom-color:rgba(255,255,255,.08)}
+  .links a{color:var(--ink)}
+  .btn{background:#f5f5f7;color:#000;border-color:#f5f5f7}
+  .btn.ghost{background:transparent;color:var(--ink);border-color:#48484a}
+  .hero{background:radial-gradient(1200px 500px at 50% 0%,#2a1018 0%,#000 60%)}
+  .step{background:#1c1c1e}
+  .faq details{background:#1c1c1e}
+  .tile.dark{background:#0b0b0c;border:1px solid #1f1f22}
+  .card li{border-top-color:var(--line)}
+  .doc p,.doc li{color:#d1d1d6}
+}
