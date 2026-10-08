@@ -118,3 +118,8 @@ section{padding:96px 0}
 .foot a{color:var(--gold2)}
 .foot .in{display:flex;flex-direction:column;gap:6px;align-items:center;text-align:center}
 .foot .c{opacity:.6;font-size:12px;margin-top:6px}
+.plan.church{max-width:880px;margin:22px auto 0;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.plan.church .cdesc{color:var(--mute);font-size:15px;margin-top:6px}
+.plan.church .pr{margin:0 0 10px}
+.cright{text-align:right;flex:none}
+@media (max-width:760px){.plan.church{flex-direction:column;align-items:flex-start}.cright{text-align:left}}
