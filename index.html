@@ -1,36 +1,132 @@
 <!doctype html>
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>남은 조각 — 설교·강의 쇼츠 만들기</title>
-<meta name="description" content="설교와 강의 영상에서 꼭 전하고 싶은 한 조각을 거두어 세로 쇼츠 영상으로 만드는 맥·아이패드 앱">
-<link rel="icon" href="icon.png"><link rel="stylesheet" href="style.css"></head>
-<body><div class="wrap">
-<header><img src="icon.png" alt=""><div><h1>남은 조각</h1><p>설교·강의 쇼츠 만들기 · Namun Jogak</p></div></header>
+<title>남은 조각 — 주일 말씀의 한 조각을 쇼츠로</title>
+<meta name="description" content="설교 영상에서 은혜의 한 대목을 골라 1분 세로 쇼츠로 만드는 맥·아이패드 앱. 받아쓰기, AI 구간 추천, 교회 템플릿, 유튜브 예약 공개까지.">
+<meta property="og:title" content="남은 조각 — 주일 말씀의 한 조각을 쇼츠로">
+<meta property="og:description" content="설교 영상에서 은혜의 한 대목을 골라 1분 세로 쇼츠로 만드는 맥·아이패드 앱">
+<meta property="og:image" content="https://alma9777a-source.github.io/img/tpl_grace.jpg">
+<link rel="icon" href="icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<script src="pay.js" defer></script>
+</head>
+<body>
+<nav class="nav"><div class="in">
+  <a class="brand" href="#top"><img src="icon.png" alt="">남은 조각</a>
+  <div class="links"><a href="#story">이야기</a><a href="#how">쓰는 법</a><a href="#features">기능</a><a href="#templates">템플릿</a><a href="#price">가격</a><a href="#faq">자주 묻는 질문</a></div>
+  <a class="btn sm" href="#price">무료로 써 보기</a>
+</div></nav>
 
-<div class="verse">“남은 조각을 거두고 버리는 것이 없게 하라”<cite>요한복음 6:12</cite></div>
+<header class="hero" id="top">
+  <div class="in">
+    <div class="hero-txt">
+      <p class="verse">“남은 조각을 거두고 버리는 것이 없게 하라”<cite>요한복음 6:12</cite></p>
+      <h1>주일 말씀의 한 조각을,<br><em>한 주 내내</em> 성도의 손안에.</h1>
+      <p class="lead">설교 영상을 넣으면 받아쓰고, 다시 들려줄 만한 은혜의 대목을 AI가 골라 주고, 교회 이름과 말씀 본문을 넣은 1분 세로 쇼츠로 만들어 줍니다. 유튜브 예약 공개까지 한 번에.</p>
+      <div class="cta"><a class="btn" href="#price">7일 무료로 시작하기</a><a class="btn ghost" href="#how">어떻게 쓰나요?</a></div>
+      <p class="note">맥(macOS 13 이상) · 아이패드(iPadOS 16.4 이상)</p>
+    </div>
+    <div class="hero-phones">
+      <img class="ph p1" src="img/tpl_card.jpg" alt="말씀 카드 템플릿으로 만든 쇼츠">
+      <img class="ph p2" src="img/tpl_grace.jpg" alt="은혜 한 줄 템플릿으로 만든 쇼츠">
+      <img class="ph p3" src="img/tpl_sunday.jpg" alt="주일 예고 템플릿으로 만든 쇼츠">
+    </div>
+  </div>
+</header>
 
-<p>‘남은 조각’은 주일에 떼어진 말씀에서 은혜의 한 조각을 거두어, 1분 남짓한 세로 쇼츠 영상으로 담는 앱입니다. 설교는 물론 강의·강연 영상에도 쓸 수 있습니다. 영상을 넣으면 한국어로 받아쓰고, 다시 들려줄 만한 구간을 고르고, 제목·자막·교회 로고를 입힌 영상을 만듭니다.</p>
-<img class="shot" src="screen.jpg" alt="남은 조각 앱 화면">
+<section class="story" id="story"><div class="in narrow">
+  <h2>오병이어 뒤에 남은 열두 바구니</h2>
+  <p>오천 명이 배불리 먹은 뒤에도 예수님은 남은 조각을 거두라고 하셨습니다. 주일 설교도 그렇습니다. 기도로 준비한 말씀은 예배가 끝나면 대부분 그 자리에 머물고, 한 주가 지나면 잊혀지곤 합니다. 그 안에 다시 들려야 할 한 문장, 누군가를 일으킬 한 대목이 숨어 있는데도 말입니다.</p>
+  <p><b>‘남은 조각’은 새로운 말씀을 만드는 도구가 아닙니다.</b> 이미 나누어진 말씀이 버려지지 않도록 다시 거두어, 성도와 이웃의 손안에서 한 주 내내 다시 말씀이 되게 하는 도구입니다.</p>
+</div></section>
 
-<h2>하는 일</h2>
-<div class="cards">
-  <div class="card"><b>받아쓰기</b>설교 영상을 기기 안에서 한국어로 받아씁니다. 영상과 받아쓴 글은 외부로 보내지 않습니다.</div>
-  <div class="card"><b>조각 거두기</b>설교 가운데 쇼츠로 쓸 만한 구간 후보를 고릅니다(사용자가 고른 AI 채팅 또는 직접 선택).</div>
-  <div class="card"><b>쇼츠 만들기</b>제목·자막·설교 본문·교회 로고·배경 음악을 넣은 1080×1920 세로 영상을 만듭니다.</div>
-  <div class="card"><b>유튜브에 올리기</b>사용자가 연결한 본인의 유튜브 채널에, 사용자가 누른 영상만 올립니다. 공개 범위와 예약 공개 시각은 사용자가 정합니다.</div>
-</div>
+<section class="how" id="how"><div class="in">
+  <h2 class="center">설교 영상 하나면 됩니다</h2>
+  <p class="sub center">예배 전체 영상이어도 괜찮습니다. 설교 부분을 스스로 찾아냅니다.</p>
+  <ol class="steps">
+    <li><span>1</span><b>설교 넣기</b>유튜브 예배 영상 링크를 붙여 넣거나(맥) 영상 파일을 고릅니다. 맥 안에서 한국어로 받아씁니다.</li>
+    <li><span>2</span><b>조각 거두기</b>AI가 설교 가운데 30~58초짜리 구간 6개를 서로 겹치지 않게 골라 줍니다. 제목 두 줄과 자막까지.</li>
+    <li><span>3</span><b>다듬기</b>맞춤법 검사, 긴 쉼·되풀이 말 잘라내기(AI로 다듬기), 시작·끝 조정. 고른 것만 바뀝니다.</li>
+    <li><span>4</span><b>쇼츠 만들기·올리기</b>교회 템플릿을 고르고 영상을 만듭니다. 유튜브에 바로 올리고 ‘다음 주일 오전 6시’처럼 예약 공개도 됩니다.</li>
+  </ol>
+</div></section>
 
-<h2>유튜브 연결에 대하여</h2>
-<p>앱의 ‘유튜브에 올리기’를 쓰려면 사용자가 직접 구글 계정으로 로그인해 권한을 허락해야 합니다. 앱은 이 권한을 <b>사용자가 고른 쇼츠 영상을 사용자의 채널에 올리는 일</b>과 <b>올릴 채널 이름을 보여 주는 일</b>에만 씁니다. 자세한 내용은 <a href="privacy.html">개인정보처리방침</a>을 보세요. 연결은 앱 설정에서 언제든 해제할 수 있습니다.</p>
+<section class="features" id="features"><div class="in">
+  <h2 class="center">목회 현장을 위해 만들었습니다</h2>
+  <div class="grid">
+    <div class="f"><i>📖</i><b>말씀 중심의 AI</b>예장합동·개혁주의 기준으로, 율법적 압박보다 은혜의 선언이 드러나는 구간을 고르도록 요청합니다. 성경 표기는 개역개정.</div>
+    <div class="f"><i>⛪</i><b>교회 이름·로고·본문</b>쇼츠 아래쪽에 교회 이름이나 로고, 그 위에 설교 본문이 들어갑니다. 한 번 넣으면 계속 쓰입니다.</div>
+    <div class="f"><i>🎞️</i><b>템플릿 39종</b>말씀 카드, 은혜 한 줄, 주일 예고, 새가족 환영, 찬양 가사, 주일학교, 새벽 기도, 절기 카드까지. 우리 교회 템플릿도 직접 만듭니다.</div>
+    <div class="f"><i>✂️</i><b>AI로 다듬기</b>긴 쉼, 같은 말 되풀이, 어색한 안내 멘트를 찾아 잘라낼 곳으로 보여 줍니다. 잘라낸 말은 자막에서도 지워집니다.</div>
+    <div class="f"><i>🎵</i><b>저작권 걱정 없는 음악 21곡</b>잔잔한 묵상부터 승리의 선포, 결단의 시간, 쇼츠 인기 스타일까지. 모두 이 앱에서 직접 만든 곡입니다.</div>
+    <div class="f"><i>📅</i><b>유튜브 예약 공개</b>제목·설명란·해시태그를 AI가 써 주고, 원하는 시각에 자동으로 공개되게 올립니다. 맥이 꺼져 있어도 됩니다.</div>
+    <div class="f"><i>🔒</i><b>영상은 맥 안에서만</b>받아쓰기와 영상 만들기는 모두 기기 안에서 합니다. 설교 영상을 외부 서버로 보내지 않습니다.</div>
+    <div class="f"><i>💬</i><b>쓰시는 AI 그대로</b>Claude·ChatGPT·Gemini 채팅에 붙여 넣어 쓰면 API 키가 없어도 됩니다. 자동 방식도 고를 수 있습니다.</div>
+  </div>
+</div></section>
 
-<h2>만든 곳</h2>
-<p>나눔조각 · 문의 010-2753-8669 · <a href="mailto:alma9777a@gmail.com">alma9777a@gmail.com</a></p>
+<section class="templates" id="templates"><div class="in">
+  <h2 class="center">교회를 위한 템플릿</h2>
+  <p class="sub center">실제 주일 설교 영상으로 만든 예시입니다. 움직이는 빛·눈·별 효과와 이모티콘도 얹을 수 있습니다.</p>
+  <div class="strip">
+    <figure><img src="img/tpl_grace.jpg" alt=""><figcaption>은혜 한 줄</figcaption></figure>
+    <figure><img src="img/tpl_card.jpg" alt=""><figcaption>말씀 카드</figcaption></figure>
+    <figure><img src="img/tpl_hl.jpg" alt=""><figcaption>설교 하이라이트</figcaption></figure>
+    <figure><img src="img/tpl_calli.jpg" alt=""><figcaption>성경 구절 캘리그라피</figcaption></figure>
+    <figure><img src="img/tpl_sunday.jpg" alt=""><figcaption>주일 예고</figcaption></figure>
+    <figure><img src="img/tpl_dawn.jpg" alt=""><figcaption>새벽 기도</figcaption></figure>
+    <figure><img src="img/tpl_welcome.jpg" alt=""><figcaption>주일 광고 · 새가족</figcaption></figure>
+    <figure><img src="img/tpl_praise.jpg" alt=""><figcaption>찬양 가사</figcaption></figure>
+    <figure><img src="img/tpl_kids.jpg" alt=""><figcaption>어린이 주일학교</figcaption></figure>
+    <figure><img src="img/tpl_thanks.jpg" alt=""><figcaption>감사 카드</figcaption></figure>
+  </div>
+</div></section>
 
-<div class="en">
-<h2>About (English)</h2>
-<p><b>Namun Jogak</b> (“the remaining pieces”, John 6:12) is a macOS/iPadOS app that turns long talk videos — sermons, lectures and speeches — into Shorts. It transcribes the video on the device, helps the user pick a short passage, and renders a vertical 1080×1920 “Shorts” video with title, captions, scripture or source reference and logo.</p>
-<p><b>YouTube upload:</b> If the user signs in with Google and grants permission, the app uploads <b>only the video the user selects</b> to <b>the user’s own channel</b>, with the title, description, privacy setting and optional scheduled publish time the user enters. The app also reads the channel name to show where the video will be uploaded. See our <a href="privacy.html#en">Privacy Policy</a>.</p>
-<p>Contact: Nanum Jogak · <a href="mailto:alma9777a@gmail.com">alma9777a@gmail.com</a></p>
-</div>
+<section class="price" id="price"><div class="in">
+  <h2 class="center">7일 동안 모든 기능을 무료로</h2>
+  <p class="sub center">한 번 구입하면 계속 쓸 수 있습니다. 매달 내는 구독이 아닙니다.</p>
+  <div class="plans">
+    <div class="plan">
+      <h3>맥용</h3>
+      <p class="pr"><span data-price="namun.price_mac">19,000원</span><small> · 1회 구입</small></p>
+      <ul><li>유튜브 링크로 예배 영상 바로 받기</li><li>모든 템플릿·효과·음악</li><li>유튜브 자동 올리기·예약 공개</li><li>7일 무료 체험 후 등록 코드로 계속 사용</li></ul>
+      <div class="pbtn"><a class="btn" data-pay="namun.mac_trial">무료 체험 내려받기<em class="soonTag">곧 열립니다</em></a><a class="btn ghost" data-pay="namun.mac_buy">등록 코드 구입<em class="soonTag">곧 열립니다</em></a></div>
+    </div>
+    <div class="plan">
+      <h3>아이패드용 <small class="tag">App Store</small></h3>
+      <p class="pr"><span data-price="namun.price_ipad">19,000원</span><small> · 앱 내 구입</small></p>
+      <ul><li>사진 앱·파일 앱의 설교 영상으로 시작</li><li>모든 템플릿과 음악</li><li>사진 앱 저장·공유</li><li>7일 무료 체험 후에도 받아쓰기·편집은 계속 무료</li></ul>
+      <div class="pbtn"><a class="btn" data-pay="namun.ipad_appstore">App Store에서 받기<em class="soonTag">출시 준비 중</em></a></div>
+    </div>
+  </div>
+  <p class="note center">교회·노회 단위 구입이나 여러 대 등록은 <a href="mailto:alma9777a@gmail.com">alma9777a@gmail.com</a>으로 문의해 주세요.</p>
+</div></section>
 
-<footer>© 2026 나눔조각. All rights reserved. · <a href="privacy.html">개인정보처리방침 / Privacy Policy</a></footer>
-</div></body></html>
+<section class="faq" id="faq"><div class="in narrow">
+  <h2 class="center">자주 묻는 질문</h2>
+  <details><summary>설교 영상이 외부로 전송되나요?</summary><p>아닙니다. 받아쓰기와 영상 만들기는 모두 맥(아이패드) 안에서 합니다. AI 구간 추천을 쓸 때만 받아쓴 글이 사용자가 고른 AI(Claude·ChatGPT·Gemini)로 전달됩니다.</p></details>
+  <details><summary>AI 계정이나 API 키가 꼭 있어야 하나요?</summary><p>아닙니다. 기본 방식은 평소 쓰시는 AI 채팅에 요청 글을 붙여 넣는 방식이라 무료 계정으로도 됩니다. AI 없이 직접 구간을 고르는 수동 방식도 있습니다.</p></details>
+  <details><summary>찬양 MR이나 유행하는 노래를 넣어도 되나요?</summary><p>저작권이 있는 음원은 유튜브에서 소리가 꺼지거나 수익이 넘어갈 수 있습니다. 앱에 든 21곡은 모두 직접 만든 곡이라 안심하고 쓰실 수 있습니다. 유행곡은 유튜브 앱의 ‘사운드 추가’로 넣으시는 것을 권합니다.</p></details>
+  <details><summary>유튜브에 올리면 ‘비공개’로 올라가요.</summary><p>구글의 앱 심사가 끝나기 전에는 유튜브 규정상 비공개로만 올라갑니다. 지금 심사를 진행하고 있으며, 끝나면 공개·예약 공개가 바로 됩니다. 그동안은 유튜브 스튜디오에서 공개로 바꿔 주세요.</p></details>
+  <details><summary>교회 행사나 주일학교 영상에도 쓸 수 있나요?</summary><p>네. 주일 광고·새가족, 찬양 가사, 주일학교, 수련회 스케치, 퀴즈 같은 템플릿이 함께 들어 있습니다.</p></details>
+</div></section>
+
+<section class="yt" id="youtube"><div class="in narrow">
+  <h2>유튜브 연결에 대하여</h2>
+  <p>앱의 ‘유튜브에 올리기’를 쓰려면 사용자가 직접 구글 계정으로 로그인해 권한을 허락해야 합니다. 앱은 이 권한을 <b>사용자가 고른 쇼츠 영상을 사용자의 채널에 올리는 일</b>과 <b>올릴 채널 이름을 보여 주는 일</b>에만 씁니다. 연결 정보는 맥의 키체인에만 보관되고, 만든 곳의 서버로 보내지 않습니다. 자세한 내용은 <a href="privacy.html">개인정보처리방침</a>을 보세요. 연결은 앱 설정에서 언제든 해제할 수 있습니다.</p>
+</div></section>
+
+<section class="en" id="en"><div class="in narrow">
+  <h2>About Namun Jogak (English)</h2>
+  <p><b>Namun Jogak</b> (“the remaining pieces”, John 6:12) is a macOS/iPadOS app that turns sermon and talk videos into Shorts. It transcribes the video on the device, helps the user pick a short passage, and renders a vertical 1080×1920 “Shorts” video with title, captions, scripture reference and church logo.</p>
+  <p><b>YouTube upload:</b> If the user signs in with Google and grants permission, the app uploads <b>only the video the user selects</b> to <b>the user’s own channel</b>, with the title, description, privacy setting and optional scheduled publish time the user enters. The app also reads the channel name to show where the video will be uploaded. Tokens are stored only in the device keychain. See our <a href="privacy.html#en">Privacy Policy</a>.</p>
+  <p>Looking for a version for everyone? See <a href="snippetcut/">SnippetCut</a>.</p>
+</div></section>
+
+<footer class="foot"><div class="in">
+  <div><b>나눔조각</b> · 문의 <a href="mailto:alma9777a@gmail.com">alma9777a@gmail.com</a></div>
+  <div><a href="privacy.html">개인정보처리방침 / Privacy Policy</a> · <a href="snippetcut/">SnippetCut (누구나 쓰는 판)</a></div>
+  <div class="c">© 2026 나눔조각. All rights reserved.</div>
+</div></footer>
+</body></html>
