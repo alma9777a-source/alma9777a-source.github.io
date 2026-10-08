@@ -136,3 +136,11 @@ p,li,.lead,summary{text-wrap:pretty}
   .card li{border-top-color:var(--line)}
   .doc p,.doc li{color:#d1d1d6}
 }
+
+/* Windows 곧 출시 */
+.win-sec{text-align:center;background:var(--soft)}
+.win-sec h2{margin-bottom:18px}
+.wsub{font-size:clamp(18px,2vw,21px);color:var(--mute);max-width:720px;margin:0 auto 44px}
+.wshot{max-width:980px;width:100%;margin:0 auto;border-radius:16px;box-shadow:0 30px 70px rgba(122,77,255,.22)}
+.wcap{font-size:13px;color:var(--mute);margin-top:12px}
+@media (prefers-color-scheme: dark){.wshot{box-shadow:0 30px 70px rgba(240,69,122,.18)}}
