@@ -161,3 +161,9 @@ section{padding:96px 0}
 body{word-break:keep-all;overflow-wrap:break-word}
 h1,h2,h3,.plan h3,.steps li b,.f b{text-wrap:balance}
 p,li,.sub,.lead,.f,.steps li,figcaption,summary{text-wrap:pretty}
+
+/* 소개 영상 */
+.demo{background:#fff;border-bottom:1px solid var(--line);padding:80px 0}
+.vwrap{max-width:1000px;margin:0 auto;border-radius:18px;overflow:hidden;background:#0d2318;box-shadow:0 30px 70px rgba(23,64,44,.22);border:1px solid var(--line)}
+.vwrap video{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#0d2318}
+@media (max-width:860px){.demo{padding:56px 0}.vwrap{border-radius:12px}}
