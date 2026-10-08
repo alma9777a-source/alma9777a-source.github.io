@@ -38,19 +38,8 @@
 <section class="demo" id="demo"><div class="in">
   <h2 class="center">1분 만에 보는 남은 조각</h2>
   <p class="sub center">유튜브 링크를 넣고, AI가 고른 구간을 확인하고, 템플릿을 골라 영상을 만들기까지 실제 앱 화면입니다.</p>
-  <div class="vwrap"><video id="demoV" controls playsinline preload="metadata" poster="video/demo_poster.jpg" src="video/demo_0.mp4">영상을 재생할 수 없는 브라우저입니다.</video></div>
-  <script>
-  /* 소개 영상은 올리기 쉽게 4토막(약 19초씩)으로 나눠 두고, 끝나면 다음 토막을 이어서 튼다 */
-  (function(){
-    var v = document.getElementById("demoV"), n = 4, i = 0;
-    function pre(k){ if (k < n) try { fetch("video/demo_" + k + ".mp4"); } catch(e){} }
-    v.addEventListener("play", function(){ pre(i + 1); });
-    v.addEventListener("ended", function(){
-      i++; if (i >= n){ i = 0; v.src = "video/demo_0.mp4"; return; }
-      v.src = "video/demo_" + i + ".mp4"; v.play().catch(function(){});
-    });
-  })();
-  </script>
+  <div class="vwrap"><iframe src="https://www.youtube-nocookie.com/embed/VXZ29hIUuaE?rel=0&amp;modestbranding=1&amp;playsinline=1" title="남은 조각 소개 영상" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+  <p class="center" style="margin-top:14px;font-size:14px"><a href="https://youtu.be/VXZ29hIUuaE" target="_blank" rel="noopener">유튜브에서 크게 보기 ↗</a></p>
 </div></section>
 
 <section class="story" id="story"><div class="in narrow">
