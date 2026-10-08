@@ -123,3 +123,18 @@ section{padding:96px 0}
 .plan.church .pr{margin:0 0 10px}
 .cright{text-align:right;flex:none}
 @media (max-width:760px){.plan.church{flex-direction:column;align-items:flex-start}.cright{text-align:left}}
+
+/* 실제 화면 */
+.screens .shot{display:grid;grid-template-columns:1.55fr 1fr;gap:48px;align-items:center;margin-top:64px}
+.screens .shot.rev .win{order:2}
+.screens .win{background:#fff;border-radius:14px;overflow:hidden;border:1px solid var(--line);box-shadow:0 24px 60px rgba(23,64,44,.16)}
+.screens .bar{height:28px;display:flex;gap:7px;align-items:center;padding:0 12px;background:#f1eee6;border-bottom:1px solid var(--line)}
+.screens .bar i{width:11px;height:11px;border-radius:50%;background:#ff5f57}
+.screens .bar i:nth-child(2){background:#febc2e}.screens .bar i:nth-child(3){background:#28c840}
+.screens .stepno{display:inline-block;font-size:13px;font-weight:700;color:var(--green2);background:#eef4ef;border-radius:999px;padding:4px 12px;margin-bottom:14px}
+.screens h3{font-family:var(--serif);font-size:clamp(22px,2.6vw,30px);line-height:1.35;margin-bottom:12px}
+.screens .txt p{color:var(--mute);font-size:16px}
+@media (max-width:860px){.screens .shot{grid-template-columns:1fr;gap:22px;margin-top:48px}.screens .shot.rev .win{order:0}}
+.screens .shot.rev{grid-template-columns:1fr 1.55fr}
+.screens{word-break:keep-all}
+@media (max-width:860px){.screens .shot.rev{grid-template-columns:1fr}}
