@@ -240,3 +240,9 @@ p,li,.sub,.lead,.f,.steps li,figcaption,summary{text-wrap:pretty}
 .tplnote span{display:inline-block;font-weight:700;color:var(--green2);background:#eef4ef;border-radius:999px;padding:5px 14px;margin-right:6px}
 @media (max-width:640px){.tplnote span{display:block;margin:0 auto 8px;width:max-content;max-width:100%}}
 @media (prefers-color-scheme: dark){.tplnote span{background:#1f3328;color:#8fd6ab}}
+
+/* 아이패드: 맥과 다른 점 안내 */
+.ipnote{max-width:760px;margin:28px auto 0;background:var(--bg);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:14px;padding:20px 24px;word-break:keep-all}
+.ipnote>b{display:block;font-size:16px;margin-bottom:8px}
+.ipnote p{font-size:15px;color:#3d4a43;margin-top:8px}
+@media (prefers-color-scheme: dark){.ipnote{background:#16211a}.ipnote p{color:#c9d3cc}}
