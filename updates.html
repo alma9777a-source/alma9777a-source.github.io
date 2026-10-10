@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>업데이트 내역 — 남은 조각</title>
+<meta name="description" content="남은 조각 앱이 버전마다 무엇이 더해지고 고쳐졌는지 정리한 기록입니다.">
+<link rel="icon" href="icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css?v=202610110156">
+<style>
+.up{padding:56px 0 88px;word-break:keep-all}.up h1{font-family:var(--serif);font-size:clamp(30px,4vw,42px);margin-bottom:8px}
+.up .lead2{color:var(--mute);font-size:17px;margin-bottom:10px}
+.badge{display:inline-block;font-size:13px;font-weight:700;background:var(--gold2);color:#3b2d06;border-radius:999px;padding:4px 12px;margin-bottom:26px}
+.ver{position:relative;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px 28px;margin-top:16px}
+.ver.cur{border-color:var(--green2);box-shadow:0 10px 30px rgba(23,64,44,.10)}
+.ver header{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.ver h2{font-family:var(--sans);font-size:24px;font-weight:900;margin:0;color:var(--green2)}
+.ver h2 em{font-style:normal;font-size:12px;font-weight:700;background:var(--green);color:#fff;border-radius:999px;padding:3px 10px;margin-left:10px;vertical-align:middle}
+.vd{color:var(--mute);font-size:14px}.ver h3{font-size:17px;margin:6px 0 12px}
+.ver ul{list-style:none}.ver li{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-top:1px dashed var(--line);font-size:15px}
+.k{flex:none;font-size:12px;font-weight:700;border-radius:999px;padding:3px 10px;margin-top:2px}
+.k.add{background:#eef4ef;color:#2f7a51}.k.fix{background:#fdeeee;color:#b5564e}.k.chg{background:#f3ece0;color:#8a5a2b}
+.soon{margin-top:28px;border:1.5px dashed var(--green2);border-radius:20px;padding:24px 28px}
+.soon h2{font-family:var(--sans);font-size:20px;margin-bottom:10px}.soon li{margin:6px 0 6px 18px;font-size:15px}
+.soon p{color:var(--mute);font-size:13px;margin-top:10px}
+@media (prefers-color-scheme: dark){.k.add{background:#1f3328;color:#8fd6ab}.k.fix{background:#3a2222;color:#f0a8a2}.k.chg{background:#3a2f1f;color:#e0b98a}.ver.cur{box-shadow:0 10px 30px rgba(0,0,0,.4)}}
+</style></head>
+<body>
+<nav class="nav"><div class="in"><a class="brand" href="./"><img src="icon.png" alt="">남은 조각</a>
+<div class="links"><a href="./#demo">영상</a><a href="./#how">쓰는 법</a><a href="./#features">기능</a><a href="./#price">가격</a><a href="updates.html" style="color:var(--ink);font-weight:700">업데이트 내역</a></div>
+<a class="btn sm" href="./#price">무료로 써 보기</a></div></nav>
+<main class="up"><div class="in narrow">
+<h1>업데이트 내역</h1>
+<p class="lead2">남은 조각이 버전마다 무엇이 더해지고 고쳐졌는지 적어 둡니다.</p>
+<span class="badge">정식 출시(1.0) 준비 중 · 지금 버전 0.6</span>
+<article class="ver cur"><header><h2>버전 0.6<em>지금</em></h2><div class="vd">2026년 10월 10일</div></header><h3>실제 아이패드에서 다듬기</h3><ul><li><span class="k fix">고침</span><span>아이패드에서 영상을 넣어도 미리보기가 비어 보이고 ▶가 눌리지 않던 문제</span></li><li><span class="k fix">고침</span><span>미리보기에서 배경 음악이 뚝뚝 끊겨 들리던 문제 (맥·아이패드)</span></li><li><span class="k fix">고침</span><span>아이패드에서 만든 영상에 배경 효과와 이모티콘이 멈춰 있던 문제 — 이제 맥과 똑같이 움직입니다</span></li><li><span class="k fix">고침</span><span>아이패드에서 앱을 업데이트한 뒤 바구니의 예전 쇼츠를 유튜브에 올리지 못하던 문제</span></li><li><span class="k add">더함</span><span>구간을 고르기 전에도 ▶로 넣은 영상을 바로 틀어 볼 수 있습니다</span></li><li><span class="k chg">바꿈</span><span>아이패드 앱 아이콘을 남은 조각 바구니 그림으로 바로잡음</span></li></ul></article>
+<article class="ver"><header><h2>버전 0.5</h2><div class="vd">2026년 10월 9일</div></header><h3>우리 교회 기준에 맞추기</h3><ul><li><span class="k add">더함</span><span>설정에 ‘교단 · 신학 전통’ 고르기 — 합동·통합·고신·감리교·성결교·침례교·순복음·초교파</span></li><li><span class="k add">더함</span><span>설정에 ‘성경 번역’ 고르기 — 개역개정·개역한글·새번역·쉬운성경·우리말성경·공동번역 개정판</span></li><li><span class="k add">더함</span><span>아이패드에서도 만든 쇼츠를 유튜브에 바로 올리기 (예약 공개 포함)</span></li><li><span class="k chg">바꿈</span><span>어두운 템플릿에서도 교회 로고가 잘 보이도록 로고 뒤에 늘 흰 받침을 깝니다</span></li></ul></article>
+<article class="ver"><header><h2>버전 0.4</h2><div class="vd">2026년 10월 8일</div></header><h3>음악과 언어</h3><ul><li><span class="k add">더함</span><span>배경 음악 10곡 추가 — 모두 21곡 (잔잔한 묵상부터 쇼츠 인기 스타일까지, 저작권 걱정 없는 자체 제작)</span></li><li><span class="k add">더함</span><span>화면 언어 한국어 · English, 받아쓰기 언어 고르기 — 영어 설교도 자막으로</span></li><li><span class="k add">더함</span><span>자동 방식에서 ChatGPT · Gemini 키도 사용 (Claude 외 AI를 쓰는 교회를 위해)</span></li><li><span class="k chg">바꿈</span><span>문의처를 이메일로 안내</span></li></ul></article>
+<article class="ver"><header><h2>버전 0.3</h2><div class="vd">2026년 10월 7~8일</div></header><h3>템플릿과 꾸미기</h3><ul><li><span class="k add">더함</span><span>템플릿 라이브러리 — 교회용 · 유튜버용 · 재미·엔터, 모두 39종</span></li><li><span class="k add">더함</span><span>‘내 템플릿 만들기’ — 색·글꼴·영상 모양을 고르고, 글자 위치를 끌어 옮기고, 배경 사진 넣기</span></li><li><span class="k add">더함</span><span>움직이는 배경 효과 7가지와 움직이는 이모티콘</span></li><li><span class="k add">더함</span><span>‘AI로 다듬기’ — 긴 쉼, 되풀이, 어색한 말을 찾아 잘라낼 곳으로 제안</span></li></ul></article>
+<article class="ver"><header><h2>버전 0.2</h2><div class="vd">2026년 10월 6~7일</div></header><h3>아이패드와 유튜브</h3><ul><li><span class="k add">더함</span><span>아이패드판 — 사진 앱·파일 앱의 설교 영상으로 시작, 사진 앱에 저장·공유</span></li><li><span class="k add">더함</span><span>맥에서 유튜브에 바로 올리기 — 제목·설명·해시태그 자동, 공개 범위와 예약 공개</span></li><li><span class="k add">더함</span><span>설치 후 7일 동안 모든 기능 무료, 그 뒤 기기별 등록</span></li><li><span class="k chg">바꿈</span><span>설명란 패키지를 제목·설명란·해시태그로 간결하게</span></li></ul></article>
+<article class="ver"><header><h2>버전 0.1</h2><div class="vd">2026년 10월 6일</div></header><h3>첫 모습</h3><ul><li><span class="k add">더함</span><span>유튜브 링크나 영상 파일로 설교 넣기, 기기 안에서 한국어 받아쓰기</span></li><li><span class="k add">더함</span><span>AI가 쇼츠로 쓸 구간 후보 6개 추천 (Claude · ChatGPT · Gemini 채팅에 붙여넣기 방식 포함)</span></li><li><span class="k add">더함</span><span>말씀하신 순간에 맞춘 낱말 단위 자막, 맞춤법·문법 검사</span></li><li><span class="k add">더함</span><span>여러 구간 잘라내기, 설교 본문(성경 구절) 넣기, 교회 이름·로고</span></li><li><span class="k add">더함</span><span>분위기별 배경 음악 11곡과 크기 조절</span></li><li><span class="k chg">바꿈</span><span>앱 이름을 ‘남은 조각’으로 — “남은 조각을 거두고 버리는 것이 없게 하라”(요 6:12)</span></li></ul></article>
+
+<section class="soon"><h2>다음 버전에서 준비하고 있는 것</h2><ul><li>교회용 템플릿을 여섯 갈래로 넓히기 (설교자용 · 예배·행사 · 은혜·신앙 메시지 · 다음 세대·교육 · 교회 공동체 · 교회 브랜딩)</li><li>‘새 작업’ 단추 — 한 번에 처음 상태로</li><li>시작·끝 시간을 분:초로 보기 쉽게</li><li>AI 고르기를 한 곳에서 간단하게</li><li>앱 안에서 새 버전 알림</li></ul><p>준비 중인 내용이라 바뀔 수 있습니다.</p></section>
+</div></main>
+<footer class="foot"><div class="in">
+  <div><b>나눔조각</b> · 문의 <a href="mailto:alma9777a@gmail.com">alma9777a@gmail.com</a></div>
+  <div><a href="./">남은 조각 홈</a> · <a href="privacy.html">개인정보처리방침 / Privacy Policy</a></div>
+  <div class="c">© 2026 나눔조각. All rights reserved.</div>
+</div></footer>
+</body></html>
