@@ -234,3 +234,9 @@ p,li,.sub,.lead,.f,.steps li,figcaption,summary{text-wrap:pretty}
   .iplist li{color:#c9d3cc}
   .ipz{box-shadow:0 22px 50px rgba(0,0,0,.55)}
 }
+
+/* 템플릿 안내 */
+.tplnote{margin:18px auto 0;font-size:15px;color:var(--mute)}
+.tplnote span{display:inline-block;font-weight:700;color:var(--green2);background:#eef4ef;border-radius:999px;padding:5px 14px;margin-right:6px}
+@media (max-width:640px){.tplnote span{display:block;margin:0 auto 8px;width:max-content;max-width:100%}}
+@media (prefers-color-scheme: dark){.tplnote span{background:#1f3328;color:#8fd6ab}}
