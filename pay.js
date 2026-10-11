@@ -5,10 +5,8 @@ window.PAY = {
   namun: {
     price_mac: "49,000원",        // 맥용 등록(1대, 1회 구입)
     price_ipad: "29,000원",       // 아이패드 앱스토어 정식판(앱 내 구입)
-    price_church: "99,000원",     // 교회 묶음(맥 3대)
     mac_trial: "",                // 맥용 무료 체험 내려받기(dmg) 주소
     mac_buy: "",                  // 맥용 등록 코드 결제 링크
-    church_buy: "",               // 교회 묶음(맥 3대) 결제 링크
     ipad_appstore: ""             // 아이패드 앱스토어 주소
   },
   snippetcut: {
