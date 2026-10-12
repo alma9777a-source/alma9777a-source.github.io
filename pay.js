@@ -10,8 +10,8 @@ window.PAY = {
     ipad_appstore: ""             // 아이패드 앱스토어 주소
   },
   snippetcut: {
-    price_krw: "19,000원",
-    price_usd: "$14.99",
+    price_krw: "49,000원",
+    price_usd: "$34.99",
     mac_trial: "",                // Mac 무료 체험 내려받기 주소
     mac_buy: "",                  // Mac 정식판 결제 링크
     appstore: ""                  // App Store 주소(맥·아이패드 유니버설)
