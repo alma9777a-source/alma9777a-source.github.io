@@ -5,7 +5,7 @@ window.PAY = {
   namun: {
     price_mac: "49,000원",        // 맥용 등록(1대, 1회 구입)
     price_ipad: "29,000원",       // 아이패드 앱스토어 정식판(앱 내 구입)
-    mac_trial: "https://github.com/alma9777a-source/alma9777a-source.github.io/releases/download/v0.8.1/NamunJogak-0.8.1.dmg",   // 맥용 무료 체험 내려받기(dmg). 새 버전을 올리면 주소의 버전 두 곳을 바꾼다
+    mac_trial: "",                // 맥용 무료 체험 내려받기(dmg) 주소 — 구글 심사 결과를 볼 때까지 닫아 둠(2026-10-12). 열 때: 릴리스 v0.8.1의 초안 표시를 풀고 그 주소를 넣는다
     mac_buy: "mailto:alma9777a@gmail.com?subject=%EB%82%A8%EC%9D%80%20%EC%A1%B0%EA%B0%81%20%EB%93%B1%EB%A1%9D%20%EC%BD%94%EB%93%9C%20%EC%8B%A0%EC%B2%AD&body=%EC%95%84%EB%9E%98%20%EB%82%B4%EC%9A%A9%EC%9D%84%20%EC%A0%81%EC%96%B4%20%EB%B3%B4%EB%82%B4%20%EC%A3%BC%EC%84%B8%EC%9A%94.%0A%0A1.%20%EA%B8%B0%EA%B8%B0%20%EB%B2%88%ED%98%B8%28%EC%95%B1%EC%9D%98%20%EB%93%B1%EB%A1%9D%20%ED%99%94%EB%A9%B4%EC%97%90%20%EB%82%98%EC%98%B5%EB%8B%88%EB%8B%A4%29%3A%20%0A2.%20%EC%9D%B4%EB%A6%84%3A%20%0A3.%20%EA%B5%90%ED%9A%8C%20%EC%9D%B4%EB%A6%84%3A%20%0A4.%20%EC%97%B0%EB%9D%BD%EC%B2%98%3A%20%0A%0A%EA%B2%B0%EC%A0%9C%20%EB%B0%A9%EB%B2%95%EC%9D%84%20%EB%8B%B5%EC%9E%A5%EC%9C%BC%EB%A1%9C%20%EC%95%88%EB%82%B4%ED%95%B4%20%EB%93%9C%EB%A6%BD%EB%8B%88%EB%8B%A4.",   // 맥용 등록 코드 신청(메일 양식). 결제 서비스가 생기면 그 주소로 바꾼다
     ipad_appstore: ""             // 아이패드 앱스토어 주소
   },
