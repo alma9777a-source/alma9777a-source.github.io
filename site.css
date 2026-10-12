@@ -35,6 +35,8 @@ section{padding:96px 0}
 .btn .soonTag{display:none;font-style:normal;font-size:11px;font-weight:700;background:var(--gold2);color:#3b2d06;border-radius:999px;padding:2px 8px}
 .btn.soon{opacity:.55;cursor:default;transform:none}
 .btn.soon .soonTag{display:inline-block}
+.btn .newTag{font-style:normal;font-size:11.5px;font-weight:800;background:#e5372b;color:#fff;border-radius:999px;padding:2px 9px;margin-left:8px;letter-spacing:.02em;box-shadow:0 0 0 2px rgba(255,255,255,.55)}
+.btn.soon .newTag{display:none}
 
 /* 첫 화면 */
 .hero{background:radial-gradient(900px 600px at 30% 30%,#2f7a51 0%,#17402c 55%,#0d2318 100%);color:#fff;padding:88px 0 96px;overflow:hidden}
