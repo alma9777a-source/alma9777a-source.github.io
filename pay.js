@@ -21,6 +21,7 @@ window.PAY = {
 };
 (function(){
   function apply(){
+    document.documentElement.classList.toggle("win-open", !!window.PAY.namun.win_trial);
     document.querySelectorAll("[data-pay]").forEach(function(a){
       var p = a.getAttribute("data-pay").split("."), url = (window.PAY[p[0]] || {})[p[1]];
       if (url){ a.setAttribute("href", url); a.classList.remove("soon"); a.removeAttribute("aria-disabled"); }

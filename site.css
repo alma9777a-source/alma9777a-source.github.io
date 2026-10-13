@@ -255,3 +255,7 @@ p,li,.sub,.lead,.f,.steps li,figcaption,summary{text-wrap:pretty}
 @media (prefers-color-scheme: dark){.helpbox p{color:#c9d3cc}}
 .howbuy{margin:16px 0 0;padding-left:20px;font-size:14px;line-height:1.7;color:var(--mute);text-align:left}
 .howbuy li{margin:4px 0}.howbuy b{color:var(--ink)}.howbuy a{color:var(--green);text-decoration:underline}
+
+/* Windows 내려받기가 열렸는지에 따라 글을 바꾼다 — pay.js가 win_trial 주소가 있으면 html에 win-open을 붙인다 */
+html:not(.win-open) .winOpen{display:none!important}
+html.win-open .winSoon{display:none!important}
