@@ -1,12 +1,13 @@
 {
   "mac": {
-    "version": "0.9.7",
+    "version": "0.9.8",
     "url": "https://namunjogak.com/#price",
     "notes": ""
   },
   "snippetcut": {
-    "version": "0.9.7",
+    "version": "0.9.8",
     "url": "https://namunjogak.com/snippetcut/",
     "notes": ""
-  }
+  },
+  "license_api": ""
 }
