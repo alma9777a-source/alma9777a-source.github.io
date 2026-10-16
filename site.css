@@ -263,3 +263,6 @@ p,li,.sub,.lead,.f,.steps li,figcaption,summary{text-wrap:pretty}
 /* Windows 내려받기가 열렸는지에 따라 글을 바꾼다 — pay.js가 win_trial 주소가 있으면 html에 win-open을 붙인다 */
 html:not(.win-open) .winOpen{display:none!important}
 html.win-open .winSoon{display:none!important}
+/* 홈페이지 결제가 열렸는지에 따라(pay.js가 toss_client_key가 있으면 buy-open을 붙인다) */
+html:not(.buy-open) .buyOpen{display:none!important}
+html.buy-open .buySoon{display:none!important}

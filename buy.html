@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>구입하기 — 남은 조각</title>
+<link rel="canonical" href="https://namunjogak.com/buy.html">
+<meta name="description" content="남은 조각 맥용 · Windows용 등록(1대 · 1회 구입)을 카드 · 계좌이체 · 간편결제로 구입합니다. 결제가 확인되면 앱에서 바로 등록됩니다.">
+<link rel="icon" href="icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css?v=202610181400">
+<script src="pay.js?v=202610161300" defer></script>
+<script src="https://js.tosspayments.com/v2/standard"></script>
+<style>
+.buy{padding:52px 0 88px;word-break:keep-all}
+.buy h1{font-family:var(--serif);font-size:clamp(30px,4vw,42px);margin-bottom:8px}
+.buy .lead2{color:var(--mute);font-size:16px;margin-bottom:24px}
+.box{border:1px solid var(--line);background:var(--card);border-radius:20px;padding:22px 24px;margin:0 0 18px}
+.box h2{font-family:var(--sans);font-size:19px;font-weight:900;margin:0 0 12px;color:var(--green2)}
+.box ul{margin:0 0 0 20px}.box li{font-size:15.5px;margin:5px 0}
+.prod{display:flex;gap:16px;align-items:center;margin-bottom:12px}
+.prod img{width:64px;height:64px;border-radius:16px}
+.prod b{font-size:18px}.prod .pr{margin:2px 0 0;font-size:30px}
+.test{border:2px dashed #c4573f;color:#b8452f;border-radius:14px;padding:12px 16px;margin:0 0 18px;font-weight:700;font-size:15px;display:none}
+label.f2{display:block;font-weight:700;font-size:15px;margin:14px 0 6px}
+.in2{width:100%;font:inherit;font-size:16px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink)}
+.hint{color:var(--mute);font-size:13.5px;margin-top:5px}
+.seg2{display:flex;gap:8px}.seg2 label{flex:1;border:1px solid var(--line);border-radius:12px;padding:11px 12px;text-align:center;cursor:pointer;font-weight:700;background:var(--bg)}
+.seg2 input{position:absolute;opacity:0;pointer-events:none}
+.seg2 label:has(input:checked){border-color:#2f7a51;background:#2f7a51;color:#fff}
+.agree{display:flex;gap:10px;align-items:flex-start;margin:18px 0 6px;font-size:15px}
+.agree input{width:20px;height:20px;margin-top:3px;flex:none}
+.pays{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+.pays .btn{width:100%;justify-content:center;border:0;cursor:pointer;font:inherit;font-weight:700;font-size:17px}
+.pays .btn[disabled]{opacity:.5;cursor:default}
+.msg{margin-top:12px;font-size:15px;font-weight:700;min-height:1.5em}
+.msg.err{color:#b8452f}
+.steps2{margin:0 0 0 20px}.steps2 li{font-size:15.5px;margin:6px 0}
+</style></head>
+<body>
+<nav class="nav"><div class="in"><a class="brand" href="./"><img src="icon.png" alt="">남은 조각</a>
+<div class="links"><a href="./#how">쓰는 법</a><a href="./#features">기능</a><a href="./#price">가격</a><a href="terms.html">이용 약관</a></div>
+<a class="btn sm" href="./#price">무료로 써 보기</a></div></nav>
+<main class="buy"><div class="in narrow">
+<h1>구입하기</h1>
+<p class="lead2">무료 체험으로 써 보신 맥이나 Windows PC를 정식으로 등록합니다.</p>
+
+<div class="test" id="testNote">지금은 시험 결제 중입니다 — 결제창이 열려도 실제로 돈이 나가지 않습니다. 정식 판매가 시작되면 이 안내가 사라집니다.</div>
+
+<div class="box">
+  <div class="prod"><img src="icon.png" alt=""><div><b>남은 조각 — 맥 · Windows용 등록 (1대)</b><p class="pr"><span data-price="namun.price_mac">49,000원</span></p></div></div>
+  <ul>
+    <li><b>1회 구입</b> — 매달 내는 구독이 아닙니다. 한 번 결제하면 그 기기에서 계속 쓰십니다.</li>
+    <li><b>제공 방법과 기간</b> — 실물 배송은 없습니다. 결제가 확인되면 곧바로(늦어도 1영업일 안에) 등록 안내 메일이 가고, 앱에서 [등록 확인]을 누르면 등록이 끝납니다.</li>
+    <li><b>기기 1대</b> — 등록은 기기마다 따로입니다. 맥과 Windows는 같은 가격입니다.</li>
+    <li><b>환불</b> — 등록 전에는 언제든, 등록 뒤 7일 안에는 전액 환불해 드립니다. 자세한 내용은 <a href="terms.html">이용 약관 9조(결제와 환불)</a>를 보세요.</li>
+  </ul>
+</div>
+
+<div class="box">
+  <h2>구입 정보</h2>
+  <form id="f" autocomplete="on" onsubmit="return false">
+    <label class="f2">기기 종류</label>
+    <div class="seg2"><label><input type="radio" name="os" value="mac" checked> 맥</label><label><input type="radio" name="os" value="win"> Windows</label></div>
+    <label class="f2" for="mid">기기 번호</label>
+    <input class="in2" id="mid" name="mid" placeholder="예: 7K3Q-9XPM" maxlength="12" autocapitalize="characters" spellcheck="false" required>
+    <p class="hint">앱 위쪽의 ‘무료 사용 ○일 남음 · 등록’을 누르면 나오는 등록 화면에 있습니다(‘이 맥의 기기 번호’). 등록할 그 기기의 번호를 넣어 주세요.</p>
+    <label class="f2" for="nm">이름 (교회 이름도 좋습니다)</label>
+    <input class="in2" id="nm" name="name" autocomplete="name" maxlength="60" required>
+    <label class="f2" for="em">메일 주소</label>
+    <input class="in2" id="em" name="email" type="email" autocomplete="email" maxlength="120" required>
+    <p class="hint">등록 안내와 구매 번호를 이 주소로 보내 드립니다.</p>
+    <label class="agree"><input type="checkbox" id="ok"> <span><a href="terms.html" target="_blank">이용 약관(결제와 환불 포함)</a>과 <a href="privacy.html" target="_blank">개인정보처리방침</a>을 읽고 동의합니다. 적어 주신 이름 · 메일 · 기기 번호는 등록과 결제 확인에만 씁니다.</span></label>
+    <div class="pays">
+      <button class="btn" type="button" data-m="CARD">카드 · 간편결제로 결제하기</button>
+      <button class="btn ghost" type="button" data-m="TRANSFER">계좌이체로 결제하기</button>
+    </div>
+    <p class="msg" id="msg" role="status"></p>
+  </form>
+</div>
+
+<div class="box">
+  <h2>결제한 뒤에는</h2>
+  <ol class="steps2">
+    <li>결제가 끝나면 이 홈페이지에 ‘결제가 끝났습니다’가 나오고, 등록 안내 메일이 갑니다.</li>
+    <li>그 기기에서 남은 조각을 열고 등록 화면의 <b>[등록 확인]</b>을 누르면 바로 등록됩니다. 코드를 옮겨 적을 필요가 없습니다.</li>
+    <li>그동안 만든 작업은 그대로 있습니다.</li>
+  </ol>
+  <p class="hint">아이패드용은 App Store에서 앱 안 구입으로 따로 판매합니다.</p>
+</div>
+</div></main>
+
+<footer class="foot"><div class="in">
+  <div><b><a href="studio.html">나눔스튜디오</a></b> · 문의 <a href="mailto:alma9777a@gmail.com">alma9777a@gmail.com</a></div>
+  <div><a href="./">처음으로</a> · <a href="terms.html">이용 약관 / Terms</a> · <a href="privacy.html">개인정보처리방침 / Privacy Policy</a></div>
+  <div class="c" style="opacity:.8">상호 나눔스튜디오 · 대표 최완수 · 사업자등록번호 252-10-03077<br>주소 경기도 수원시 권선구 칠보로 102, 103동 501호 (호매실동, 한양수자인파크원) · 전화 010-8014-1279 · 메일 alma9777a@gmail.com</div>
+  <div class="c">© 2026 나눔스튜디오. All rights reserved.</div>
+</div></footer>
+<script>
+/* 구입: 판매 장부(order)에서 주문 번호와 금액을 받아 토스페이먼츠 결제창을 연다. 금액은 판매 장부가 정한다 */
+(function(){
+  var $ = function(s){ return document.querySelector(s); }, busy = false;
+  function msg(t, err){ var m = $("#msg"); m.textContent = t || ""; m.className = "msg" + (err ? " err" : ""); }
+  function key(){ return (window.PAY && window.PAY.namun.toss_client_key) || ""; }
+  function api(){ return fetch("version.json?t=" + Date.now()).then(function(r){ return r.json(); }).then(function(v){ if (!v.license_api) throw new Error("no api"); return v.license_api; }); }
+  function setup(){
+    var k = key();
+    if (/^test_/.test(k)) $("#testNote").style.display = "block";
+    if (!k){ document.querySelectorAll(".pays .btn").forEach(function(b){ b.disabled = true; }); msg("결제는 곧 열립니다. 그동안은 앱의 등록 화면에서 ‘신청 보내기’로 신청해 주세요."); }
+  }
+  async function pay(method){
+    if (busy) return;
+    var os = (document.querySelector('input[name=os]:checked') || {}).value || "mac";
+    var mid = $("#mid").value.toUpperCase().replace(/[^0-9A-Z]/g, ""), name = $("#nm").value.trim(), email = $("#em").value.trim();
+    if (mid.length !== 8){ msg("기기 번호 8자리를 넣어 주세요(예: 7K3Q-9XPM).", true); $("#mid").focus(); return; }
+    if (!name){ msg("이름을 적어 주세요.", true); $("#nm").focus(); return; }
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ msg("메일 주소를 다시 확인해 주세요.", true); $("#em").focus(); return; }
+    if (!$("#ok").checked){ msg("이용 약관과 개인정보처리방침에 동의해 주세요.", true); return; }
+    busy = true; msg("주문을 만드는 중입니다…");
+    try {
+      var url = await api();
+      var o = await fetch(url, { method: "POST", body: JSON.stringify({ action: "order", brand: "namun", os: os, machine: mid, name: name, email: email }) }).then(function(r){ return r.json(); });
+      if (!o.ok){ msg(o.error || "주문을 만들지 못했습니다.", true); busy = false; return; }
+      msg("결제창을 여는 중입니다…");
+      var base = location.href.replace(/[^\/]*$/, "");
+      var payment = TossPayments(key()).payment({ customerKey: TossPayments.ANONYMOUS });
+      var req = { method: method, amount: { currency: "KRW", value: o.amount }, orderId: o.orderId, orderName: o.orderName,
+        successUrl: base + "buy-result.html", failUrl: base + "buy-result.html?fail=1", customerName: name, customerEmail: email };
+      if (method === "CARD") req.card = { useEscrow: false, flowMode: "DEFAULT", useCardPoint: false, useAppCardOnly: false };
+      if (method === "TRANSFER") req.transfer = { cashReceipt: { type: "소득공제" }, useEscrow: false };
+      await payment.requestPayment(req);
+    } catch (e) {
+      // 결제창을 닫은 경우(USER_CANCEL)는 조용히 되돌린다
+      if (e && e.code === "USER_CANCEL") msg("결제를 취소했습니다. 다시 누르면 처음부터 결제할 수 있습니다.");
+      else msg("결제를 시작하지 못했습니다" + (e && e.message ? " — " + e.message : "") + ". 잠시 뒤 다시 해 보시거나 메일로 문의해 주세요.", true);
+    }
+    busy = false;
+  }
+  document.querySelectorAll(".pays .btn").forEach(function(b){ b.onclick = function(){ pay(b.getAttribute("data-m")); }; });
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", setup); else setup();
+})();
+</script>
+</body></html>
