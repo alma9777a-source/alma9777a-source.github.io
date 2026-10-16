@@ -93,6 +93,9 @@ section{padding:96px 0}
 .plan .tag{font-size:11px;font-weight:700;background:#eef4ef;color:var(--green2);border-radius:999px;padding:3px 10px}
 .pr{font-size:34px;font-weight:900;margin:10px 0 16px;color:var(--green)}
 .pr small{font-size:15px;font-weight:500;color:var(--mute)}
+/* 출시 기념가(pay.js promo): 원래 가격은 줄을 긋고, 기간 딱지를 붙인다 */
+.was{font-size:.55em;font-weight:500;color:var(--mute)}
+.promo{display:inline-block;vertical-align:middle;font-size:13px;font-weight:700;line-height:1.4;color:#fff;background:#b8452f;border-radius:999px;padding:3px 10px;letter-spacing:0;white-space:nowrap}
 .plan ul{list-style:none;margin-bottom:24px}
 .plan li{padding:7px 0 7px 26px;position:relative;color:#3d4a43;font-size:15px;border-top:1px dashed var(--line)}
 .plan li:before{content:"✓";position:absolute;left:2px;color:var(--green2);font-weight:900}
@@ -190,6 +193,7 @@ p,li,.sub,.lead,.f,.steps li,figcaption,summary{text-wrap:pretty}
   .plan{background:var(--card);box-shadow:0 10px 30px rgba(0,0,0,.35)}
   .plan .tag,.screens .stepno{background:#1f3328;color:#8fd6ab}
   .pr{color:#8fd6ab}
+  .promo{background:#c4573f}
   .faq details{background:var(--card)}
   .en{background:var(--bg)}
   .screens .win{background:var(--card);box-shadow:0 24px 60px rgba(0,0,0,.45)}
