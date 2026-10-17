@@ -104,7 +104,7 @@ label.f2{display:block;font-weight:700;font-size:15px;margin:14px 0 6px}
   function setup(){
     var k = key();
     if (/^test_/.test(k)) $("#testNote").style.display = "block";
-    if (!k){ document.querySelectorAll(".pays .btn").forEach(function(b){ b.disabled = true; }); msg("결제는 곧 열립니다. 그동안은 앱의 등록 화면에서 ‘신청 보내기’로 신청해 주세요."); }
+    if (!k){ document.querySelectorAll(".pays .btn").forEach(function(b){ b.disabled = true; }); msg("홈페이지 카드 결제는 아직 열지 않았습니다. 앱의 등록 화면에서 ‘신청 보내기’로 신청하시면 메일로 안내해 드리며, 결제는 계좌이체(농협 352-01045339-43 · 예금주 최완수)로 받습니다."); }
   }
   async function pay(method){
     if (busy) return;
