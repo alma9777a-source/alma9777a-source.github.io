@@ -318,3 +318,27 @@ html.buy-open .buySoon{display:none!important}
 .winstamp b{font-family:var(--serif);font-size:30px}
 @media (max-width:860px){.hero-win{min-height:0;margin-top:10px}.winstamp{width:96px;height:96px;font-size:12px;right:4px;top:-24px}.winstamp b{font-size:22px}.winshot{transform:none}}
 @media (prefers-reduced-motion: reduce){.slide{transition:none}}
+/* 비교표 · 한 해 비용 움직임(2026-10-17) — 화면에 들어오면 한 번: 다른 앱 줄이 차례로 → 남은 조각 줄이 크게 박힘 → 막대가 자람 → 도장. 움직임 줄이기를 켠 기기는 바로 끝 모습 */
+.cmpwrap.anim tr:not(:first-child) td{opacity:0;transform:translateX(40px);transition:opacity .4s ease,transform .5s cubic-bezier(.2,.8,.2,1)}
+.cmpwrap.anim tr.go td{opacity:1;transform:none}
+.cmpwrap.anim tr.me td{transform:scale(1.18)}
+.cmpwrap.anim tr.me.go td{transform:none;transition:opacity .25s ease,transform .38s cubic-bezier(.3,1.6,.5,1)}
+.cmpwrap tr.me.hit td{animation:meFlash 1.4s .15s both}
+@keyframes meFlash{0%{background:#eef6f0}25%{background:#fbefc8}100%{background:#eef6f0}}
+.cmpwrap.shake{animation:whyShake .38s .2s}
+@keyframes whyShake{0%,100%{transform:none}20%{transform:translate(-6px,2px)}40%{transform:translate(5px,-3px)}60%{transform:translate(-4px,2px)}80%{transform:translate(3px,-1px)}}
+.costs.anim .ct i{transition:width .9s cubic-bezier(.2,.8,.2,1)}
+.costs.anim .cb .cn,.costs.anim .cb .cv{opacity:0;transition:opacity .4s ease}
+.costs.anim .cb.go .cn,.costs.anim .cb.go .cv{opacity:1}
+.costs.anim .cb.me .cv{transform:scale(1.6);transform-origin:100% 50%;transition:opacity .25s ease,transform .42s cubic-bezier(.3,1.6,.5,1)}
+.costs.anim .cb.me.go .cv{transform:none}
+.stamp0{display:block;width:fit-content;margin:26px auto 0;border:4px solid var(--gold);color:var(--gold);border-radius:12px;padding:4px 18px;font-weight:900;font-size:24px;letter-spacing:-.01em;transform:rotate(-6deg) scale(1)}
+.costs.anim .stamp0{opacity:0;transform:rotate(-6deg) scale(2.2);transition:opacity .2s ease,transform .32s cubic-bezier(.2,.9,.3,1.2)}
+.costs.anim .stamp0.go{opacity:1;transform:rotate(-6deg) scale(1)}
+.costs.shake{animation:whyShake .38s}
+@media (max-width:560px){.costs.anim .cb.me .cv{transform-origin:0 50%}}
+@media (prefers-color-scheme:dark){
+  .cmpwrap tr.me.hit td{animation-name:meFlashD}
+  @keyframes meFlashD{0%{background:#16261c}25%{background:#3a3418}100%{background:#16261c}}
+  .stamp0{color:var(--gold2);border-color:var(--gold2)}
+}

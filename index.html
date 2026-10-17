@@ -21,20 +21,18 @@
 <link rel="icon" href="icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="site.css?v=202610172100">
+<link rel="stylesheet" href="site.css?v=202610180010">
 <script src="pay.js?v=202610161400" defer></script>
 <script>
-/* 상단 그림 자동 넘김(6초) — 손을 대면 멈추고, 움직임 줄이기를 켠 기기에서는 넘기지 않는다. 문서가 다 읽힌 뒤에 돈다 */
+/* 상단 그림 자동 넘김(6초, 움직임 줄이기를 켠 기기는 9초) — 문서가 다 읽힌 뒤에 돈다 */
 document.addEventListener("DOMContentLoaded", function(){
   var h=document.querySelector(".hero"); if(!h) return;
   var sl=[].slice.call(h.querySelectorAll(".slide")), dots=[].slice.call(h.querySelectorAll(".dots button")), i=0, t=0, hold=false;
   var still=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   function show(n){ i=(n+sl.length)%sl.length; sl.forEach(function(e,k){ e.classList.toggle("on",k===i); e.setAttribute("aria-hidden",k===i?"false":"true"); e.querySelectorAll("a,button").forEach(function(x){ x.tabIndex=k===i?0:-1; }); }); dots.forEach(function(d,k){ d.classList.toggle("on",k===i); }); }
   function next(){ if(!hold&&!document.hidden) show(i+1); }
-  function run(){ clearInterval(t); if(!still) t=setInterval(next,6000); }
+  function run(){ clearInterval(t); t=setInterval(next,still?9000:6000); }   // 마우스를 올려도 멈추지 않는다(2026-10-17 저작자 요청), 점을 누르면 그때부터 다시 셈
   dots.forEach(function(d){ d.addEventListener("click",function(){ show(+d.getAttribute("data-go")); run(); }); });
-  h.addEventListener("mouseenter",function(){ hold=true; }); h.addEventListener("mouseleave",function(){ hold=false; });
-  h.addEventListener("focusin",function(){ hold=true; }); h.addEventListener("focusout",function(){ hold=false; });
   show(0); run();
 });
 </script>
@@ -117,7 +115,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
   <h3 class="whyh">한 해 동안 드는 비용</h3>
   <p class="whyn">매주 한 편씩 1년 동안 만든다고 할 때(가장 싼 유료 단계 기준)</p>
-  <div class="costs">
+  <div class="costs" data-stamp="2년째부터 0원">
     <div class="cb me"><span class="cn">남은 조각</span><span class="ct"><i style="width:5.5%"></i></span><span class="cv">49,000원 한 번</span></div>
     <div class="cb"><span class="cn">일반 영상 편집 앱</span><span class="ct"><i style="width:28%"></i></span><span class="cv">약 8만~25만 원</span></div>
     <div class="cb"><span class="cn">AI 쇼츠 자동 추출 앱</span><span class="ct"><i style="width:27%"></i></span><span class="cv">약 24만 원</span></div>
@@ -365,6 +363,32 @@ document.addEventListener("DOMContentLoaded", function(){
   lb.addEventListener("click", close);
   lb.querySelector(".lbx").addEventListener("click", close);
   document.addEventListener("keydown", function(e){ if (e.key === "Escape") close(); });
+})();
+</script>
+<script>
+/* 비교표 · 한 해 비용 움직임 — 화면에 보이면 한 번 재생 */
+(function(){
+  var cw = document.querySelector(".why .cmpwrap"), cs = document.querySelector(".why .costs"); if (!cw || !cs) return;
+  var stamp = document.createElement("div"); stamp.className = "stamp0"; stamp.textContent = cs.getAttribute("data-stamp") || ""; cs.appendChild(stamp);
+  var still = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (still || !("IntersectionObserver" in window)) return;
+  var rows = [].slice.call(cw.querySelectorAll("tr")).slice(1), me = cw.querySelector("tr.me"), others = rows.filter(function(r){ return r !== me; });
+  var bars = [].slice.call(cs.querySelectorAll(".cb")), meb = cs.querySelector(".cb.me"), ob = bars.filter(function(b){ return b !== meb; });
+  cw.classList.add("anim"); cs.classList.add("anim");
+  bars.forEach(function(b){ var i = b.querySelector(".ct i"); i.setAttribute("data-w", i.style.width); i.style.width = "0"; });
+  function grow(b){ b.classList.add("go"); var i = b.querySelector(".ct i"); i.style.width = i.getAttribute("data-w"); }
+  function playT(){
+    others.slice().reverse().forEach(function(r, k){ setTimeout(function(){ r.classList.add("go"); }, k * 170); });
+    setTimeout(function(){ me.classList.add("go", "hit"); cw.classList.add("shake"); }, others.length * 170 + 380);
+  }
+  function playC(){
+    ob.forEach(function(b, k){ setTimeout(function(){ grow(b); }, k * 260); });
+    var t = ob.length * 260 + 700;
+    setTimeout(function(){ grow(meb); }, t);
+    setTimeout(function(){ stamp.classList.add("go"); setTimeout(function(){ cs.classList.add("shake"); }, 260); }, t + 900);
+  }
+  function once(el, fn){ var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ io.disconnect(); fn(); } }); }, { threshold: .35 }); io.observe(el); }
+  once(cw, playT); once(cs, playC);
 })();
 </script>
 </body></html>
