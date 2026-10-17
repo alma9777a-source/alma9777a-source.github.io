@@ -388,7 +388,15 @@ document.addEventListener("DOMContentLoaded", function(){
     setTimeout(function(){ stamp.classList.add("go"); setTimeout(function(){ cs.classList.add("shake"); }, 260); }, t + 900);
   }
   function once(el, fn){ var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ io.disconnect(); fn(); } }); }, { threshold: .35 }); io.observe(el); }
-  once(cw, playT); once(cs, playC);
+  // 마우스를 올리면 처음부터 다시(2026-10-18 저작자 요청). 재생 중에는 다시 시작하지 않는다
+  var busyT = 0, busyC = 0;
+  function runT(){ if (busyT) return; busyT = 1; playT(); setTimeout(function(){ busyT = 0; }, others.length * 170 + 2200); }
+  function runC(){ if (busyC) return; busyC = 1; playC(); setTimeout(function(){ busyC = 0; }, ob.length * 260 + 2600); }
+  function resetT(){ rows.forEach(function(r){ r.classList.remove("go", "hit"); }); cw.classList.remove("shake"); void cw.offsetWidth; }
+  function resetC(){ bars.forEach(function(b){ b.classList.remove("go"); b.querySelector(".ct i").style.width = "0"; }); stamp.classList.remove("go"); cs.classList.remove("shake"); void cs.offsetWidth; }
+  cw.addEventListener("mouseenter", function(){ if (busyT) return; resetT(); setTimeout(runT, 60); });
+  cs.addEventListener("mouseenter", function(){ if (busyC) return; resetC(); setTimeout(runC, 60); });
+  once(cw, runT); once(cs, runC);
 })();
 </script>
 </body></html>
