@@ -266,3 +266,55 @@ html.win-open .winSoon{display:none!important}
 /* 홈페이지 결제가 열렸는지에 따라(pay.js가 toss_client_key가 있으면 buy-open을 붙인다) */
 html:not(.buy-open) .buyOpen{display:none!important}
 html.buy-open .buySoon{display:none!important}
+
+/* 비교 · 한 해 비용 · 강점 (2026-10-17) */
+.why{background:var(--bg);padding:88px 0}
+.whygrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:8px}
+.wy{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px 20px;font-size:15px;color:var(--mute)}
+.wy b{display:block;color:var(--ink);font-size:17px;margin-bottom:6px}
+.whyh{font-family:var(--serif);font-size:24px;margin:52px 0 14px;text-align:center}
+.whyn{color:var(--mute);font-size:13.5px;max-width:760px;margin:10px auto 0;text-align:center}
+.cmpwrap{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:var(--card)}
+.cmp2{border-collapse:collapse;width:100%;min-width:760px;font-size:15px}
+.cmp2 th,.cmp2 td{padding:13px 16px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.cmp2 th{font-size:13.5px;color:var(--mute);font-weight:700;background:var(--bg)}
+.cmp2 tr:last-child td{border-bottom:0}
+.cmp2 td:first-child{font-weight:700;white-space:nowrap}
+.cmp2 tr.me td{background:#eef6f0}
+.cmp2 tr.me td:first-child{color:var(--green)}
+.cmp2 .yes{color:var(--green2);font-weight:700}
+.cmp2 small{color:var(--mute)}
+.cmp2 .was{color:var(--mute)}
+.costs{display:flex;flex-direction:column;gap:12px;max-width:820px;margin:0 auto}
+.cb{display:grid;grid-template-columns:11em minmax(0,1fr) 10em;gap:14px;align-items:center;font-size:15px}
+.cb .ct{height:16px;border-radius:8px;background:var(--card);border:1px solid var(--line);overflow:hidden;display:block}
+.cb .ct i{display:block;height:100%;border-radius:8px;background:#b9c3bc}
+.cb.me .ct i{background:var(--green2)}
+.cb.me .cn,.cb.me .cv{font-weight:700;color:var(--green)}
+.cb .cv{text-align:right;font-variant-numeric:tabular-nums}
+@media (max-width:960px){.whygrid{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.whygrid{grid-template-columns:1fr}.cb{grid-template-columns:1fr;gap:4px}.cb .cv{text-align:left}.why{padding:60px 0}}
+@media (prefers-color-scheme: dark){
+  .cmp2 tr.me td{background:#16261c}
+  .cmp2 tr.me td:first-child,.cb.me .cn,.cb.me .cv{color:#8fd6ab}
+  .cb .ct i{background:#3d4a42}
+}
+
+/* 상단 그림 넘김 + Windows 출시 장면 (2026-10-17) */
+.hero{position:relative}
+.slides{display:grid}
+.slide{grid-area:1/1;opacity:0;visibility:hidden;transition:opacity .8s ease,visibility .8s}
+.slide.on{opacity:1;visibility:visible}
+.dots{position:absolute;left:0;right:0;bottom:26px;display:flex;justify-content:center;gap:10px}
+.dots button{width:10px;height:10px;border-radius:50%;border:0;padding:0;background:rgba(255,255,255,.35);cursor:pointer;transition:width .3s,background .3s}
+.dots button.on{width:28px;border-radius:5px;background:var(--gold2)}
+.dots button:focus-visible{outline:2px solid #fff;outline-offset:3px}
+.newbadge{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:15px;color:#fff;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:6px 16px 6px 6px;margin-bottom:22px}
+.newbadge span{background:var(--gold2);color:#20180a;border-radius:999px;padding:3px 10px;font-size:12.5px;letter-spacing:.06em}
+.hero-win{position:relative;min-height:420px;display:flex;align-items:center}
+.winshot{width:100%;border-radius:14px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.5),0 0 0 6px rgba(255,255,255,.08);transform:perspective(1200px) rotateY(-8deg) rotateX(2deg)}
+.winshot img{width:100%;display:block}
+.winstamp{position:absolute;right:-6px;top:6px;width:132px;height:132px;border-radius:50%;background:var(--gold2);color:#20180a;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-weight:700;font-size:15px;line-height:1.2;transform:rotate(12deg);box-shadow:0 14px 30px rgba(0,0,0,.35)}
+.winstamp b{font-family:var(--serif);font-size:30px}
+@media (max-width:860px){.hero-win{min-height:0;margin-top:10px}.winstamp{width:96px;height:96px;font-size:12px;right:4px;top:-24px}.winstamp b{font-size:22px}.winshot{transform:none}}
+@media (prefers-reduced-motion: reduce){.slide{transition:none}}
