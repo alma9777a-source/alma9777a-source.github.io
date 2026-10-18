@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Q&A — Namun Jogak</title>
+<meta name="description" content="Questions and answers about using, buying and troubleshooting Namun Jogak, plus the FAQ">
+<link rel="canonical" href="https://namunjogak.com/en/board.html">
+<link rel="alternate" hreflang="ko" href="https://namunjogak.com/board.html"><link rel="alternate" hreflang="en" href="https://namunjogak.com/en/board.html">
+<link rel="icon" href="../icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../site.css?v=202610180010"><link rel="stylesheet" href="../board.css?v=1">
+<style>.nav .brand,.nav .btn.sm{white-space:nowrap}.langsw{font-size:13px;margin-right:10px;color:inherit;opacity:.8;text-decoration:none;border:1px solid currentColor;border-radius:999px;padding:3px 10px}</style>
+</head><body>
+<nav class="nav"><div class="in"><a class="brand" href="./"><img src="../icon.png" alt="">Namun Jogak</a>
+<div class="links"><a href="./#demo">Video</a><a href="./#why">Compare</a><a href="./#how">How</a><a href="./#features">Features</a><a href="./#price">Pricing</a><a href="board.html" style="color:var(--ink);font-weight:700">Q&amp;A</a></div><a class="langsw" href="../board.html" lang="ko" onclick="try{localStorage.setItem('nLang','ko')}catch(e){}">한국어</a><a class="btn sm" href="./#price">Try it free</a></div></nav>
+<main class="bd"><div class="in narrow" style="max-width:860px" id="bTop">
+<h1>Questions &amp; Answers</h1><p class="lead2">Ask anything about using Namun Jogak. You can also read other churches’ questions and our answers.</p>
+<div class="tabs2"><span class="on" data-t="board">Q&amp;A</span><span data-t="faq">FAQ</span></div>
+<div id="bAdmin" style="display:none;margin-bottom:14px"></div>
+<div id="bBoard">
+<div class="faqbox"><div class="fh">Frequently asked — check here first<a onclick="document.querySelector('.tabs2 span[data-t=faq]').click()">See all ›</a></div><details><summary>Is my sermon video sent anywhere?</summary><p>No. Transcription and rendering both happen on your Mac, PC or iPad. Only when you use AI clip suggestions is the transcript text sent to the AI you choose (Claude, ChatGPT or Gemini).</p></details><details><summary>Does it work with English sermons?</summary><p>Yes. Transcription works on the device in English, Korean and other major languages (Japanese, Chinese, Spanish, French, German) — choose the speech language in Settings. The app screens are available in English and Korean.</p></details><details><summary>Do I need an AI account or API key?</summary><p>No. By default you paste a request into the AI chat you already use, so a free account works. There is also a manual mode where you choose the clip yourself without AI.</p></details></div>
+<div id="bListWrap">
+<div class="tools"><input class="srch" id="bQ" type="search" placeholder="Search questions" style="font:inherit;color:var(--ink)"><a class="btn" id="bAsk">✏️ Ask a question</a></div>
+<div class="chips" id="bChips"></div>
+<div id="bList"></div>
+<div class="pager" id="bPager"></div>
+</div>
+<div id="bView" style="display:none"></div>
+<div id="bForm" class="form" style="display:none">
+<div class="fg"><div><label for="fName">Name</label><input class="in2" id="fName" maxlength="40" placeholder="e.g. Pastor John Smith"></div><div><label for="fChurch">Church (optional)</label><input class="in2" id="fChurch" maxlength="60" placeholder="e.g. Grace Church"></div></div>
+<div class="fg"><div><label for="fMail">Email <span style="font-weight:500;color:var(--mute)">· never shown · optional</span></label><input class="in2" id="fMail" type="email" maxlength="120" placeholder="Where we send the answer"></div><div><label for="fCat">Category</label><select class="in2" id="fCat"><option value="howto">How to</option><option value="buy">Purchase</option><option value="windows">Windows</option><option value="error">Problems</option><option value="idea">Ideas</option></select></div></div>
+<label for="fTitle">Title</label><input class="in2" id="fTitle" maxlength="120" placeholder="What would you like to ask?">
+<label for="fBody">Details</label><textarea class="in2" id="fBody" maxlength="5000" placeholder="Tell us your device (Mac · Windows · iPad) and which screen it happened on, so we can answer faster."></textarea>
+<label>Screenshots <span style="font-weight:500;color:var(--mute)">· optional, up to 3</span></label>
+<div class="up" id="fUp" role="button" tabindex="0"><b>📷 Add photos</b>Drag in or click to choose a screenshot of the problem. (JPG · PNG, up to 5 MB each)</div><input type="file" id="fFile" accept="image/png,image/jpeg,image/webp" multiple hidden>
+<div class="thumbs" id="fThumbs"></div>
+<p style="font-size:13px;color:var(--mute);margin-top:8px">Make sure no name, contact or device number is visible. Posts with photos start as private.</p>
+<label class="ck"><input type="checkbox" id="fSecret">Post privately (only you and the admin can see it)</label>
+<label class="ck"><input type="checkbox" id="fAgree"><span>I agree to the collection of my name, email and photos to answer this question. Posts are stored on Cloudflare servers outside Korea; names, emails and photos are deleted after one year. <a href="../privacy.html#board" target="_blank">Privacy Policy</a></span></label>
+<div id="fTs" style="margin-top:14px"></div>
+<div class="err" id="fErr"></div>
+<div style="margin-top:20px;display:flex;gap:10px;justify-content:flex-end"><a class="btn ghost" id="fCancel">Cancel</a><a class="btn" id="fGo">Post question</a></div>
+</div>
+</div>
+<div id="bFaq" class="faqall" style="display:none"><details><summary>Is my sermon video sent anywhere?</summary><p>No. Transcription and rendering both happen on your Mac, PC or iPad. Only when you use AI clip suggestions is the transcript text sent to the AI you choose (Claude, ChatGPT or Gemini).</p></details><details><summary>Does it work with English sermons?</summary><p>Yes. Transcription works on the device in English, Korean and other major languages (Japanese, Chinese, Spanish, French, German) — choose the speech language in Settings. The app screens are available in English and Korean.</p></details><details><summary>Do I need an AI account or API key?</summary><p>No. By default you paste a request into the AI chat you already use, so a free account works. There is also a manual mode where you choose the clip yourself without AI.</p></details><details><summary>Can I use worship backing tracks or popular songs?</summary><p>Copyrighted music can get your Short muted on YouTube or its revenue claimed. All tracks in the app were made by us, so they are safe to use. For trending songs, use “Add sound” in the YouTube app.</p></details><details><summary>What if connecting to YouTube doesn’t work?</summary><p><b>To connect</b> — in Settings → YouTube, click <b>Connect</b>. Sign in with the Google account that owns your church channel and click <b>Allow</b> on the permission screen. Namun Jogak has completed Google’s app verification (October 2026).</p><p><b>If uploads fail after connecting</b> — make sure all checkboxes were ticked on the permission screen, then disconnect and connect again in Settings. A Google account without a YouTube channel needs to create a channel first.</p><p><b>If you’d rather not connect</b> — you don’t have to. Upload the Short file yourself in the YouTube app or YouTube Studio, and copy the title, description and hashtags the app wrote.</p></details><details><summary>My uploads go up as “Private”.</summary><p>Apart from Google’s app verification, YouTube separately reviews an app’s use of YouTube. Until that review finishes, videos uploaded by the app may be set to private. The app tells you when this happens — switch them to public in YouTube Studio. After the review, public and scheduled publishing work as set.</p></details><details><summary>Does my work keep taking up storage?</summary><p>No. Audio files and transcripts created while working are deleted after 7 days of not being used (you can change this to 3, 14 or 30 days, or turn it off). Your original video files and finished Shorts are never deleted.</p></details><details><summary>Can I start from a YouTube link?</summary><p>No. Since version 0.9, you start from a video file. Under YouTube’s policies, an app that connects to YouTube (for uploading) cannot also download YouTube videos. For videos on your own channel, download them from YouTube Studio (Content → ⋮ → Download).</p></details><details><summary>Can I use it for church events or Sunday school videos?</summary><p>Yes. Templates for Sunday previews, Friday prayer, worship lyrics, Sunday school, youth, quiet time, discipleship and retreats are included, and you can rename the labels to your own ministries. For testimonies, lectures or interviews, choose <b>6 general clips</b> and AI picks the most moving moments without sermon rules.</p></details><details><summary>How do I pay from outside Korea?</summary><p>Email <a href="mailto:alma9777a@gmail.com?subject=Namun%20Jogak%20purchase%20inquiry">alma9777a@gmail.com</a> with your country and Mac or Windows. We will reply with the price and a way to pay that works for you.</p></details></div>
+</div></main>
+<footer class="foot"><div class="in">
+  <div><b><a href="../studio.html">Nanum Studio</a></b> · Contact <a href="mailto:alma9777a@gmail.com">alma9777a@gmail.com</a></div>
+  <div><a href="../updates.html">Updates (Korean)</a> · <a href="../terms.html">Terms</a> · <a href="../privacy.html#en">Privacy Policy</a> · <a href="../snippetcut/">SnippetCut</a> · <a href="../" onclick="try{localStorage.setItem('nLang','ko')}catch(e){}" lang="ko">한국어</a></div>
+  <div class="c" style="opacity:.8">Nanum Studio (나눔스튜디오) · Representative: Wansu Choi · Business registration no. 252-10-03077<br>102 Chilbo-ro, Bldg 103 Unit 501, Gwonseon-gu, Suwon-si, Gyeonggi-do, Republic of Korea · Phone +82-10-8014-1279 · alma9777a@gmail.com</div>
+  <div class="c">© 2026 Nanum Studio. All rights reserved.</div>
+</div></footer>
+<div class="lbx" id="bZoom"><img alt=""></div>
+<script src="../board-config.js?v=1"></script><script src="../board.js?v=1"></script>
+</body></html>

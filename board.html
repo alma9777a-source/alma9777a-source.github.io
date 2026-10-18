@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>묻고 답하기 — 남은 조각</title>
+<meta name="description" content="남은 조각 사용법 · 구입 · 오류를 묻고 답하는 게시판과 자주 묻는 질문">
+<link rel="canonical" href="https://namunjogak.com/board.html">
+<link rel="alternate" hreflang="ko" href="https://namunjogak.com/board.html"><link rel="alternate" hreflang="en" href="https://namunjogak.com/en/board.html">
+<link rel="icon" href="icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css?v=202610180010"><link rel="stylesheet" href="board.css?v=1">
+<style>.nav .brand,.nav .btn.sm{white-space:nowrap}.langsw{font-size:13px;margin-right:10px;color:inherit;opacity:.8;text-decoration:none;border:1px solid currentColor;border-radius:999px;padding:3px 10px}</style>
+</head><body>
+<nav class="nav"><div class="in"><a class="brand" href="./"><img src="icon.png" alt="">남은 조각</a>
+<div class="links"><a href="./#demo">영상</a><a href="./#why">비교</a><a href="./#how">쓰는 법</a><a href="./#features">기능</a><a href="./#price">가격</a><a href="board.html" style="color:var(--ink);font-weight:700">묻고 답하기</a></div><a class="langsw" href="en/board.html" lang="en" onclick="try{localStorage.setItem('nLang','en')}catch(e){}">English</a><a class="btn sm" href="./#price">무료로 써 보기</a></div></nav>
+<main class="bd"><div class="in narrow" style="max-width:860px" id="bTop">
+<h1>묻고 답하기</h1><p class="lead2">쓰시다 궁금한 점을 남겨 주세요. 다른 교회의 질문과 답도 함께 보실 수 있습니다.</p>
+<div class="tabs2"><span class="on" data-t="board">묻고 답하기</span><span data-t="faq">자주 묻는 질문</span></div>
+<div id="bAdmin" style="display:none;margin-bottom:14px"></div>
+<div id="bBoard">
+<div class="faqbox"><div class="fh">자주 묻는 질문 — 먼저 확인해 보세요<a onclick="document.querySelector('.tabs2 span[data-t=faq]').click()">전체 보기 ›</a></div><details><summary>설교 영상이 외부로 전송되나요?</summary><p>아닙니다. 받아쓰기와 영상 만들기는 모두 맥(아이패드) 안에서 합니다. AI 구간 추천을 쓸 때만 받아쓴 글이 사용자가 고른 AI(Claude·ChatGPT·Gemini)로 전달됩니다.</p></details><details><summary>AI 계정이나 API 키가 꼭 있어야 하나요?</summary><p>아닙니다. 기본 방식은 평소 쓰시는 AI 채팅에 요청 글을 붙여 넣는 방식이라 무료 계정으로도 됩니다. AI 없이 직접 구간을 고르는 수동 방식도 있습니다.</p></details><details><summary>찬양 MR이나 유행하는 노래를 넣어도 되나요?</summary><p>저작권이 있는 음원은 유튜브에서 소리가 꺼지거나 수익이 넘어갈 수 있습니다. 앱에 든 21곡은 모두 직접 만든 곡이라 안심하고 쓰실 수 있습니다. 유행곡은 유튜브 앱의 ‘사운드 추가’로 넣으시는 것을 권합니다.</p></details></div>
+<div id="bListWrap">
+<div class="tools"><input class="srch" id="bQ" type="search" placeholder="궁금한 내용을 검색해 보세요" style="font:inherit;color:var(--ink)"><a class="btn" id="bAsk">✏️ 질문하기</a></div>
+<div class="chips" id="bChips"></div>
+<div id="bList"></div>
+<div class="pager" id="bPager"></div>
+</div>
+<div id="bView" style="display:none"></div>
+<div id="bForm" class="form" style="display:none">
+<div class="fg"><div><label for="fName">이름</label><input class="in2" id="fName" maxlength="40" placeholder="예: 홍길동 목사"></div><div><label for="fChurch">교회 (선택)</label><input class="in2" id="fChurch" maxlength="60" placeholder="예: ○○교회"></div></div>
+<div class="fg"><div><label for="fMail">이메일 <span style="font-weight:500;color:var(--mute)">· 공개되지 않습니다 · 선택</span></label><input class="in2" id="fMail" type="email" maxlength="120" placeholder="답변 알림을 받을 주소"></div><div><label for="fCat">분류</label><select class="in2" id="fCat"><option value="howto">사용법</option><option value="buy">구입·등록</option><option value="windows">Windows</option><option value="error">오류</option><option value="idea">제안</option></select></div></div>
+<label for="fTitle">제목</label><input class="in2" id="fTitle" maxlength="120" placeholder="무엇이 궁금하신가요?">
+<label for="fBody">내용</label><textarea class="in2" id="fBody" maxlength="5000" placeholder="쓰시는 기기(맥 · Windows · 아이패드)와 어떤 화면에서 생긴 일인지 적어 주시면 더 빨리 답해 드릴 수 있습니다."></textarea>
+<label>화면 사진 <span style="font-weight:500;color:var(--mute)">· 선택, 3장까지</span></label>
+<div class="up" id="fUp" role="button" tabindex="0"><b>📷 사진 올리기</b>문제가 생긴 화면을 찍어 올려 주세요. 끌어다 놓거나 눌러서 고를 수 있습니다. (JPG · PNG, 한 장 5MB까지)</div><input type="file" id="fFile" accept="image/png,image/jpeg,image/webp" multiple hidden>
+<div class="thumbs" id="fThumbs"></div>
+<p style="font-size:13px;color:var(--mute);margin-top:8px">사진에 이름 · 연락처 · 기기 번호 같은 개인 정보가 보이지 않는지 확인해 주세요. 사진을 올리면 처음부터 비밀글로 올라갑니다.</p>
+<label class="ck"><input type="checkbox" id="fSecret">비밀글로 올리기 (작성자와 관리자만 볼 수 있습니다)</label>
+<label class="ck"><input type="checkbox" id="fAgree"><span>이름 · 이메일 · 사진을 답변을 위해 수집하는 데 동의합니다. 글은 Cloudflare(해외) 서버에 보관되며, 1년 뒤 이름 · 이메일 · 사진을 지웁니다. <a href="privacy.html#board" target="_blank">개인정보처리방침</a></span></label>
+<div id="fTs" style="margin-top:14px"></div>
+<div class="err" id="fErr"></div>
+<div style="margin-top:20px;display:flex;gap:10px;justify-content:flex-end"><a class="btn ghost" id="fCancel">취소</a><a class="btn" id="fGo">질문 올리기</a></div>
+</div>
+</div>
+<div id="bFaq" class="faqall" style="display:none"><details><summary>설교 영상이 외부로 전송되나요?</summary><p>아닙니다. 받아쓰기와 영상 만들기는 모두 맥(아이패드) 안에서 합니다. AI 구간 추천을 쓸 때만 받아쓴 글이 사용자가 고른 AI(Claude·ChatGPT·Gemini)로 전달됩니다.</p></details><details><summary>AI 계정이나 API 키가 꼭 있어야 하나요?</summary><p>아닙니다. 기본 방식은 평소 쓰시는 AI 채팅에 요청 글을 붙여 넣는 방식이라 무료 계정으로도 됩니다. AI 없이 직접 구간을 고르는 수동 방식도 있습니다.</p></details><details><summary>찬양 MR이나 유행하는 노래를 넣어도 되나요?</summary><p>저작권이 있는 음원은 유튜브에서 소리가 꺼지거나 수익이 넘어갈 수 있습니다. 앱에 든 21곡은 모두 직접 만든 곡이라 안심하고 쓰실 수 있습니다. 유행곡은 유튜브 앱의 ‘사운드 추가’로 넣으시는 것을 권합니다.</p></details><details><summary>유튜브 연결이 잘 안 될 때는 어떻게 하나요?</summary><p><b>연결하는 방법</b> — 설정 → 유튜브 연결에서 <b>연결</b>을 누르면 구글 로그인 화면이 열립니다. 교회 유튜브 채널이 있는 구글 계정으로 로그인하고, 권한을 묻는 화면에서 <b>허용</b>을 누르면 됩니다. 남은 조각은 구글의 앱 확인을 마쳤습니다(2026년 10월).</p><p><b>연결했는데 올리기가 안 될 때</b> — 권한을 묻는 화면에서 체크 칸을 모두 체크했는지 확인하고, 설정 → 유튜브 연결에서 <b>연결 해제</b> 뒤 다시 연결해 보세요. 유튜브 채널이 없는 구글 계정이면 유튜브에서 채널을 먼저 만들어야 합니다.</p><p>더 자세한 안내는 <a href="install-guide.pdf?v=100" target="_blank" rel="noopener">설치와 첫 사용 안내</a>의 8번 ‘유튜브에 바로 올리기’에 있습니다.</p><p><b>연결이 꺼려질 때</b> — 연결하지 않아도 됩니다. 만든 쇼츠 파일을 유튜브 앱이나 유튜브 스튜디오에서 직접 올리시면 됩니다. 제목 · 설명란 · 해시태그는 앱이 써 준 것을 복사해 쓰세요.</p></details><details><summary>유튜브에 올리면 ‘비공개’로 올라가요.</summary><p>구글의 앱 확인은 끝났지만, 유튜브는 이와 별도로 앱의 유튜브 사용을 한 번 더 확인합니다. 그 확인이 끝나기 전에는 앱으로 올린 영상이 비공개로 올라갈 수 있습니다. 그때는 앱이 알려 드리니, 유튜브 스튜디오에서 공개로 바꿔 주세요. 확인이 끝나면 공개 · 예약 공개가 그대로 됩니다.</p></details><details><summary>작업한 자료가 저장 공간을 계속 차지하나요?</summary><p>아닙니다. 작업하면서 생긴 소리 파일과 받아쓴 글은 7일 동안 쓰지 않으면 알아서 지웁니다(3일 · 14일 · 30일 · 끄기로 바꿀 수 있습니다). 넣으신 원본 영상 파일과 완성한 쇼츠는 지우지 않습니다. 바구니에서 기록을 지우면 그 쇼츠 파일도 휴지통으로 옮깁니다.</p></details><details><summary>유튜브 링크만 넣어서 시작할 수는 없나요?</summary><p>없습니다. 0.9 버전부터는 영상 파일을 넣어 시작합니다. 유튜브의 정책에 따라, 유튜브에 올리기처럼 유튜브와 연결되는 앱은 유튜브 영상을 내려받는 기능을 둘 수 없기 때문입니다. 우리 교회 채널에 올린 영상은 유튜브 스튜디오의 ‘콘텐츠’에서 영상 옆 ⋮ → <b>오프라인 저장</b>으로 내려받아 넣으시면 됩니다.</p></details><details><summary>교회 행사나 주일학교 영상에도 쓸 수 있나요?</summary><p>네. 주일 예고, 금요 기도회, 찬양 가사, 주일학교, 청년부, 큐티, 제자훈련, 수련회 같은 템플릿이 함께 들어 있고, ‘금요 기도회’ ‘청년부’ 같은 글은 우리 교회 부서 · 모임 이름으로 바꿔 쓸 수 있습니다. 간증 · 특강 · 인터뷰처럼 설교가 아닌 영상은 ‘거둘 것’에서 <b>일반 영상 6개</b>를 고르면, 설교 기준 없이 그 영상에서 가장 와닿는 구간을 AI가 골라 줍니다.</p></details><details><summary>Windows PC에서도 쓸 수 있나요?</summary><p class="winSoon">지금은 맥과 아이패드용입니다. Windows 10·11용을 준비하고 있으며, 출시일과 가격은 이 홈페이지에서 먼저 알려 드립니다. <a href="#windows">출시 알림 받기</a>를 눌러 메일을 보내 주시면 가장 먼저 알려 드립니다.</p><p class="winOpen">네, 쓸 수 있습니다. Windows 10 · 11(64비트)용을 <a href="#windows">Windows 칸</a>에서 내려받으실 수 있고, 기능과 가격은 맥용과 같습니다.</p></details><details><summary>프로그램 사용이 어려우면 어떻게 하나요?</summary><p>컴퓨터가 익숙하지 않으셔도 괜찮습니다. 사용이 어려우신 목회자분들을 위해 소규모 사용법 모임을 엽니다. 함께 배우실 분들을 모아 주시면 지역에 상관없이 찾아가고, 저희 교회에 오셔서 배우실 수도 있습니다(한 번에 10명까지). 맥과 Windows는 기능이 똑같아서 어느 쪽을 쓰셔도 함께 배우실 수 있습니다<span class="winSoon">(Windows용은 시험 중 · 곧 엽니다)</span>. 소정의 참가비가 있으며, 일정은 <a href="mailto:alma9777a@gmail.com?subject=%EB%82%A8%EC%9D%80%20%EC%A1%B0%EA%B0%81%20%EC%82%AC%EC%9A%A9%EB%B2%95%20%EC%84%A4%EB%AA%85%20%EC%8B%A0%EC%B2%AD">메일</a>로 상의해 주세요.</p></details></div>
+</div></main>
+<footer class="foot"><div class="in">
+  <div><b><a href="studio.html">나눔스튜디오</a></b> <span style="opacity:.7">(옛 이름 나눔조각)</span> · 문의 <a href="mailto:alma9777a@gmail.com">alma9777a@gmail.com</a></div>
+  <div><a href="shorts-guide.html">설교 쇼츠 만드는 법</a> · <a href="studio.html">만든 곳 · 로고(CI)</a> · <a href="updates.html">업데이트 내역</a> · <a href="terms.html">이용 약관 / Terms</a> · <a href="privacy.html">개인정보처리방침 / Privacy Policy</a> · <a href="snippetcut/">SnippetCut (누구나 쓰는 판)</a> · <a href="en/" onclick="try{localStorage.setItem('nLang','en')}catch(e){}" lang="en">English</a></div>
+  <div class="c" style="opacity:.8">상호 나눔스튜디오 · 대표 최완수 · 사업자등록번호 252-10-03077<br>주소 경기도 수원시 권선구 칠보로 102, 103동 501호 (호매실동, 한양수자인파크원) · 전화 010-8014-1279 · 메일 alma9777a@gmail.com</div>
+  <div class="c">© 2026 나눔스튜디오. All rights reserved.</div>
+</div></footer>
+<div class="lbx" id="bZoom"><img alt=""></div>
+<script src="board-config.js?v=1"></script><script src="board.js?v=1"></script>
+</body></html>
