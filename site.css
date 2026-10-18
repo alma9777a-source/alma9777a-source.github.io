@@ -21,7 +21,13 @@ section{padding:96px 0}
 .nav .in{display:flex;align-items:center;gap:24px;height:60px}
 .brand{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-weight:700;font-size:20px;color:var(--ink);text-decoration:none}
 .brand img{width:32px;height:32px;border-radius:8px}
-.links{display:flex;gap:22px;margin-left:auto;font-size:14px}
+.brand{flex:none;white-space:nowrap}
+.links{display:flex;gap:18px;margin-left:auto;font-size:14px;min-width:0}
+.links a{white-space:nowrap}
+/* 메뉴가 한 줄에 다 안 들어가면 덜 중요한 칸부터 숨긴다(2026-10-18) */
+.links a.o1{display:none}   /* 이야기 · 화면: 메뉴 칸 너비가 정해져 있어 늘 뺀다(페이지 안에는 그대로) */
+@media (max-width:1180px){.links a.o2{display:none}}
+@media (max-width:1020px){.links a.o3{display:none}}
 .links a{color:var(--mute);text-decoration:none}
 .links a:hover{color:var(--ink)}
 @media (max-width:860px){.links{display:none}.nav .btn.sm{margin-left:auto}}
