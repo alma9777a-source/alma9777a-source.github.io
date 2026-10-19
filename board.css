@@ -62,5 +62,5 @@ textarea.in2{min-height:140px;resize:vertical}
 .faqall summary{font-weight:700;cursor:pointer}.faqall p{color:var(--mute);margin-top:8px}
 .th{cursor:pointer}
 .att img{max-width:100%}
-.lbx{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:99}.lbx.on{display:flex}.lbx img{max-width:94vw;max-height:92vh;border-radius:8px}
+.bzoom{position:fixed;inset:0;width:auto;height:auto;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:99;cursor:zoom-out;padding:2vh 3vw}.bzoom.on{display:flex}.bzoom img{max-width:94vw;max-height:92vh;border-radius:8px;object-fit:contain}
 .tabs2 span{cursor:pointer}.chip{cursor:pointer}.pager span{cursor:pointer}
