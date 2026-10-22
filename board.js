@@ -48,10 +48,13 @@
   function show(which){ [["list", $("#bListWrap")], ["view", view], ["form", form]].forEach(([k, el]) => el.style.display = k === which ? "" : "none"); const fb = document.querySelector(".faqbox"); if (fb) fb.style.display = which === "list" ? "" : "none"; window.scrollTo({ top: $("#bTop").offsetTop - 70 }); }
 
   /* ---------- 탭: 묻고 답하기 / 자주 묻는 질문 ---------- */
-  document.querySelectorAll(".tabs2 span").forEach(t => t.onclick = () => {
+  function tabGo(t){
     document.querySelectorAll(".tabs2 span").forEach(x => x.classList.toggle("on", x === t));
-    $("#bBoard").style.display = t.dataset.t === "faq" ? "none" : ""; $("#bFaq").style.display = t.dataset.t === "faq" ? "" : "none";
-  });
+    $("#bBoard").style.display = t.dataset.t === "board" ? "" : "none"; $("#bFaq").style.display = t.dataset.t === "faq" ? "" : "none";
+    const nw = $("#bNews"); if (nw) nw.style.display = t.dataset.t === "news" ? "" : "none";
+    if (t.dataset.t === "news") newsLoad();
+  }
+  document.querySelectorAll(".tabs2 span").forEach(t => t.onclick = () => tabGo(t));
   if (location.hash === "#faq") document.querySelector('.tabs2 span[data-t="faq"]').click();
 
   if (!API){ $("#bBoard").innerHTML = '<div class="note2">' + esc(L.notReady) + "</div>"; return; }
@@ -187,6 +190,7 @@
     box.style.display = "";
     box.innerHTML = admin ? '<span class="tag d">' + L.adminOn + '</span> <a class="btn ghost sm" id="adOut">' + L.adminOut + "</a>"
       : '<input class="in2" type="password" id="adPw" placeholder="' + esc(L.adminIn) + '" style="max-width:260px;display:inline-block"> <a class="btn sm" id="adGo">' + L.adminGo + '</a> <span class="err" id="adErr"></span>';
+    newsTab();
     if (admin) $("#adOut").onclick = () => { admin = ""; ls.del("boardAdmin"); paintAdmin(); load(); };
     else $("#adGo").onclick = async () => {
       const pw = $("#adPw").value; admin = pw;
@@ -194,6 +198,60 @@
       catch (e){ admin = ""; $("#adErr").textContent = L.adminBad; }
     };
   }
+  /* ---------- 앱 소식(관리자만, 한국어 게시판) — 남은 조각 앱 첫 화면 ‘나눔스튜디오 소식’ 카드에 나온다(2026-10-22) ---------- */
+  let NEWS = [], nEdit = null;
+  function newsTab(){
+    const tabs = document.querySelector(".tabs2"); if (!tabs || EN) return;
+    let t = tabs.querySelector('[data-t="news"]'), box = $("#bNews");
+    if (!admin){ if (t){ if (t.classList.contains("on")) tabGo(tabs.querySelector('[data-t="board"]')); t.remove(); } if (box) box.remove(); return; }
+    if (!t){ t = document.createElement("span"); t.dataset.t = "news"; t.textContent = "📣 앱 소식"; t.onclick = () => tabGo(t); tabs.append(t); }
+    if (!box){ box = document.createElement("div"); box.id = "bNews"; box.style.display = "none"; $("#bFaq").after(box); }
+  }
+  const nState = (n, today) => !n.active ? ["꺼 둠", "w"] : (n.start_on && n.start_on > today) ? ["예정 · " + n.start_on + "부터", "w"] : (n.end_on && n.end_on < today) ? ["끝남", ""] : ["앱에 보이는 중", "d"];
+  function nCard(n){
+    return '<div class="ncard"><div class="nk">🌿 나눔스튜디오 소식' + (n.tag ? ' <em>' + esc(n.tag) + "</em>" : "") + '</div><div class="nt">' + esc(n.title || "제목") + '</div>' + (n.body ? '<div class="nd">' + esc(n.body) + "</div>" : "") + (n.link ? '<div class="ng">' + esc(n.link_label || "자세히") + " ›</div>" : "") + "</div>";
+  }
+  async function newsLoad(){
+    const box = $("#bNews"); if (!box) return;
+    box.innerHTML = '<div class="note2">' + esc(L.loading) + "</div>";
+    try {
+      const d = await call("/news?all=1"); NEWS = d.items;
+      const rows = NEWS.map(n => { const [st, c] = nState(n, d.today); return '<div class="nrow"><div class="nl"><span class="tag ' + c + '">' + st + '</span> <b>' + esc(n.title) + '</b><small>' + (n.start_on || "언제부터나") + " ~ " + (n.end_on || "끝 없음") + (n.tag ? " · " + esc(n.tag) : "") + '</small></div><div class="nb"><button data-ne="' + n.id + '">고치기</button><button data-nd="' + n.id + '" style="color:#c0392b">지우기</button></div></div>'; }).join("");
+      box.innerHTML = '<div class="nhelp">여기 쓴 소식은 <b>남은 조각 앱 첫 화면 오른쪽 ‘나눔스튜디오 소식’ 카드</b>에 나옵니다. 앱을 켤 때 읽어 가니 따로 업데이트할 필요가 없습니다. 보이는 소식이 없으면 그 자리에 ‘1분 사용법’ 영상 카드가 나옵니다. 한 번에 5개까지, 몇 초마다 넘어갑니다.</div>'
+        + '<div style="margin:12px 0"><a class="btn sm" id="nNew">＋ 새 소식 쓰기</a></div>'
+        + (rows || '<div class="note2">아직 쓴 소식이 없습니다.</div>') + '<div id="nForm"></div>';
+      $("#nNew").onclick = () => newsForm({ active: true });
+      box.querySelectorAll("[data-ne]").forEach(b => b.onclick = () => newsForm(NEWS.find(n => n.id === +b.dataset.ne)));
+      box.querySelectorAll("[data-nd]").forEach(b => b.onclick = async () => { if (!window.confirm("이 소식을 지울까요? 앱에서도 사라집니다.")) return; await call("/news/" + b.dataset.nd, { method: "DELETE" }); newsLoad(); });
+    } catch (e){ box.innerHTML = '<div class="note2">' + esc(e.status === 403 ? "관리자 암호를 다시 넣어 주세요." : L.fail) + "</div>"; }
+  }
+  function newsForm(n){
+    nEdit = n; const f = $("#nForm"), v = k => esc(n[k] || "");
+    f.innerHTML = '<div class="form nform"><div class="fg2"><div>'
+      + '<label>꼬리표 <small>· 예: 사용법 모임, 새 앱, 새 기능 (20자)</small></label><input class="in2" id="nTag" maxlength="20" value="' + v("tag") + '">'
+      + '<label>제목 <small>· 두 줄 안쪽이 보기 좋습니다 (60자)</small></label><input class="in2" id="nTitle" maxlength="60" value="' + v("title") + '">'
+      + '<label>내용 <small>· 선택 (200자)</small></label><textarea class="in2" id="nBody" maxlength="200" style="min-height:80px">' + v("body") + '</textarea>'
+      + '<div class="fg"><div><label>누르면 열 주소 <small>· 선택, https://로 시작</small></label><input class="in2" id="nLink" maxlength="300" placeholder="https://namunjogak.com/..." value="' + v("link") + '"></div><div><label>단추 글 <small>· 예: 자세히 · 신청</small></label><input class="in2" id="nLabel" maxlength="20" value="' + v("link_label") + '"></div></div>'
+      + '<div class="fg"><div><label>보이기 시작하는 날 <small>· 비우면 바로</small></label><input class="in2" type="date" id="nStart" value="' + v("start_on") + '"></div><div><label>마지막 날 <small>· 비우면 계속</small></label><input class="in2" type="date" id="nEnd" value="' + v("end_on") + '"></div></div>'
+      + '<label class="ck"><input type="checkbox" id="nOn"' + (n.active !== false ? " checked" : "") + '>앱에 보이기</label>'
+      + '<label class="ck"><input type="checkbox" id="nTop"' + (n.sort > 0 ? " checked" : "") + '>맨 앞에 보이기</label>'
+      + '</div><div><label>앱에서 보이는 모양</label><div id="nPrev"></div></div></div>'
+      + '<div class="err" id="nErr"></div><div style="margin-top:14px;display:flex;gap:10px;justify-content:flex-end"><a class="btn ghost sm" id="nCancel">취소</a><a class="btn sm" id="nSave">' + (n.id ? "고친 것 저장" : "소식 올리기") + "</a></div></div>";
+    const read = () => ({ id: n.id, tag: $("#nTag").value.trim(), title: $("#nTitle").value.trim(), body: $("#nBody").value.trim(), link: $("#nLink").value.trim(), link_label: $("#nLabel").value.trim(), start_on: $("#nStart").value, end_on: $("#nEnd").value, active: $("#nOn").checked, sort: $("#nTop").checked ? 1 : 0 });
+    const prev = () => { $("#nPrev").innerHTML = nCard(read()); };
+    f.querySelectorAll("input,textarea").forEach(i => i.addEventListener("input", prev)); prev();
+    $("#nCancel").onclick = () => { f.innerHTML = ""; };
+    $("#nSave").onclick = async () => {
+      const d = read(), err = $("#nErr"); err.textContent = "";
+      if (!d.title){ err.textContent = "제목을 적어 주세요."; return; }
+      if (d.link && !/^https:\/\//.test(d.link)){ err.textContent = "주소는 https://로 시작해야 합니다."; return; }
+      if (d.start_on && d.end_on && d.end_on < d.start_on){ err.textContent = "마지막 날이 시작하는 날보다 앞입니다."; return; }
+      try { await call("/news", { method: "POST", body: JSON.stringify(d) }); newsLoad(); }
+      catch (e){ err.textContent = e.status === 403 ? "관리자 암호를 다시 넣어 주세요." : L.fail; }
+    };
+    f.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
   paintAdmin();
   const m = location.hash.match(/^#p(\d+)$/);
   if (m) openPost(+m[1]); else { show("list"); load(); }
