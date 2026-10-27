@@ -69,11 +69,11 @@ section{padding:96px 0}
 .story p{font-size:18px;color:#36423b;margin-bottom:16px}
 
 /* 쓰는 법 */
-.steps{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:18px;counter-reset:s}
+.steps{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;counter-reset:s}
 .steps li{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px 22px;font-size:15px;color:var(--mute)}
 .steps li span{display:inline-flex;width:34px;height:34px;border-radius:50%;align-items:center;justify-content:center;background:var(--green);color:#fff;font-weight:700;margin-bottom:14px}
 .steps li b{display:block;color:var(--ink);font-size:18px;margin-bottom:6px}
-@media (max-width:860px){.steps{grid-template-columns:1fr 1fr}}
+@media (max-width:860px){.steps{grid-template-columns:1fr}}
 @media (max-width:520px){.steps{grid-template-columns:1fr}}
 
 /* 기능 */
@@ -348,3 +348,8 @@ html.buy-open .buySoon{display:none!important}
   @keyframes meFlashD{0%{background:#16261c}25%{background:#3a3418}100%{background:#16261c}}
   .stamp0{color:var(--gold2);border-color:var(--gold2)}
 }
+
+/* 2.0 1분 사용법 영상 고르기(2026-10-27) */
+.howlist{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:16px}
+.howlist button{font:inherit;font-size:14px;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.howlist button.on{background:var(--green);border-color:var(--green);color:#fff}
