@@ -21,7 +21,7 @@
 <link rel="icon" href="icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="site.css?v=202610272330">
+<link rel="stylesheet" href="site.css?v=202610280010">
 <script src="pay.js?v=202610272200" defer></script>
 <script>
 /* 상단 그림 자동 넘김(6초, 움직임 줄이기를 켠 기기는 9초) — 문서가 다 읽힌 뒤에 돈다 */
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function(){
   var still=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   function show(n){ i=(n+sl.length)%sl.length; sl.forEach(function(e,k){ e.classList.toggle("on",k===i); e.setAttribute("aria-hidden",k===i?"false":"true"); e.querySelectorAll("a,button").forEach(function(x){ x.tabIndex=k===i?0:-1; }); }); dots.forEach(function(d,k){ d.classList.toggle("on",k===i); }); }
   function next(){ if(!hold&&!document.hidden) show(i+1); }
-  function run(){ clearInterval(t); t=setInterval(next,still?9000:6000); }   // 마우스를 올려도 멈추지 않는다(2026-10-17 저작자 요청), 점을 누르면 그때부터 다시 셈
+  function run(){ clearTimeout(t); t=setTimeout(function(){ next(); run(); }, still?9000:(sl[i]&&sl[i].classList.contains("slide-v2")?9000:6000)); }   // 마우스를 올려도 멈추지 않는다(2026-10-17 저작자 요청), 점을 누르면 그때부터 다시 셈
   dots.forEach(function(d){ d.addEventListener("click",function(){ show(+d.getAttribute("data-go")); run(); }); });
   show(0); run();
 });
@@ -49,7 +49,28 @@ document.addEventListener("DOMContentLoaded", function(){
 
 <header class="hero" id="top">
   <div class="slides" aria-roledescription="carousel" aria-label="남은 조각 소개">
-    <div class="slide on" aria-roledescription="slide" aria-label="1 / 2">
+    <div class="slide slide-v2 on" aria-roledescription="slide" aria-label="1 / 2">
+  <div class="v2fx" aria-hidden="true"><i class="o1"></i><i class="o2"></i><i class="o3"></i><i class="ray"></i><b class="sp s1">✦</b><b class="sp s2">✦</b><b class="sp s3">✧</b><b class="sp s4">✦</b><b class="sp s5">✧</b><b class="sp s6">✦</b></div>
+  <div class="in">
+    <div class="hero-txt">
+      <p class="newbadge v2badge"><span>NEW</span> 남은 조각 2.0 출시 · 완전히 새 화면</p>
+      <h1 class="v2h">영상을 넣으면 <em class="shine">완성본 6개</em>,<br>그 자리에서 다듬고 완성.</h1>
+      <p class="lead">설교 영상을 끌어다 놓으면 받아쓰기부터 제목 · 자막 · 템플릿 · 음악을 입힌 쇼츠 완성본 6개까지 알아서 만듭니다. 마음에 드는 것을 골라 그 자리에서 다듬고, 썸네일 · 저장 · 유튜브 · 카톡 공유 카드까지 차례로.</p>
+      <ul class="v2chips"><li>✨ 완성본 6개 한눈에</li><li>✂️ 끌어 올려 자르기</li><li>💌 카톡 · 주보 공유 카드</li><li>📅 한 주 예약 올리기</li><li>▶️ 1분 사용법 영상</li><li>🖥️ 맥 · Windows 같은 화면</li></ul>
+      <div class="cta"><a class="btn v2go" href="#price">2.0 무료로 써 보기 →</a><a class="btn ghost" href="#screens">새 화면 보기</a></div>
+      <p class="note">10일 무료 체험 · 1.0 위에 설치하면 설정 · 바구니 · 등록이 그대로 · <a href="windows-pc.html" style="color:inherit;text-decoration:underline">Windows 사무용 PC · 노트북 안내</a></p>
+    </div>
+    <div class="v2vis" aria-hidden="false">
+      <div class="v2big" aria-hidden="true">2.0</div>
+      <div class="v2scr"><img src="img/v2_2.jpg?v=200" alt="남은 조각 2.0 완성본 고르기 화면"></div>
+      <img class="v2ph q1" src="img/tpl_card.jpg?v=202610121" alt="" loading="lazy">
+      <img class="v2ph q2" src="img/tpl_grace.jpg?v=202610121" alt="" loading="lazy">
+      <img class="v2ph q3" src="img/tpl_sunday.jpg?v=202610121" alt="" loading="lazy">
+      <div class="v2ring"><span>NEW</span><b>2.0</b><em>새 화면</em></div>
+    </div>
+  </div>
+    </div>
+    <div class="slide" aria-roledescription="slide" aria-label="2 / 2" aria-hidden="true">
   <div class="in">
     <div class="hero-txt">
       <p class="verse">“남은 조각을 거두고 버리는 것이 없게 하라”<cite>요한복음 6:12</cite></p>
@@ -65,23 +86,7 @@ document.addEventListener("DOMContentLoaded", function(){
     </div>
   </div>
     </div>
-    <div class="slide slide-win" aria-roledescription="slide" aria-label="2 / 2" aria-hidden="true">
-  <div class="in">
-    <div class="hero-txt">
-      <p class="newbadge"><span>NEW</span> 남은 조각 2.0 · 새 화면</p>
-      <h1>영상을 넣으면 <em>완성본 6개</em>,<br>그 자리에서 다듬고 완성.</h1>
-      <p class="lead">설교 영상을 끌어다 놓으면 받아쓰기부터 쇼츠 완성본 6개까지 알아서 만듭니다. 마음에 드는 것을 골라 그 자리에서 다듬고, 썸네일 · 영상 저장 · 유튜브 · 카톡 공유 카드까지 차례로. 맥과 Windows 10 · 11 모두 같은 화면입니다.</p>
-      <div class="cta"><a class="btn" href="#price">맥 · Windows 무료 체험</a><a class="btn ghost" href="#screens">새 화면 보기</a></div>
-      <p class="note">10일 무료 체험 · 1.0을 쓰시던 분은 그 위에 설치하면 설정 · 바구니 · 등록이 그대로 · <a href="windows-pc.html" style="color:inherit;text-decoration:underline">Windows 사무용 PC · 노트북 안내</a></p>
-    </div>
-    <div class="hero-win">
-      <div class="winshot"><img src="img/windows_v2.jpg?v=1" alt="Windows에서 실행한 남은 조각 2.0 화면" loading="lazy"></div>
-      <div class="winstamp">버전<br><b>2.0</b></div>
-    </div>
-  </div>
-    </div>
-  </div>
-  <div class="dots" role="tablist"><button type="button" class="on" aria-label="첫 화면 보기" data-go="0"></button><button type="button" aria-label="2.0 새 화면 보기" data-go="1"></button></div>
+  <div class="dots" role="tablist"><button type="button" class="on" aria-label="2.0 새 화면 보기" data-go="0"></button><button type="button" aria-label="첫 화면 보기" data-go="1"></button></div>
 </header>
 
 <a class="lowbar" href="windows-pc.html"><span class="lb-i">🖥️</span><span class="lb-t"><b>Windows 사무용 PC · 노트북을 쓰시나요?</b> 그래픽 카드가 없는 PC는 ‘빠른 받아쓰기 모델’로 훨씬 빨라집니다 — 방법 3가지 안내</span><span class="lb-go">안내 보기 ›</span></a>
