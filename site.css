@@ -353,3 +353,14 @@ html.buy-open .buySoon{display:none!important}
 .howlist{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:16px}
 .howlist button{font:inherit;font-size:14px;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
 .howlist button.on{background:var(--green);border-color:var(--green);color:#fff}
+
+/* Windows 사무용 PC 안내(2026-10-27) — 첫 화면 아래 띠 · Windows 칸 강조 상자 */
+.lowbar{display:flex;align-items:center;gap:14px;max-width:1120px;margin:22px auto 0;padding:16px 22px;border-radius:18px;background:linear-gradient(90deg,#fff4d6,#fde9b8);border:2px solid #e8c779;color:#4a3a12;text-decoration:none;box-shadow:0 10px 26px rgba(150,110,20,.15)}
+.lowbar .lb-i{font-size:28px}.lowbar .lb-t{flex:1;font-size:16px;line-height:1.55}.lowbar .lb-t b{display:block;font-size:18px;color:#3a2c08}
+.lowbar .lb-go{flex:none;background:#17402c;color:#fff;font-weight:700;padding:10px 18px;border-radius:999px;font-size:15px}
+.lowbar:hover{filter:brightness(1.03)}
+.lowbox{background:linear-gradient(135deg,#fff4d6,#fdebc0);border:2px solid #e8c779;border-radius:18px;padding:18px 20px;margin:0 0 18px;color:#4a3a12}
+.lowbox b{display:block;font-size:18px;margin-bottom:6px;color:#3a2c08}.lowbox p{font-size:15px;line-height:1.7;margin:0 0 12px}
+.lowbox .btn{background:#17402c;color:#fff}
+@media (max-width:860px){.lowbar{margin:16px 16px 0;flex-wrap:wrap}.lowbar .lb-go{width:100%;text-align:center}}
+@media (prefers-color-scheme:dark){.lowbar,.lowbox{background:linear-gradient(135deg,#3a2e12,#2c2410);border-color:#8a6d2a;color:#ead9b0}.lowbar .lb-t b,.lowbox b{color:#ffe7a8}.lowbar .lb-go,.lowbox .btn{background:#e8c779;color:#2a2008}}

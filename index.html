@@ -21,7 +21,7 @@
 <link rel="icon" href="icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="site.css?v=202610272200">
+<link rel="stylesheet" href="site.css?v=202610272330">
 <script src="pay.js?v=202610272200" defer></script>
 <script>
 /* 상단 그림 자동 넘김(6초, 움직임 줄이기를 켠 기기는 9초) — 문서가 다 읽힌 뒤에 돈다 */
@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function(){
       <h1>영상을 넣으면 <em>완성본 6개</em>,<br>그 자리에서 다듬고 완성.</h1>
       <p class="lead">설교 영상을 끌어다 놓으면 받아쓰기부터 쇼츠 완성본 6개까지 알아서 만듭니다. 마음에 드는 것을 골라 그 자리에서 다듬고, 썸네일 · 영상 저장 · 유튜브 · 카톡 공유 카드까지 차례로. 맥과 Windows 10 · 11 모두 같은 화면입니다.</p>
       <div class="cta"><a class="btn" href="#price">맥 · Windows 무료 체험</a><a class="btn ghost" href="#screens">새 화면 보기</a></div>
-      <p class="note">10일 무료 체험 · 1.0을 쓰시던 분은 그 위에 설치하면 설정 · 바구니 · 등록이 그대로</p>
+      <p class="note">10일 무료 체험 · 1.0을 쓰시던 분은 그 위에 설치하면 설정 · 바구니 · 등록이 그대로 · <a href="windows-pc.html" style="color:inherit;text-decoration:underline">Windows 사무용 PC · 노트북 안내</a></p>
     </div>
     <div class="hero-win">
       <div class="winshot"><img src="img/windows_v2.jpg?v=1" alt="Windows에서 실행한 남은 조각 2.0 화면" loading="lazy"></div>
@@ -83,6 +83,8 @@ document.addEventListener("DOMContentLoaded", function(){
   </div>
   <div class="dots" role="tablist"><button type="button" class="on" aria-label="첫 화면 보기" data-go="0"></button><button type="button" aria-label="2.0 새 화면 보기" data-go="1"></button></div>
 </header>
+
+<a class="lowbar" href="windows-pc.html"><span class="lb-i">🖥️</span><span class="lb-t"><b>Windows 사무용 PC · 노트북을 쓰시나요?</b> 그래픽 카드가 없는 PC는 ‘빠른 받아쓰기 모델’로 훨씬 빨라집니다 — 방법 3가지 안내</span><span class="lb-go">안내 보기 ›</span></a>
 
 <section class="demo" id="demo"><div class="in">
   <h2 class="center">1분 만에 보는 남은 조각</h2>
@@ -261,6 +263,7 @@ document.addEventListener("DOMContentLoaded", function(){
         <li>가격은 맥용과 같습니다 — <b><span data-price="namun.price_win">49,000원</span></b> · 1대 · 1회 구입 · 10일 무료 체험</li>
         <li class="winSoon">여러 PC에서 마무리 시험을 하고 있습니다. 시험을 마치는 대로 내려받기를 엽니다</li><li class="winOpen">설치 파일 하나로 설치합니다 — 관리자 권한이 필요 없습니다</li>
       </ul>
+      <div class="lowbox"><b>🐢 사무용 PC · 노트북이라 받아쓰기가 느린가요?</b><p>게임용 그래픽 카드가 없는 PC는 가볍게 줄인 <b>빠른 받아쓰기 모델(약 570MB)</b>을 쓰면 훨씬 빨라집니다. 앱에서 고르기 · 내려받기 도구 · 직접 받아 넣기(인터넷 없는 방송실 PC) — 세 가지 방법을 차례대로 정리했습니다.</p><a class="btn" href="windows-pc.html">사무용 PC 빠르게 쓰는 법 보기 ›</a></div>
       <div class="ipnote" style="margin:0 0 22px">
         <b>맥용과 같은 점</b>
         <p>Windows용은 맥용처럼 이 홈페이지에서 직접 내려받는 방식입니다. 맥용과 같은 방법으로, 설교 영상 파일을 넣어 시작합니다.</p>
@@ -318,6 +321,7 @@ document.addEventListener("DOMContentLoaded", function(){
   <details><summary>유튜브 링크만 넣어서 시작할 수는 없나요?</summary><p>없습니다. 0.9 버전부터는 영상 파일을 넣어 시작합니다. 유튜브의 정책에 따라, 유튜브에 올리기처럼 유튜브와 연결되는 앱은 유튜브 영상을 내려받는 기능을 둘 수 없기 때문입니다. 우리 교회 채널에 올린 영상은 유튜브 스튜디오의 ‘콘텐츠’에서 영상 옆 ⋮ → <b>오프라인 저장</b>으로 내려받아 넣으시면 됩니다.</p></details>
   <details><summary>교회 행사나 주일학교 영상에도 쓸 수 있나요?</summary><p>네. 주일 예고, 금요 기도회, 찬양 가사, 주일학교, 청년부, 큐티, 제자훈련, 수련회 같은 템플릿이 함께 들어 있고, ‘금요 기도회’ ‘청년부’ 같은 글은 우리 교회 부서 · 모임 이름으로 바꿔 쓸 수 있습니다. 간증 · 특강 · 인터뷰처럼 설교가 아닌 영상은 ‘거둘 것’에서 <b>일반 영상 6개</b>를 고르면, 설교 기준 없이 그 영상에서 가장 와닿는 구간을 AI가 골라 줍니다.</p></details>
   <details><summary>Windows PC에서도 쓸 수 있나요?</summary><p class="winSoon">지금은 맥과 아이패드용입니다. Windows 10·11용을 준비하고 있으며, 출시일과 가격은 이 홈페이지에서 먼저 알려 드립니다. <a href="#windows">출시 알림 받기</a>를 눌러 메일을 보내 주시면 가장 먼저 알려 드립니다.</p><p class="winOpen">네, 쓸 수 있습니다. Windows 10 · 11(64비트)용을 <a href="#windows">Windows 칸</a>에서 내려받으실 수 있고, 기능과 가격은 맥용과 같습니다.</p></details>
+  <details><summary>Windows 사무용 PC에서 받아쓰기가 너무 오래 걸려요</summary><p>그래픽 카드가 없는 PC는 ‘빠른 받아쓰기 모델’을 쓰면 훨씬 빨라집니다. 설정 › 받아쓰기 모델 › ‘빠르게’를 고르거나, 내려받기 도구 · 직접 받아 넣기로 준비할 수 있습니다. <a href="windows-pc.html">사무용 PC 안내 보기</a></p></details>
   <details><summary>프로그램 사용이 어려우면 어떻게 하나요?</summary><p>컴퓨터가 익숙하지 않으셔도 괜찮습니다. 사용이 어려우신 목회자분들을 위해 소규모 사용법 모임을 엽니다. 함께 배우실 분들을 모아 주시면 지역에 상관없이 찾아가고, 저희 교회에 오셔서 배우실 수도 있습니다(한 번에 10명까지). 맥과 Windows는 기능이 똑같아서 어느 쪽을 쓰셔도 함께 배우실 수 있습니다<span class="winSoon">(Windows용은 시험 중 · 곧 엽니다)</span>. 소정의 참가비가 있으며, 일정은 <a href="mailto:alma9777a@gmail.com?subject=%EB%82%A8%EC%9D%80%20%EC%A1%B0%EA%B0%81%20%EC%82%AC%EC%9A%A9%EB%B2%95%20%EC%84%A4%EB%AA%85%20%EC%8B%A0%EC%B2%AD">메일</a>로 상의해 주세요.</p></details>
 </div></section>
 

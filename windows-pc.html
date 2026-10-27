@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>사무용 · 오래된 Windows PC에서 빠르게 쓰기 | 남은 조각</title>
+<link rel="canonical" href="https://namunjogak.com/windows-pc.html">
+<meta name="description" content="그래픽 카드가 없는 사무용 PC · 노트북에서 남은 조각 받아쓰기를 빠르게 하는 방법. 빠른 받아쓰기 모델을 앱에서, 내려받기 도구로, 또는 직접 받아 넣는 방법을 차례로 안내합니다.">
+<meta property="og:title" content="사무용 · 오래된 Windows PC에서 남은 조각 빠르게 쓰기">
+<meta property="og:description" content="그래픽 카드가 없는 PC를 위한 빠른 받아쓰기 모델 안내">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://namunjogak.com/windows-pc.html">
+<meta property="og:image" content="https://namunjogak.com/img/windows_v2.jpg">
+<link rel="icon" href="icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css?v=202610272330">
+<style>
+.gd{padding:56px 0 88px;word-break:keep-all}
+.gd h1{font-family:var(--serif);font-size:clamp(30px,4.2vw,44px);line-height:1.3;margin-bottom:12px}
+.gd .lead2{color:var(--mute);font-size:17px;line-height:1.8;margin-bottom:18px}
+.gd .toc{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 22px;margin:22px 0 8px;font-size:15px}
+.gd .toc b{display:block;margin-bottom:6px}
+.gd .toc ol{margin:0 0 0 20px}.gd .toc li{margin:3px 0}
+.gd h2{font-family:var(--serif);font-size:clamp(23px,3vw,29px);margin:48px 0 14px;line-height:1.4}
+.gd h3{font-size:18px;margin:22px 0 8px}
+.gd p,.gd li{font-size:16px;line-height:1.85}
+.gd p{margin:0 0 12px}
+.gd ul.dot,.gd ol.num{margin:6px 0 14px 22px}.gd ul.dot li,.gd ol.num li{margin:6px 0}
+.tip{display:grid;gap:12px;margin:14px 0}
+.tip div{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 20px}
+.tip b{display:block;font-size:17px;margin-bottom:4px;color:var(--green2)}
+.tip p{margin:0;font-size:15px;color:var(--mute)}
+.shot{margin:18px 0 6px;border-radius:14px;overflow:hidden;border:1px solid var(--line);box-shadow:0 12px 30px rgba(23,64,44,.10)}
+.shot img{display:block;width:100%;height:auto}
+.cap{font-size:13px;color:var(--mute);margin:0 0 18px}
+.cmp{width:100%;border-collapse:collapse;margin:12px 0 16px;font-size:15px}
+.cmp th,.cmp td{border-top:1px solid var(--line);padding:10px 8px;text-align:left;vertical-align:top}
+.cmp th{font-size:14px;color:var(--mute);font-weight:700}
+.cta{margin-top:46px;background:var(--green);color:#fff;border-radius:22px;padding:28px 26px;text-align:center}
+.cta h2{color:#fff;margin:0 0 8px}.cta p{color:#e3eee7;margin-bottom:18px}
+.cta .btn{background:#fff;color:var(--green2)}
+.gd details{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 18px;margin:10px 0}
+.gd summary{font-weight:700;cursor:pointer;font-size:16px}
+.gd details p{margin:10px 0 2px;font-size:15px}
+.gd .tbl{overflow-x:auto}
+.gd .step{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 22px;margin:16px 0}
+.gd .step h3{margin:0 0 6px;font-size:19px}.gd .step .tag{display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;background:#e6f2ea;color:var(--green2);margin-bottom:8px}
+.gd .step.best{border:2px solid var(--green)}
+.gd code{font-family:ui-monospace,Consolas,monospace;background:rgba(23,64,44,.08);padding:2px 7px;border-radius:6px;font-size:.93em;word-break:break-all}
+.gd .dl{display:inline-flex;align-items:center;gap:8px;margin:6px 0 10px;background:var(--green);color:#fff;font-weight:700;padding:12px 20px;border-radius:12px;text-decoration:none}
+.gd .warn{background:#fff7e6;border:1px solid #f0d9a8;border-radius:14px;padding:12px 16px;font-size:15px;color:#6b5320}
+.gd .who{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:10px 0 6px}
+.gd .who div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 16px;font-size:15px}
+@media (prefers-color-scheme:dark){.gd .warn{background:#2c2414;border-color:#5a4720;color:#ead9b0}.gd .step .tag{background:#173022;color:#9fe0b4}.gd code{background:rgba(255,255,255,.08)}}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="in"><a class="brand" href="./"><img src="icon.png" alt="">남은 조각</a>
+<div class="links"><a href="./#windows">Windows</a><a href="./#price">가격</a><a href="windows-pc.html" style="color:var(--ink);font-weight:700">사무용 PC 안내</a><a href="shorts-guide.html">설교 쇼츠 만드는 법</a></div>
+<a class="btn sm" href="./#price">무료로 써 보기</a></div></nav>
+<main class="gd"><div class="in narrow">
+<h1>사무용 · 오래된 Windows PC에서<br>빠르게 쓰기<br><small style="font-size:.55em;color:var(--mute)">그래픽 카드가 없는 PC를 위한 ‘빠른 받아쓰기 모델’ 안내</small></h1>
+<p class="lead2">남은 조각은 설교를 <b>PC 안에서</b> 받아씁니다. 영상을 밖으로 보내지 않는 대신, PC 성능에 따라 받아쓰는 시간이 크게 달라집니다. 게임용 그래픽 카드가 있는 PC는 30분 설교를 1분 안에 받아쓰지만, 교회 사무실의 사무용 PC나 노트북은 같은 일을 훨씬 오래 합니다. 이런 PC를 위해 <b>가볍게 줄인 받아쓰기 모델(약 570MB)</b>을 따로 준비했습니다.</p>
+
+<h2>이런 PC라면 이 안내를 따라 주세요</h2>
+<div class="who">
+<div>🖥️ 교회 사무실의 <b>사무용 PC</b></div>
+<div>💻 <b>노트북</b> · 몇 년 된 PC</div>
+<div>🐢 받아쓰기가 <b>10분 넘게</b> 걸릴 때</div>
+<div>🎮 ‘GeForce · Radeon RX’ 같은 <b>그래픽 카드가 없는</b> PC</div>
+</div>
+<p>잘 모르시겠으면 남은 조각의 <b>설정 › 받아쓰기 모델</b>을 열어 보세요. ‘그래픽 카드가 없어 빠른 모델을 씁니다’라고 나오면 이 PC가 해당합니다.</p>
+
+<h2>세 가지 방법 — 위에서부터 해 보세요</h2>
+
+<div class="step best"><span class="tag">가장 쉬움 · 먼저 해 보세요</span>
+<h3>방법 1 — 앱에서 ‘빠르게’ 고르기</h3>
+<ol class="num">
+<li>남은 조각을 켜고 오른쪽 위 <b>설정</b>을 누릅니다.</li>
+<li><b>받아쓰기 모델</b>에서 <b>빠르게</b>를 누릅니다. (그래픽 카드가 없는 PC는 ‘자동’이어도 빠른 모델을 씁니다.)</li>
+<li>‘내려받기’ 창이 뜨면 기다립니다. 약 570MB를 한 번만 받습니다(인터넷 속도에 따라 몇 분).</li>
+<li>상태가 <b>‘빠른 모델 · 준비됨’</b>으로 바뀌면 끝입니다. 다음 받아쓰기부터 빨라집니다.</li>
+</ol>
+</div>
+
+<div class="step"><span class="tag">앱 안 내려받기가 멈추거나 끊길 때</span>
+<h3>방법 2 — 내려받기 도구 실행하기</h3>
+<p>교회 인터넷이 느리거나 앱 안에서 내려받기가 자꾸 끊길 때 씁니다. 두 번 눌러 실행하면 같은 모델을 앱이 쓰는 폴더에 받아 줍니다. 끊기면 다시 실행해 이어 받습니다.</p>
+<a class="dl" href="download/namunjogak-fast-model.bat" download>⬇ 내려받기 도구 받기 (namunjogak-fast-model.bat)</a>
+<ol class="num">
+<li>위 단추로 받은 <code>namunjogak-fast-model.bat</code> 파일을 <b>두 번 누릅니다</b>.</li>
+<li>‘Windows의 PC 보호’ 파란 창이 나오면 <b>추가 정보 → 실행</b>을 누릅니다. (인터넷에서 받은 실행 파일에 처음 한 번 나오는 창입니다.)</li>
+<li>검은 창에 진행 막대가 나오며 내려받습니다. <b>‘다 받았습니다!’</b>가 나올 때까지 창을 닫지 마세요.</li>
+<li>남은 조각을 껐다가 다시 켜고, <b>설정 › 받아쓰기 모델 › 빠르게</b>를 고릅니다.</li>
+</ol>
+<p class="cap">이 도구는 메모장으로 열어 내용을 볼 수 있습니다. 모델 파일 하나를 <code>%APPDATA%\설교쇼츠\모델</code> 폴더에 받는 일만 하고, 다른 설정은 바꾸지 않습니다. Windows 10(1803 이후) · 11에 들어 있는 curl을 씁니다.</p>
+</div>
+
+<div class="step"><span class="tag">인터넷이 안 되는 PC · 방송실 PC</span>
+<h3>방법 3 — 직접 받아 넣기</h3>
+<p>방송실 PC처럼 인터넷이 막혀 있으면, 다른 PC에서 받아 USB로 옮겨 넣습니다.</p>
+<ol class="num">
+<li>인터넷이 되는 PC에서 모델 파일을 받습니다 — <a href="https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v3-turbo-q5_0.bin">ggml-large-v3-turbo-q5_0.bin</a> (약 574MB, whisper.cpp 공식 모델).</li>
+<li>남은 조각을 쓸 PC에서 <b>Windows 키 + R</b>을 누르고 <code>%APPDATA%\설교쇼츠</code>를 붙여 넣은 뒤 <b>확인</b>을 누릅니다.</li>
+<li>열린 폴더 안에 <b>모델</b> 폴더가 없으면 새로 만듭니다(오른쪽 클릭 › 새로 만들기 › 폴더 › 이름 ‘모델’).</li>
+<li>받은 파일을 <b>모델</b> 폴더에 그대로 넣습니다. 파일 이름은 바꾸지 마세요.</li>
+<li>남은 조각을 다시 켜고 <b>설정 › 받아쓰기 모델 › 빠르게</b>를 고릅니다. ‘빠른 모델 · 준비됨’이 나오면 됩니다.</li>
+</ol>
+<p class="warn">남은 조각을 한 번도 켜지 않은 PC에는 <code>설교쇼츠</code> 폴더가 아직 없습니다. 먼저 남은 조각을 한 번 켰다가 끈 뒤 진행해 주세요.</p>
+</div>
+
+<h2>함께 하면 더 빨라지는 것</h2>
+<ul class="dot">
+<li><b>설교 부분만 받아쓰기</b> — 첫 화면 ‘시작 설정’에서 받아쓸 부분을 ‘설교 부분만’으로 바꾸면 찬양 · 기도 · 광고를 건너뛰어 그만큼 빨라집니다.</li>
+<li><b>노트북은 전원을 꽂고</b> — 배터리로 쓰면 Windows가 속도를 낮춥니다.</li>
+<li><b>다른 프로그램은 닫고</b> — 받아쓰는 동안 방송 프로그램 · 브라우저 탭을 줄이면 도움이 됩니다.</li>
+<li><b>기다리는 동안 다른 일을</b> — 받아쓰는 동안 ‘남은 시간’이 표시되고, 끝나면 완성본 6개가 저절로 나옵니다.</li>
+</ul>
+
+<h2>자주 묻는 질문</h2>
+<details><summary>빠른 모델은 받아쓰기가 덜 정확한가요?</summary><p>같은 모델을 가볍게 줄인 판이라 설교 받아쓰기에서는 차이가 거의 없습니다. 드물게 낱말 하나가 다르게 나오면 다듬기 화면에서 자막을 눌러 고치면 됩니다.</p></details>
+<details><summary>그래픽 카드가 있는 PC도 이걸 써야 하나요?</summary><p>아닙니다. 그래픽 카드가 있는 PC는 ‘자동’으로 두시면 정확한 모델로 빠르게 받아씁니다.</p></details>
+<details><summary>맥도 해당되나요?</summary><p>아닙니다. 애플 실리콘 맥은 처음부터 빠르게 받아쓰므로 따로 할 일이 없습니다.</p></details>
+<details><summary>그래도 느리거나 잘 안 되면요?</summary><p><a href="board.html">묻고 답하기</a>에 PC 이름(또는 사진)과 걸린 시간을 남겨 주세요. 확인해 답을 드립니다.</p></details>
+
+<div class="cta">
+<h2>Windows용 남은 조각</h2>
+<p>Windows 10 · 11 · 10일 무료 체험 — 설교 영상 파일 하나면 시작됩니다.</p>
+<a class="btn" href="./#price">무료 체험 내려받기</a>
+</div>
+</div></main>
+<footer class="foot"><div class="in">
+  <div><b><a href="studio.html">나눔스튜디오</a></b> · 문의 <a href="mailto:alma9777a@gmail.com">alma9777a@gmail.com</a></div>
+  <div><a href="./">남은 조각 홈</a> · <a href="shorts-guide.html">설교 쇼츠 만드는 법</a> · <a href="windows-pc.html">사무용 PC 안내</a> · <a href="studio.html">만든 곳 · 로고(CI)</a> · <a href="terms.html">이용 약관 / Terms</a> · <a href="privacy.html">개인정보처리방침 / Privacy Policy</a></div>
+  <div class="c" style="opacity:.8">상호 나눔스튜디오 · 대표 최완수 · 사업자등록번호 252-10-03077<br>주소 경기도 수원시 권선구 칠보로 102, 103동 501호 (호매실동, 한양수자인파크원) · 전화 010-8014-1279 · 메일 alma9777a@gmail.com</div>
+  <div class="c">© 2026 나눔스튜디오. All rights reserved.</div>
+</div></footer>
+</body></html>
