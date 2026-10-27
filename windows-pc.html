@@ -2,7 +2,7 @@
 <html lang="ko"><head><meta charset="utf-8"><meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>사무용 · 오래된 Windows PC에서 빠르게 쓰기 | 남은 조각</title>
 <link rel="canonical" href="https://namunjogak.com/windows-pc.html">
-<meta name="description" content="그래픽 카드가 없는 사무용 PC · 노트북에서 남은 조각 받아쓰기를 빠르게 하는 방법. 빠른 받아쓰기 모델을 앱에서, 내려받기 도구로, 또는 직접 받아 넣는 방법을 차례로 안내합니다.">
+<meta name="description" content="그래픽 카드가 없는 사무용 PC · 노트북에서 남은 조각을 빠르게 쓰는 방법. 유튜브 스크립트(자막)로 받아쓰기 없이 시작하기, 빠른 받아쓰기 모델을 앱에서 · 내려받기 도구로 · 직접 받아 넣는 방법을 차례로 안내합니다.">
 <meta property="og:title" content="사무용 · 오래된 Windows PC에서 남은 조각 빠르게 쓰기">
 <meta property="og:description" content="그래픽 카드가 없는 PC를 위한 빠른 받아쓰기 모델 안내">
 <meta property="og:type" content="article">
@@ -44,6 +44,8 @@
 .gd .step{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 22px;margin:16px 0}
 .gd .step h3{margin:0 0 6px;font-size:19px}.gd .step .tag{display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;background:#e6f2ea;color:var(--green2);margin-bottom:8px}
 .gd .step.best{border:2px solid var(--green)}
+.gd .step .tag.soon{background:#fff1cc;color:#8a5a00}
+@media (prefers-color-scheme:dark){.gd .step .tag.soon{background:#3a2e12;color:#ffd98a}}
 .gd code{font-family:ui-monospace,Consolas,monospace;background:rgba(23,64,44,.08);padding:2px 7px;border-radius:6px;font-size:.93em;word-break:break-all}
 .gd .dl{display:inline-flex;align-items:center;gap:8px;margin:6px 0 10px;background:var(--green);color:#fff;font-weight:700;padding:12px 20px;border-radius:12px;text-decoration:none}
 .gd .warn{background:#fff7e6;border:1px solid #f0d9a8;border-radius:14px;padding:12px 16px;font-size:15px;color:#6b5320}
@@ -69,10 +71,32 @@
 </div>
 <p>잘 모르시겠으면 남은 조각의 <b>설정 › 받아쓰기 모델</b>을 열어 보세요. ‘그래픽 카드가 없어 빠른 모델을 씁니다’라고 나오면 이 PC가 해당합니다.</p>
 
-<h2>세 가지 방법 — 위에서부터 해 보세요</h2>
+<h2>네 가지 방법 — 위에서부터 골라 보세요</h2>
 
-<div class="step best"><span class="tag">가장 쉬움 · 먼저 해 보세요</span>
-<h3>방법 1 — 앱에서 ‘빠르게’ 고르기</h3>
+<div class="step best"><span class="tag">받아쓰기를 아예 건너뛰기 · 가장 빠름</span> <span class="tag soon">남은 조각 2.0.2부터 · 준비 중</span>
+<h3>방법 1 — 유튜브 스크립트(자막)로 시작하기</h3>
+<p>교회 유튜브 채널에 예배 영상을 이미 올리셨다면, 유튜브가 만들어 둔 <b>자동 자막(스크립트)</b>을 그대로 가져와 쓸 수 있습니다. PC가 받아쓸 일이 없으니 사무용 PC에서도 <b>몇 초 만에</b> 완성본 고르기로 넘어갑니다. 남은 조각 첫 화면의 <b>‘스크립트로 시작(직접 넣기)’</b>에 붙여 넣거나 자막 파일을 고르면 됩니다.</p>
+<p class="warn">이 기능은 <b>다음 판(2.0.2)</b>에 다시 들어갑니다. 1.0에 있던 ‘직접 넣기’를 2.0 새 화면에 옮기는 중입니다. 판이 나오면 앱 위쪽에 새 판 알림이 뜹니다. 그때까지는 아래 방법 2~4를 써 주세요.</p>
+<h3 style="font-size:16px;margin-top:16px">가) 유튜브 화면에서 스크립트 복사하기 — 누구나</h3>
+<ol class="num">
+<li>PC 브라우저(크롬 · 엣지)에서 교회 채널에 올린 <b>설교(예배) 영상</b>을 엽니다.</li>
+<li>영상 아래 <b>설명란</b>을 눌러 펼치고, 맨 아래 <b>‘스크립트 표시’</b>를 누릅니다. 오른쪽에 시간과 말이 줄줄이 나옵니다.</li>
+<li>스크립트 창 위의 <b>⋮</b>를 눌러 <b>‘타임스탬프 전환’</b>이 켜져(시간이 보이게) 있는지 확인합니다. 시간이 있어야 쇼츠 구간이 정확히 맞습니다.</li>
+<li>스크립트 첫 줄을 마우스로 누른 채 <b>맨 끝 줄까지 끌어 내려</b> 모두 고른 뒤 <b>Ctrl + C</b>로 복사합니다.</li>
+<li>남은 조각 첫 화면 <b>‘스크립트로 시작’</b> 칸에 <b>Ctrl + V</b>로 붙여 넣고, 그 예배의 <b>영상 파일</b>을 함께 고릅니다(영상은 쇼츠를 만들 때 씁니다).</li>
+<li><b>‘다음’</b>을 누르면 받아쓰기 없이 바로 완성본 6개를 만들기 시작합니다.</li>
+</ol>
+<h3 style="font-size:16px;margin-top:16px">나) 유튜브 스튜디오에서 자막 파일 내려받기 — 채널 관리자</h3>
+<ol class="num">
+<li><b>studio.youtube.com</b>에 교회 채널 계정으로 들어가 왼쪽 <b>자막</b>을 누릅니다.</li>
+<li>그 예배 영상을 누르고, 언어 ‘한국어(자동)’ 줄의 <b>⋮ → 다운로드</b>에서 <b>.srt</b>(또는 .vtt)를 고릅니다.</li>
+<li>남은 조각 <b>‘스크립트로 시작’</b>에서 받은 자막 파일을 고르고, 영상 파일도 함께 고릅니다.</li>
+</ol>
+<p class="cap">유튜브 자동 자막은 영상을 올리고 보통 몇 시간 뒤에 생깁니다. ‘스크립트 표시’가 안 보이면 조금 기다렸다가 다시 열어 보세요. 자동 자막은 띄어쓰기 · 성경 인명이 틀릴 때가 있으니, 완성본에서 자막을 눌러 고치면 됩니다. 앱이 유튜브에서 무엇을 받아 오지는 않습니다 — 직접 복사하거나 내려받은 글만 씁니다.</p>
+</div>
+
+<div class="step"><span class="tag">가장 쉬움 · 먼저 해 보세요</span>
+<h3>방법 2 — 앱에서 ‘빠르게’ 고르기</h3>
 <ol class="num">
 <li>남은 조각을 켜고 오른쪽 위 <b>설정</b>을 누릅니다.</li>
 <li><b>받아쓰기 모델</b>에서 <b>빠르게</b>를 누릅니다. (그래픽 카드가 없는 PC는 ‘자동’이어도 빠른 모델을 씁니다.)</li>
@@ -82,7 +106,7 @@
 </div>
 
 <div class="step"><span class="tag">앱 안 내려받기가 멈추거나 끊길 때</span>
-<h3>방법 2 — 내려받기 도구 실행하기</h3>
+<h3>방법 3 — 내려받기 도구 실행하기</h3>
 <p>교회 인터넷이 느리거나 앱 안에서 내려받기가 자꾸 끊길 때 씁니다. 두 번 눌러 실행하면 같은 모델을 앱이 쓰는 폴더에 받아 줍니다. 끊기면 다시 실행해 이어 받습니다.</p>
 <a class="dl" href="download/namunjogak-fast-model.bat" download>⬇ 내려받기 도구 받기 (namunjogak-fast-model.bat)</a>
 <ol class="num">
@@ -95,7 +119,7 @@
 </div>
 
 <div class="step"><span class="tag">인터넷이 안 되는 PC · 방송실 PC</span>
-<h3>방법 3 — 직접 받아 넣기</h3>
+<h3>방법 4 — 직접 받아 넣기</h3>
 <p>방송실 PC처럼 인터넷이 막혀 있으면, 다른 PC에서 받아 USB로 옮겨 넣습니다.</p>
 <ol class="num">
 <li>인터넷이 되는 PC에서 모델 파일을 받습니다 — <a href="https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v3-turbo-q5_0.bin">ggml-large-v3-turbo-q5_0.bin</a> (약 574MB, whisper.cpp 공식 모델).</li>
