@@ -21,7 +21,7 @@
 <link rel="icon" href="icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="site.css?v=202611091800">
+<link rel="stylesheet" href="site.css?v=202611092330">
 <script src="pay.js?v=202611091700" defer></script>
 <script>
 /* 상단 그림 자동 넘김(6초, 움직임 줄이기를 켠 기기는 9초) — 문서가 다 읽힌 뒤에 돈다 */
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
 <header class="hero" id="top">
   <div class="slides" aria-roledescription="carousel" aria-label="남은 조각 소개">
-    <div class="slide slide-v2 on" aria-roledescription="slide" aria-label="1 / 2">
+    <div class="slide slide-v2 on" aria-roledescription="slide" aria-label="1 / 3">
   <div class="v2fx" aria-hidden="true"><i class="o1"></i><i class="o2"></i><i class="o3"></i><i class="ray"></i><b class="sp s1">✦</b><b class="sp s2">✦</b><b class="sp s3">✧</b><b class="sp s4">✦</b><b class="sp s5">✧</b><b class="sp s6">✦</b></div>
   <div class="in">
     <div class="hero-txt">
@@ -70,7 +70,25 @@ document.addEventListener("DOMContentLoaded", function(){
     </div>
   </div>
     </div>
-    <div class="slide" aria-roledescription="slide" aria-label="2 / 2" aria-hidden="true">
+    <div class="slide slide-v2 slide-st" aria-roledescription="slide" aria-label="2 / 3" aria-hidden="true">
+  <div class="v2fx" aria-hidden="true"><i class="o1"></i><i class="o2"></i><i class="o3"></i><i class="ray"></i><b class="sp s1">✦</b><b class="sp s3">✧</b><b class="sp s4">✦</b><b class="sp s6">✦</b></div>
+  <div class="in">
+    <div class="hero-txt">
+      <p class="newbadge v2badge"><span>NEW</span> 나눔스튜디오 · 새 프로그램 체험판</p>
+      <h1 class="v2h">예배 화면도, 교회 행정도<br><em class='shine'>직접 눌러 보세요.</em></h1>
+      <p class="lead">남은 조각을 만든 나눔스튜디오가 행복드림교회에서 시험하고 있는 두 프로그램 — 예배 자막 <b>WorshipFlow</b>와 중소형 교회 행정 <b>핏처치</b>를 가상의 교회로 홈페이지에서 바로 체험할 수 있습니다.</p>
+      <ul class="v2chips"><li>🖥️ WorshipFlow — 찬양 · 성경을 예배당 · 생중계 · 강단에</li><li>⛪ 핏처치 — 성도 · 출석 · 심방 · 헌금 · 주보</li><li>🧪 둘 다 테스트 중 · 곧 출시</li><li>🔒 가상의 자료 · 저장되지 않음</li></ul>
+      <div class="cta"><a class="btn v2go" href="studio/worshipflow/">WorshipFlow 체험하기 →</a><a class="btn ghost" href="studio/fitchurch.html">핏처치 체험하기</a></div>
+      <p class="note"><a href="studio/" style="color:inherit;text-decoration:underline">나눔스튜디오에서 세 프로그램 모두 보기 ›</a> · 컴퓨터에서 여시면 편합니다</p>
+    </div>
+    <div class="v2vis stvis">
+      <a class="stw a" href="studio/worshipflow/"><img src="img/st_wf.jpg?v=1" alt="WorshipFlow 체험판 화면" loading="lazy"><span class="stl"><img src="studio/img/worshipflow.png" alt="">WorshipFlow · 예배 자막</span></a>
+      <a class="stw b" href="studio/fitchurch.html"><img src="img/st_fc.jpg?v=1" alt="핏처치 체험판 화면" loading="lazy"><span class="stl"><img src="studio/img/fitchurch.svg" alt="">핏처치 · 교회 행정</span></a>
+      <div class="v2ring"><span>NEW</span><b>체험판</b><em>테스트 중</em></div>
+    </div>
+  </div>
+    </div>
+    <div class="slide" aria-roledescription="slide" aria-label="3 / 3" aria-hidden="true">
   <div class="in">
     <div class="hero-txt">
       <p class="verse">“남은 조각을 거두고 버리는 것이 없게 하라”<cite>요한복음 6:12</cite></p>
@@ -86,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function(){
     </div>
   </div>
     </div>
-  <div class="dots" role="tablist"><button type="button" class="on" aria-label="2.0 새 화면 보기" data-go="0"></button><button type="button" aria-label="첫 화면 보기" data-go="1"></button></div>
+  <div class="dots" role="tablist"><button type="button" class="on" aria-label="2.0 새 화면 보기" data-go="0"></button><button type="button" aria-label="나눔스튜디오 체험판 보기" data-go="1"></button><button type="button" aria-label="첫 화면 보기" data-go="2"></button></div>
 </header>
 
 <a class="lowbar" href="windows-pc.html"><span class="lb-i">🖥️</span><span class="lb-t"><b>Windows 사무용 PC · 노트북을 쓰시나요?</b> 유튜브 스크립트로 받아쓰기 건너뛰기 · ‘빠른 받아쓰기 모델’ — 빠르게 쓰는 방법 4가지 안내</span><span class="lb-go">안내 보기 ›</span></a>

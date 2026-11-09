@@ -424,4 +424,16 @@ html.buy-open .buySoon{display:none!important}
 .v2ring b{font-size:30px;letter-spacing:-.02em}
 @media (max-width:860px){ .v2ring b{font-size:22px} }
 .v2ring span{background:#0D1014}
+/* 2026-11-09 둘째 슬라이드: 나눔스튜디오 체험판(WorshipFlow · 핏처치) — 첫 슬라이드와 같은 흑연 · 금색 */
+.stvis{position:relative;min-height:440px}
+.stw{position:absolute;display:block;border-radius:14px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.55),0 0 0 5px rgba(255,255,255,.08);transform:perspective(1300px) rotateY(-9deg) rotateX(3deg);transition:transform .3s}
+.stw img{display:block;width:100%}
+.stw.a{left:0;right:40px;top:10px;z-index:1}
+.stw.b{left:110px;right:-40px;top:200px;z-index:2}
+.stw:hover{transform:perspective(1300px) rotateY(-5deg) rotateX(2deg) translateY(-6px);z-index:3}
+.stw .stl{position:absolute;left:12px;bottom:12px;display:flex;gap:8px;align-items:center;background:rgba(13,16,20,.88);color:#fff;font-size:13px;font-weight:700;border-radius:999px;padding:5px 13px 5px 5px;box-shadow:0 0 0 1px rgba(255,255,255,.15)}
+.stw .stl img{width:24px;height:24px;border-radius:6px;display:block}
+.slide-st .v2chips li{font-size:13.5px}
+.stw.a .stl{top:12px;bottom:auto}
+@media (max-width:860px){ .stvis{min-height:330px;margin-top:8px} .stw.a{right:30px} .stw.b{left:50px;right:-10px;top:130px} }
 
