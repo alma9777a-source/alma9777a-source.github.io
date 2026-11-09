@@ -148,7 +148,7 @@ pre.bl{white-space:pre-wrap;background:#F7F9FC;border:1px solid var(--line);bord
   <div class="menu" id="menu1"></div>
   <div class="menu vault"><div class="lk"><svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="9" width="12" height="9" rx="2"/><path d="M7 9V6.5a3 3 0 0 1 6 0V9"/></svg>재정 금고 · 담당자만</div><div id="menu2" style="display:flex;flex-direction:column;gap:2px"></div></div>
   <div class="store">저장소<b><i></i>이 컴퓨터 · 체험판</b></div>
-  <div class="me"><div class="av">담</div><div><b style="font-size:14px;display:block">보는 사람</b><select id="role" aria-label="화면을 보는 사람"><option value="pastor">담임목사 · 전체</option><option value="fin">재정부</option><option value="staff">교역자 · 간사</option></select></div></div>
+  <div class="me"><div class="av">담</div><div><b style="font-size:14px;display:block">보는 사람</b><select id="role" aria-label="화면을 보는 사람"><option value="pastor">담임목사</option><option value="minister">교역자</option><option value="office">사무간사</option><option value="teacher">부서 교사</option><option value="fin">재정부</option></select></div></div>
 </nav>
 <main id="view"></main>
 </div>
@@ -241,8 +241,8 @@ const closeP=()=>$("#sheet").classList.remove("open");
 const openP=h=>{$("#panel").innerHTML=`<button class="x" aria-label="닫기" onclick="closeP()">✕</button>`+h;$("#sheet").classList.add("open")};
 $("#sheet").onclick=e=>{if(e.target.id==="sheet")closeP()};
 document.querySelectorAll("[data-v]").forEach(b=>b.onclick=()=>go(b.dataset.v));
-$("#role").onchange=e=>{role=e.target.value;render();toast(e.target.selectedOptions[0].text.split(" ·")[0]+" 화면으로 봅니다")};
-function go(v){cur=v;document.querySelectorAll("[data-v]").forEach(x=>x.classList.toggle("on",x.dataset.v===v||(v==="mem"&&false)));render();window.scrollTo(0,0)}
+$("#role").onchange=e=>{role=e.target.value;applyRole();toast(e.target.selectedOptions[0].text+" 화면으로 봅니다 — 메뉴가 역할에 맞게 바뀝니다")};
+function go(v){if(lv(v)>1&&v!=="home"){toast("이 역할에는 열려 있지 않은 화면입니다");v="home"}cur=v;document.querySelectorAll("[data-v]").forEach(x=>x.classList.toggle("on",x.dataset.v===v||(v==="mem"&&false)));render();window.scrollTo(0,0)}
 // ── 2026-11-09 채운 메뉴 11개(진짜 핏처치 화면 ui/screens · 디자인-새/project 의 모양을 가상 자료로) ──
 const finLock=(h)=>{$("#view").innerHTML=head("재정 금고",h)+`<section class="card soon"><div class="ic">${svg("won").replace('viewBox','width="26" height="26" viewBox')}</div><h2>재정부와 담임목사만 열 수 있습니다</h2><p>교역자 · 간사 화면에서는 재정 메뉴가 잠겨 있어요. 왼쪽 아래 ‘보는 사람’을 재정부나 담임목사로 바꿔 보세요.</p></section>`};
 const finNote=`<div class="lock"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="9" width="12" height="9" rx="2"/><path d="M7 9V6.5a3 3 0 0 1 6 0V9"/></svg><span>재정 금고 · 교회 컴퓨터에만 저장하고 따로 잠급니다. 금액은 모두 예시입니다.</span></div>`;
@@ -360,7 +360,7 @@ function newExp(){openP(`<h3>지출결의서 쓰기</h3><div class="form"><label
 const OUTS=[["인건비",3200000],["예배 · 교육",640000],["선교 · 구제",900000],["관리 · 시설",760000],["행사",520000],["사무",180000]];
 const DEPT=[["재정부(본회계)",0],["교육부",1200000],["청년부",640000],["선교부",2100000]];
 function ledger(){
-  if(role==="staff")return finLock("재정 관리");
+  if(lv(cur)>1)return finLock("재정 관리");
   const m=TODAY.getMonth(),from=new Date(lastSun);from.setDate(from.getDate()-21);const inc=O.filter(o=>new Date(o.date)>=from).reduce((s,o)=>s+o.amt,0),out=OUTS.reduce((s,o)=>s+o[1],0),mx=Math.max(...OUTS.map(o=>o[1]));
   $("#view").innerHTML=head("재정 금고",`재정 관리 · 최근 4주`,`<button class="btn" onclick="newOut()">＋ 지출 입력</button>`)+finNote+`
   <div class="grid g4"><div class="card stat"><small>최근 4주 수입</small><b>${man(inc)}</b><span>헌금 관리에서 확정한 것</span></div><div class="card stat"><small>최근 4주 지출</small><b>${man(out)}</b><span>${OUTS.length}개 항목</span></div><div class="card stat"><small>차액</small><b>${man(inc-out)}</b><span>원</span></div><div class="card stat"><small>통장과 맞춰 볼 거래</small><b>3건</b><span>기록에 없는 입출금</span></div></div>
@@ -372,7 +372,7 @@ function newOut(){openP(`<h3>새 지출 입력</h3><div class="form"><label>항�
 const BUD={in:[["주정헌금",12000000],["십일조",28000000],["감사헌금",6000000],["선교헌금",4000000],["건축헌금",5000000]],out:[["인건비",27000000],["예배 · 교육",5000000],["선교 · 구제",6000000],["관리 · 시설",7000000],["행사",4000000],["건축 적립",5000000],["예비비",1000000]]};
 const BUD0=JSON.parse(JSON.stringify(BUD));
 function budget(){
-  if(role==="staff")return finLock("예산안");
+  if(lv(cur)>1)return finLock("예산안");
   const s=L=>L.reduce((a,x)=>a+x[1],0),tin=s(BUD.in),tout=s(BUD.out);
   const tb=(k,L)=>`<table style="min-width:0"><thead><tr><th>${k==="in"?"수입":"지출"}</th><th class="num">작년 결산</th><th class="num">${TODAY.getFullYear()+1} 안</th><th class="num">증감</th></tr></thead><tbody>${L.map((x,i)=>{const l=BUD0[k][i][1]*.95,dl=x[1]-l;return `<tr><td>${x[0]}</td><td class="num mute">${man(l)}</td><td class="num"><input type="number" value="${x[1]/10000}" style="width:90px;text-align:right;border:1px solid var(--line2);border-radius:8px;padding:4px 6px" onchange="BUD.${k}[${i}][1]=this.value*10000;budget()">만</td><td class="num" style="color:${dl>=0?"var(--ok)":"var(--red)"}">${dl>=0?"+":""}${man(dl)}</td></tr>`}).join("")}<tr><td><b>합계</b></td><td></td><td class="num"><b>${man(s(L))}</b></td><td></td></tr></tbody></table>`;
   $("#view").innerHTML=head("재정 금고",`${TODAY.getFullYear()+1} 예산안`,`<button class="btn gh" onclick="Object.assign(BUD,JSON.parse(JSON.stringify(BUD0)));budget();toast('처음 숫자로 되돌렸어요')">처음으로</button><button class="btn" onclick="demoOnly('제직회 자료용 표는 정식판에서 엑셀 · PDF로 나갑니다')">내보내기</button>`)+finNote+`
@@ -382,14 +382,14 @@ function budget(){
 
 // 11. 기부금영수증
 function rcp(){
-  if(role==="staff")return finLock("기부금영수증");
+  if(lv(cur)>1)return finLock("기부금영수증");
   const yr=TODAY.getFullYear(),L=givers.slice(0,8).map((p,i)=>({p,tot:O.filter(o=>o.pid===p.id).reduce((s,o)=>s+o.amt,0)*4,ok:i%3!==2,ch:i%2?"홈택스(전자)":"종이"}));
   $("#view").innerHTML=head("재정 금고",`기부금영수증 · ${yr}년 귀속`,`<button class="btn gh" onclick="demoOnly('신청 안내 문자를 예약했어요(체험판)')">신청 안내 문자 예약</button><button class="btn" onclick="demoOnly('홈택스 일괄 발급 파일은 정식판에서, 재정부 두 사람이 확인해야 만들어집니다')">홈택스 일괄 발급 파일 만들기</button>`)+finNote+`
   <div class="grid g4"><div class="card stat"><small>신청한 성도</small><b>${L.length}명</b><span>예시</span></div><div class="card stat"><small>동의 받음</small><b>${L.filter(r=>r.ok).length}명</b></div><div class="card stat"><small>전자 발급</small><b>${L.filter(r=>r.ch[0]==="홈").length}명</b><span>연말정산 간소화에 바로</span></div><div class="card stat"><small>발급대장</small><b>5년 보관</b></div></div>
   <section class="card"><h2>신청한 성도 <small>주민등록번호는 신청한 분에게만 받고, 파일을 만드는 순간에만 풀립니다</small></h2><div class="tbl"><table><thead><tr><th>이름</th><th>주민등록번호</th><th class="num">${yr} 합계</th><th>동의</th><th>받는 방법</th></tr></thead><tbody>${L.map(r=>`<tr><td><b>${r.p.name}</b></td><td class="mute">●●●●●●-●●●●●●●</td><td class="num">${won(r.tot)}</td><td>${r.ok?'<span class="pill p-ok">동의</span>':'<span class="pill p-w">다시 받기</span>'}</td><td>${r.ch}</td></tr>`).join("")}</tbody></table></div></section>`}
 
 const VIEWS={home,mem,att,visit,off,weekly,bulletin,cal,event:evPrep,presby,plan,time,msg,forms,meet,share,arch,exp,ledger,budget,rcp};
-function render(){(VIEWS[cur]||soon)()}
+function render(){(VIEWS[cur]||soon)();if(lv(cur)===1&&cur!=="home"){const h=document.querySelector("#view .head");if(h)h.insertAdjacentHTML("afterend",`<div class="viewonly">👁 <b>${RNAME[role]}</b> 역할은 이 화면을 <b>보기만</b> 합니다 — 고치기 · 보내기는 담당자가 합니다</div>`)}}
 const head=(p,h,btns="")=>`<header class="head"><div><p>${p}</p><h1>${h}</h1></div><div style="display:flex;gap:8px;flex-wrap:wrap">${btns}</div></header>`;
 const memTabs=t=>`<div class="tabs">${[["mem","성도 목록"],["att","출석"],["visit","심방"]].map(([v,l])=>`<button class="${v===t?"on":""}" onclick="go('${v}')">${l}</button>`).join("")}</div>`;
 const lockNote=`<div class="lock"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="9" width="12" height="9" rx="2"/><path d="M7 9V6.5a3 3 0 0 1 6 0V9"/></svg><span>재정 금고 · 교회 컴퓨터에만 저장하고 따로 잠급니다. 교역자·간사는 이름·연락처·소속까지, 헌금은 재정부, 심방 기록은 담임목사만 봅니다. <b>왼쪽 아래 ‘보는 사람’을 바꿔 보세요.</b></span></div>`;
@@ -453,7 +453,7 @@ function showPerson(id){const p=byId(id);const fam=P.filter(x=>x.fam===p.fam&&x.
   <div style="margin-top:10px;display:flex;gap:6px">${tagFor(p)}<span class="pill p-a">${p.zone}</span></div>
   <div class="kv"><div><b>나이</b>${age(p)}세 (${p.birth}년생) · ${p.sex}</div><div><b>연락처</b>${p.phone}</div><div><b>생일</b>${p.bday.replace("-","월 ")}일</div><div><b>등록</b>${p.reg}년</div><div><b>가족</b><span>${fam.map(f=>`<a href="#" onclick="showPerson(${f.id});return false" style="color:var(--ac);margin-right:8px">${f.name}</a>`).join("")||"-"}</span></div></div>
   <h4>최근 8주 출석</h4><div style="display:flex;gap:6px;flex-wrap:wrap">${p.att.map((v,i)=>`<span style="text-align:center;font-size:11px;color:var(--mute)"><i style="display:block;width:22px;height:22px;border-radius:50%;margin:0 auto 3px;background:${v?"var(--ac)":"#E3E6EB"}"></i>${md(SUNS[i])}</span>`).join("")}</div>
-  <h4>헌금 · ${TODAY.getFullYear()} 누계</h4>${role==="staff"?hidden("재정부와 담임목사만 볼 수 있습니다"):`<p style="font-size:18px;font-weight:700">${won(gave)} <span class="mute" style="font-weight:400">· ${gs.length}건</span></p>`}
+  <h4>헌금 · ${TODAY.getFullYear()} 누계</h4>${lv("off")>1?hidden("이 역할에는 헌금 내역이 보이지 않습니다"):`<p style="font-size:18px;font-weight:700">${won(gave)} <span class="mute" style="font-weight:400">· ${gs.length}건</span></p>`}
   <h4>심방 기록</h4>${role!=="pastor"?hidden("담임목사만 볼 수 있습니다. 재정부도 열지 못합니다."):`<ul class="rows" style="background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px">${vs.map(v=>`<li><span><b>${v.date}</b> · ${v.kind}<br><span class="mute">${v.memo}</span></span><span class="pill ${v.done?"p-ok":"p-a"}">${v.done?"다녀옴":"예정"}</span></li>`).join("")||'<li class="mute">기록 없음</li>'}</ul>
   <div class="form"><label for="pm">메모 (담임목사만)</label><textarea rows="3" id="pm">${p.memo}</textarea></div><button class="btn gh" style="width:100%;justify-content:center;margin-top:10px" onclick="byId(${id}).memo=$('#pm').value;toast('메모를 저장했어요')">메모 저장</button>`}
   <button class="btn" style="width:100%;justify-content:center;margin-top:12px" onclick="newVisit(${id})">심방 일정 잡기</button>`)}
@@ -501,7 +501,7 @@ function newVisit(pid){openP(`<h3>심방 일정 잡기</h3><div class="form">
 function saveVisit(){V.push({id:vid++,pid:+$("#v1").value,date:$("#v2").value,time:$("#v3").value,kind:$("#v4").value,where:$("#v6").value,memo:$("#v5").value||"-",done:false});closeP();go("visit");toast("심방 일정을 넣었어요")}
 
 function off(){
-  if(role==="staff"){$("#view").innerHTML=head("재정 금고","헌금 관리")+`<section class="card soon"><div class="ic">${svg("won").replace('viewBox','width="26" height="26" viewBox')}</div><h2>재정부와 담임목사만 열 수 있습니다</h2><p>교역자 · 간사 화면에서는 헌금 메뉴가 잠겨 있어요. 왼쪽 아래 ‘보는 사람’을 재정부나 담임목사로 바꿔 보세요.</p></section>`;return}
+  if(lv("off")>1){$("#view").innerHTML=head("재정 금고","헌금 관리")+`<section class="card soon"><div class="ic">${svg("won").replace('viewBox','width="26" height="26" viewBox')}</div><h2>재정부와 담임목사만 열 수 있습니다</h2><p>교역자 · 간사 화면에서는 헌금 메뉴가 잠겨 있어요. 왼쪽 아래 ‘보는 사람’을 재정부나 담임목사로 바꿔 보세요.</p></section>`;return}
   const months=[2,1,0].map(m=>new Date(TODAY.getFullYear(),TODAY.getMonth()-m,1));
   const inM=d=>O.filter(o=>{const x=new Date(o.date);return x.getMonth()===d.getMonth()&&x.getFullYear()===d.getFullYear()}).reduce((s,o)=>s+o.amt,0);
   const thisM=months[2],sun=ymd(lastSun),sunO=O.filter(o=>o.date===sun);
@@ -772,6 +772,42 @@ function presby(){
 
 function soon(){const it=[...M1,...M2].find(m=>m[0]===cur);
   $("#view").innerHTML=head("핏처치",it[1])+`<section class="card soon"><div class="ic">${svg(it[2]||"doc").replace('viewBox','width="26" height="26" viewBox')}</div><h2>${it[1]}</h2><p>${it[4]||""}</p><p style="margin-top:-8px"><span class="pill p-w">정식판에 들어갑니다</span></p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><button class="btn gh" onclick="go('home')">홈으로</button><button class="btn" onclick="go('mem')">성도 관리 체험하기</button></div></section>`}
+// ── 2026-11-09 역할마다 다른 메뉴: 실제 핏처치 권한표(server/perms.js) 그대로 — 0 고침 · 1 보기 · 2 없음(메뉴에서 빠짐) ──
+// 순서: [담임목사, 교역자, 사무간사, 부서 교사, 재정부]
+const RKEY=["pastor","minister","office","teacher","fin"],RNAME={pastor:"담임목사",minister:"교역자",office:"사무간사",teacher:"부서 교사",fin:"재정부"},RINI={pastor:"담",minister:"교",office:"간",teacher:"교사",fin:"재"};
+const AREA={cal:[0,0,1,1,1],plan:[0,0,1,1,1],event:[0,0,0,0,1],weekly:[0,0,0,1,2],time:[0,0,0,1,2],bulletin:[0,0,0,2,2],msg:[0,1,0,2,2],forms:[0,0,0,1,2],presby:[0,1,0,2,2],meet:[0,1,1,2,2],share:[0,0,0,0,1],arch:[0,0,0,1,2],exp:[0,0,0,0,0],mem:[0,1,0,2,1],att:[0,1,0,2,1],visit:[0,0,2,2,2],ledger:[1,2,2,2,0],off:[1,2,2,2,0],budget:[1,2,2,2,0],rcp:[1,2,0,2,0]};
+function lv(v){const a=AREA[v];return a?a[RKEY.indexOf(role)]:0}
+// 역할별 ‘내 사역’ 묶음 — 실제 핏처치 메뉴(ui/app.js ROLE_MENU)처럼 맡은 일을 맨 위에, 아래 묶음에서는 뺀다
+const MINE={minister:["교구 사역",["visit","att","mem"]],office:["서무",["bulletin","share","forms"]],teacher:["교육부",["plan","event","forms","exp"]],fin:["재정부",["off","exp","ledger","rcp"]]};
+function applyRole(){
+  const tag=id=>lv(id)===1?'<em class="ro">보기</em>':"";
+  const all=[...M1,...M2],mine=MINE[role],own=mine?mine[1].filter(id=>lv(id)<2):[];
+  const btns=a=>menuHTML(a).replace(/(<button data-v="([a-z]+)"[^>]*>[\s\S]*?<span>[^<]*<\/span>)/g,(m,x,id)=>x+tag(id));
+  const L=a=>a.filter(m=>lv(m[0])<2&&!own.includes(m[0]));
+  let box=document.getElementById("menuMine");
+  if(!box){box=document.createElement("div");box.id="menuMine";box.className="menu mine";document.getElementById("menu1").before(box)}
+  box.innerHTML=own.length?`<div class="mk2">내 사역 · ${mine[0]}</div>`+btns(own.map(id=>{const m=all.find(x=>x[0]===id);return [m[0],m[1],m[2]||"doc"]})):"";
+  box.style.display=own.length?"":"none";
+  document.getElementById("menu1").innerHTML=btns(L(M1));
+  const m2=L(M2);document.getElementById("menu2").innerHTML=btns(m2);
+  document.querySelector(".menu.vault").style.display=m2.length?"":"none";
+  document.querySelectorAll("#mnav [data-v]").forEach(b=>b.style.display=lv(b.dataset.v)<2?"":"none");
+  const av=document.querySelector(".me .av");if(av)av.textContent=RINI[role];
+  document.querySelectorAll(".menu [data-v]").forEach(b=>b.onclick=()=>go(b.dataset.v));
+  go(lv(cur)<2?cur:"home");
+}
+const roleCss=document.createElement("style");roleCss.textContent=`.menu em.ro{font-style:normal;margin-left:auto;font-size:10.5px;font-weight:600;color:var(--mute);background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:0 7px}
+.menu.mine{padding:0 0 10px;border-bottom:1px solid var(--line);margin-bottom:6px}.menu.mine .mk2{padding:0 12px 6px;font-size:11.5px;font-weight:700;color:var(--ac)}
+.viewonly{margin:-4px 0 14px;padding:9px 14px;border-radius:10px;background:#FDF4E3;color:#8A5A0E;font-size:13px}`;document.head.append(roleCss);
+// ── 2026-11-09 주보: 행복드림 디자인 스튜디오(실제 핏처치의 주보 편집기 ui/studio)를 그대로 ──
+VIEWS.bulletin=function(){
+  $("#view").innerHTML=head("주간 사역","주보 작업 · 디자인 스튜디오",`<button class="btn gh" onclick="demoOnly('정식판에서는 이번 주 설교 · 예배 순서 · 교회 소식이 저절로 채워지고 핏처치에 저장됩니다')">이번 주 내용으로 채우기</button>`)+
+  `<p class="mute" style="margin:-6px 0 12px">핏처치에 들어 있는 주보 편집기 ‘행복드림 디자인 스튜디오’를 그대로 넣었습니다. 글자를 눌러 고치고, 사진 · 도형 · 페이지를 바꾸고, PDF로 내보내 보세요. 고친 내용은 이 브라우저에만 남습니다.</p>
+  <div class="card" style="padding:0;overflow:hidden;height:calc(100vh - 210px);min-height:560px"><iframe id="sframe" src="fitchurch-studio.html" title="행복드림 디자인 스튜디오" style="width:100%;height:100%;border:0;display:block"></iframe></div>`;
+  const fr=$("#sframe");fr.onload=async()=>{  // 템플릿 예시의 교회 이름을 체험판 교회로
+    for(let i=0;i<120;i++){const w=fr.contentWindow;if(w&&w.__ed&&w.__ed.canvas&&w.__ed.canvas.getObjects().length){try{let n=0;const walk=o=>{if(o.getObjects)o.getObjects().forEach(walk);if(typeof o.text==="string"&&o.text.includes("행복드림교회")){o.set("text",o.text.replace(/행복드림교회/g,"은혜샘교회"));n++}};w.__ed.canvas.getObjects().forEach(walk);if(n)w.__ed.canvas.requestRenderAll()}catch(e){}return}await new Promise(r=>setTimeout(r,150))}};
+};
+applyRole();
 go(VIEWS[location.hash.slice(1)]?location.hash.slice(1):"home");   // 주소 끝 #msg 처럼 바로 그 메뉴로
 </script>
 </body></html>
