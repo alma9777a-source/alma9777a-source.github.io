@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ko">
+<head><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300..900&family=Gowun+Batang:wght@400;700&family=Nanum+Myeongjo:wght@800&display=block" rel="stylesheet">
+<meta charset="utf-8">
+<title>WorshipFlow 예배당 화면</title>
+<link rel="stylesheet" href="shared/stage.css">
+<style>
+  html, body { margin: 0; height: 100%; background: #000; overflow: hidden; cursor: none; user-select: none; }
+  #wrap { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; }
+  .layer { position: absolute; inset: 0; transition: opacity .18s linear; z-index: 1; }
+  .layer.off { opacity: 0; }
+  .layer.top { z-index: 2; } /* 0.3.33 깜박임: 새 화면만 위에서 나타나고, 옛 화면은 아래에 그대로 있다가 다 덮인 뒤 지움 */
+  #bar { position: absolute; left: 96px; bottom: 76px; width: 900px; opacity: 0; transition: opacity .45s ease; z-index: 3; }
+  #bar.on { opacity: 1; }
+</style>
+<script src="es-shim.js"></script>
+</head>
+<body>
+<div id="wrap"><div class="layer" id="a"></div><div class="layer off" id="b"></div><img id="bar" alt=""></div>
+<script src="shared/cdmotion.js"></script>
+<script src="shared/render.js"></script>
+<script src="projection.js"></script>
+</body>
+</html>

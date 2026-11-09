@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>나눔스튜디오 — 남은 조각 · WorshipFlow · 핏처치</title>
+<meta name="description" content="목회자가 만들고 우리 교회에서 먼저 쓰는 프로그램 — 설교 쇼츠 ‘남은 조각’, 예배 자막 ‘WorshipFlow’, 중소형 교회 행정 ‘핏처치’.">
+<link rel="canonical" href="https://namunjogak.com/studio/">
+<link rel="icon" href="../icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+/* 나눔스튜디오 홈(2026-11-09): D안 배치 + 1안 색(흑연 · 금색) — 시안 배포/나눔스튜디오_홈페이지_D안_색_시안.png */
+:root{--g1:#1B2027;--g2:#343B45;--gold:#B98A35;--gold2:#D7A34B;--bg:#FAF8F4;--ink:#14181D;--mute:#6B7078;--line:#E4E0D8;--navy:#24407A;--serif:"Gowun Batang",serif;--cream:#F3EAD8}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:"Noto Sans KR",sans-serif;word-break:keep-all;line-height:1.7}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.in{max-width:1240px;margin:0 auto;padding:0 32px}
+.eye{font-size:12.5px;letter-spacing:.16em;font-weight:700;color:var(--mute);text-transform:uppercase}
+.eye b{color:var(--ink);font-weight:700;margin-right:10px}
+.tag{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;border-radius:999px;padding:3px 11px;white-space:nowrap}
+.tag::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.t-on{background:#E5F3EA;color:#1F7A47}.t-soon{background:#FBF0DA;color:#8A5A0E}.t-try{background:#E9EEF8;color:var(--navy)}
+/* 위 메뉴 */
+.nav{border-bottom:1px solid var(--line);background:rgba(250,248,244,.94);position:sticky;top:0;z-index:5;backdrop-filter:blur(8px)}
+.nav .in{height:74px;display:flex;align-items:center;gap:30px}
+.brand{display:flex;gap:10px;align-items:center;font-weight:900;font-size:19px;color:var(--g1)}
+.brand svg{width:32px;height:32px}
+.links{margin-left:auto;display:flex;gap:24px;font-size:15px;color:#3A4048}
+.links a:hover{color:var(--gold)}
+.pill{white-space:nowrap;background:var(--g1);color:#fff;border-radius:999px;padding:9px 16px 9px 18px;font-size:14px;font-weight:700;display:inline-flex;gap:10px;align-items:center}
+.pill i{font-style:normal;width:22px;height:22px;border-radius:11px;background:rgba(255,255,255,.18);display:grid;place-items:center;font-size:12px}
+/* 머리글 */
+.top{display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:end;padding:56px 0 30px}
+.top h1{font-family:var(--serif);font-size:54px;line-height:1.3;color:var(--g1);margin-top:14px}
+.top h1 em{font-style:normal;color:var(--gold)}
+.top p{color:#4A5058;font-size:16px}
+.top .dn{display:inline-flex;gap:10px;align-items:center;margin-top:16px;font-weight:700;font-size:14.5px}
+.top .dn i{font-style:normal;width:30px;height:30px;border:1px solid var(--line);border-radius:15px;display:grid;place-items:center;background:#fff}
+/* 큰 판(메인 그림): 왼쪽 말 · 오른쪽 세 프로그램 */
+.stage{position:relative;min-height:560px;border-radius:36px;overflow:hidden;background:var(--g1);display:grid;grid-template-columns:1fr 520px;gap:30px;padding:40px 44px 40px 56px;align-items:center}
+.stage::before,.stage::after{content:"";position:absolute;top:50%;width:36px;height:14px;background:var(--bg);border-radius:7px;transform:translateY(-50%);z-index:3}
+.stage::before{left:-10px}.stage::after{right:-10px}
+.stage svg.art{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.stage>*{position:relative;z-index:1}
+.chip{display:inline-block;border:1px solid rgba(243,234,216,.35);background:rgba(255,255,255,.06);color:var(--cream);border-radius:999px;padding:7px 15px;font-size:12px;letter-spacing:.14em}
+.big{color:var(--cream);font-family:var(--serif);font-size:78px;line-height:1.12;font-weight:700;margin:26px 0 18px}
+.big em{font-style:normal;color:var(--gold2)}
+.lead{color:rgba(243,234,216,.8);font-size:15.5px;max-width:440px}
+.cap{display:block;margin-top:26px;color:rgba(243,234,216,.55);font-size:12px;letter-spacing:.14em}
+.three{display:flex;flex-direction:column;gap:14px}
+.pt{display:grid;grid-template-columns:62px 1fr auto;gap:16px;align-items:center;background:rgba(250,248,244,.08);border:1px solid rgba(243,234,216,.2);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:22px;padding:16px 18px;color:var(--cream);transition:background .2s,transform .2s}
+.pt:hover{background:rgba(250,248,244,.14);transform:translateX(-4px)}
+.pt img{width:62px;height:62px;border-radius:15px;box-shadow:0 8px 20px rgba(0,0,0,.35)}
+.pt small{display:block;font-size:12px;letter-spacing:.12em;color:rgba(243,234,216,.6);font-weight:700}
+.pt b{display:block;font-size:20px;line-height:1.3;color:#fff}
+.pt span.d{display:block;font-size:13.5px;color:rgba(243,234,216,.78);line-height:1.5;margin-top:2px}
+.pt .tag{margin-top:8px}
+.pt>i{font-style:normal;width:36px;height:36px;border-radius:18px;border:1px solid rgba(243,234,216,.3);display:grid;place-items:center}
+.pt.hot{border-color:rgba(215,163,75,.7);box-shadow:0 0 0 1px rgba(215,163,75,.35),0 14px 34px rgba(215,163,75,.12)}
+.pt .tag.t-on{background:rgba(111,194,139,.18);color:#9FE0B5}.pt .tag.t-soon{background:rgba(215,163,75,.2);color:#F0CF8E}.pt .tag.t-try{background:rgba(125,184,232,.18);color:#B7D9F5}
+.under{display:flex;justify-content:space-between;color:var(--mute);font-size:13px;padding:16px 4px 0}
+/* (01) */
+.why{display:grid;grid-template-columns:220px 1fr 260px;gap:40px;padding:110px 0 90px;border-bottom:1px solid var(--line)}
+.why h2{font-family:var(--serif);font-size:38px;line-height:1.35;color:var(--g1)}
+.why h2 em,.ph h2 em,.sec h2 em{font-style:normal;color:var(--gold)}
+.why p{color:#4A5058;margin:18px 0 22px;max-width:520px}
+.why .lk{display:inline-flex;gap:14px;font-weight:700;border-bottom:1px solid var(--ink);padding-bottom:6px;font-size:15px}
+.cnt{border-left:1px solid var(--line);padding-left:30px}
+.cnt b{font-size:96px;font-weight:300;letter-spacing:-.05em;line-height:1;color:var(--g1)}
+.cnt b sup{font-size:30px;color:var(--gold);font-weight:500;margin-left:4px}
+.cnt p{font-size:14.5px;margin:14px 0}
+.cnt small{font-size:12px;letter-spacing:.14em;color:var(--mute)}
+/* (02) 카드 */
+.proj{padding:100px 0 60px}
+.ph{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:36px}
+.ph h2,.sec h2{font-family:var(--serif);font-size:44px;line-height:1.3;color:var(--g1);margin-top:14px}
+.ph .r{text-align:right;color:var(--mute);font-size:14px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{background:#fff;border:1px solid var(--line);border-radius:26px;overflow:hidden;transition:transform .25s,box-shadow .25s;display:flex;flex-direction:column}
+.card:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(20,24,29,.10)}
+.vis{height:270px;position:relative;overflow:hidden}
+.vis img.s{width:100%;height:100%;object-fit:cover;object-position:top left}
+.v1{background:#20262E;padding:22px 22px 0}.v1 img.s{border-radius:12px 12px 0 0;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.v2{background:#141a33;display:flex;align-items:center;justify-content:center}
+.v2 .scr{width:80%;aspect-ratio:16/9;background:linear-gradient(160deg,#27306a,#121731);border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font-family:var(--serif);text-align:center;box-shadow:0 18px 40px rgba(0,0,0,.35)}
+.v2 .scr b{font-size:20px;line-height:1.5}.v2 .scr span{font:11px "Noto Sans KR";opacity:.6;margin-top:8px}
+.v3{background:#E9EEF7;display:flex;align-items:flex-end;justify-content:center;padding-top:30px}
+.v3 .win{width:84%;height:100%;background:#F5F6F8;border-radius:12px 12px 0 0;display:flex;overflow:hidden;box-shadow:0 10px 30px rgba(36,64,122,.18)}
+.v3 .sd{width:30%;background:#fff;border-right:1px solid #E3E6EB;padding:14px 8px;display:flex;flex-direction:column;gap:4px;font-size:10.5px;color:#3A4352}
+.v3 .sd b{background:#EEF2FA;color:#24407A;border-radius:6px;padding:5px 8px}.v3 .sd span{padding:5px 8px}
+.v3 .mn{flex:1;padding:14px;display:flex;flex-direction:column;gap:8px}
+.v3 h4{font-size:14px;color:#1B2230}
+.v3 .k{display:grid;grid-template-columns:1fr 1fr;gap:6px}.v3 .k div{background:#fff;border:1px solid #E3E6EB;border-radius:8px;padding:8px;font-size:9.5px;color:#5B6474}.v3 .k b{display:block;font-size:15px;color:#1B2230}
+.v3 .bar{flex:1;background:#fff;border:1px solid #E3E6EB;border-radius:8px;display:flex;align-items:flex-end;gap:5px;padding:8px}
+.v3 .bar i{flex:1;background:#BFCBE3;border-radius:3px 3px 1px 1px}.v3 .bar i:last-child{background:#24407A}
+.vis .ic{position:absolute;left:18px;top:18px;width:48px;height:48px;border-radius:12px;box-shadow:0 6px 16px rgba(0,0,0,.3);z-index:2}
+.body{padding:20px 24px 24px;flex:1;display:flex;flex-direction:column}
+.meta{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--mute);gap:8px}
+.ttl{display:flex;justify-content:space-between;align-items:center;margin:10px 0 6px}
+.ttl h3{font-size:23px;font-weight:900}
+.ttl i{font-style:normal;width:38px;height:38px;border:1px solid var(--line);border-radius:19px;display:grid;place-items:center;transition:background .2s,color .2s,transform .2s}
+.card:hover .ttl i{background:var(--g1);color:#fff;border-color:var(--g1);transform:rotate(45deg)}
+.body p{font-size:14.5px;color:#4A5058}
+/* 프로그램 자세히 */
+.sec{padding:90px 0;border-top:1px solid var(--line)}
+.sh{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.sh .lede{font-size:16.5px;color:#3A4048;margin:18px 0 20px}
+.sh .lede b{color:var(--ink)}
+.idrow{display:flex;align-items:center;gap:14px;margin-bottom:8px}
+.idrow img{width:58px;height:58px;border-radius:14px;box-shadow:0 8px 18px rgba(0,0,0,.15)}
+.idrow .nm{font-size:15px;color:var(--mute)}.idrow .nm b{display:block;font-size:22px;color:var(--ink);line-height:1.3}
+.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+.btn{display:inline-flex;gap:12px;align-items:center;border-radius:999px;padding:12px 12px 12px 22px;font-weight:700;font-size:15px}
+.btn i{font-style:normal;width:30px;height:30px;border-radius:15px;display:grid;place-items:center}
+.btn.p{background:var(--g1);color:#fff}.btn.p i{background:rgba(255,255,255,.16)}
+.btn.n{background:var(--navy);color:#fff}.btn.n i{background:rgba(255,255,255,.18)}
+.btn.o{border:1px solid var(--line);background:#fff}.btn.o i{background:var(--bg)}
+.small{font-size:13px;color:var(--mute);margin-top:12px}
+.feat{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:44px}
+.feat div{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px 20px 18px}
+.feat .n{font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.1em}
+.feat h4{font-size:16.5px;margin:8px 0 6px;line-height:1.4}
+.feat p{font-size:13.5px;color:#5A6068;line-height:1.6}
+/* WorshipFlow 그림: 세 화면 */
+.wfvis{background:#141A33;border-radius:28px;padding:26px;display:grid;grid-template-columns:1fr 1fr;gap:14px;box-shadow:0 20px 40px rgba(20,26,51,.25)}
+.wfvis .m{grid-column:1/3;aspect-ratio:16/8;background:linear-gradient(160deg,#27306a,#121731);border-radius:14px;color:#fff;font-family:var(--serif);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative}
+.wfvis .m b{font-size:24px;line-height:1.55}.wfvis .m span{font:12px "Noto Sans KR";opacity:.6;margin-top:10px}
+.wfvis label{position:absolute;left:12px;top:10px;font:700 11px "Noto Sans KR";letter-spacing:.1em;color:#B7C3F0;background:rgba(255,255,255,.08);border-radius:999px;padding:3px 10px}
+.wfvis .o{aspect-ratio:16/9;border-radius:12px;position:relative;overflow:hidden}
+.wfvis .o1{background:linear-gradient(180deg,#5b6a7d,#2b3442)}
+.wfvis .o1 .ly{position:absolute;left:8%;right:8%;bottom:10%;background:rgba(10,14,30,.82);color:#fff;font:600 12px "Noto Sans KR";text-align:center;padding:7px 8px;border-radius:6px}
+.wfvis .o2{background:#0B0F1C;color:#fff;padding:14px;font-size:11px;display:flex;flex-direction:column;justify-content:center;gap:4px}
+.wfvis .o2 em{font-style:normal;color:#F0CF8E;font-size:10.5px}.wfvis .o2 b{font:700 14px var(--serif)}.wfvis .o2 small{opacity:.55}
+.wfvis .o label{left:8px;top:7px;font-size:10px}
+/* 핏처치 */
+.fc{background:#fff;border:1px solid var(--line);border-radius:36px;padding:56px;margin:0 0 20px}
+.fcm{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin:24px 0 6px}
+.fcm .eq{font-family:var(--serif);font-size:30px;color:var(--navy);font-weight:700;white-space:nowrap}
+.fcm .eq span{color:var(--gold)}
+.fcm p{font-size:15px;color:#4A5058;max-width:520px}
+.fcvis{background:#E9EEF7;border-radius:24px;padding:28px 28px 0;display:flex;justify-content:center;overflow:hidden}
+.fcvis .win{width:100%;height:290px;background:#F5F6F8;border-radius:14px 14px 0 0;display:flex;overflow:hidden;box-shadow:0 14px 34px rgba(36,64,122,.18);font-family:system-ui,sans-serif}
+.fcvis .sd{width:30%;background:#fff;border-right:1px solid #E3E6EB;padding:16px 10px;display:flex;flex-direction:column;gap:3px;font-size:12px;color:#3A4352}
+.fcvis .sd b{background:#EEF2FA;color:#24407A;border-radius:7px;padding:6px 9px}.fcvis .sd span{padding:6px 9px}
+.fcvis .mn{flex:1;padding:18px;display:flex;flex-direction:column;gap:10px}
+.fcvis h4{font-size:16px;color:#1B2230}
+.fcvis .k{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.fcvis .k div{background:#fff;border:1px solid #E3E6EB;border-radius:10px;padding:10px;font-size:11px;color:#5B6474}.fcvis .k b{display:block;font-size:18px;color:#1B2230}
+.fcvis .bar{flex:1;background:#fff;border:1px solid #E3E6EB;border-radius:10px;display:flex;align-items:flex-end;gap:7px;padding:12px}
+.fcvis .bar i{flex:1;background:#BFCBE3;border-radius:4px 4px 1px 1px}.fcvis .bar i:last-child{background:#24407A}
+.feat.fcf div{border-color:#DFE5F0}.feat.fcf .n{color:var(--navy)}
+/* (05) 지키는 것 */
+.prom{padding:90px 0 60px;border-top:1px solid var(--line)}
+.pg{display:grid;grid-template-columns:repeat(4,1fr);border-top:2px solid var(--g1)}
+.pg div{padding:30px 26px 10px 0}
+.pg div+div{padding-left:26px;border-left:1px solid var(--line)}
+.pg .no{font-size:12.5px;font-weight:700;color:var(--gold);letter-spacing:.1em}
+.pg svg{display:block;width:30px;height:30px;fill:none;stroke:var(--g2);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;margin:16px 0 14px}
+.pg h4{font-size:19px;margin-bottom:6px}.pg p{font-size:14.5px;color:var(--mute)}
+/* (06) 소식 */
+.news{padding:70px 0 100px}
+.nl{border-top:2px solid var(--g1);margin-top:28px}
+.nl a{display:grid;grid-template-columns:130px 140px 1fr 40px;gap:20px;align-items:center;padding:20px 4px;border-bottom:1px solid var(--line);font-size:16px;transition:background .2s}
+.nl a:hover{background:#F1EDE5}
+.nl time{color:var(--mute);font-size:14px;font-variant-numeric:tabular-nums}
+.nl span.l{font-size:13px;color:var(--mute)}
+.nl i{font-style:normal;text-align:right}
+/* 끝 */
+.talk{background:var(--g1);color:var(--cream);border-radius:36px;padding:70px 64px;display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:end;margin-bottom:70px}
+.talk h2{font-family:var(--serif);font-size:44px;line-height:1.35;margin-top:14px}
+.talk h2 em{font-style:normal;color:var(--gold2)}
+.talk p{opacity:.8;margin-bottom:20px}
+.talk .eye{color:var(--gold2)}
+.talk .tb{display:flex;gap:10px;flex-wrap:wrap}
+.talk a{display:inline-flex;gap:12px;align-items:center;background:var(--gold2);color:var(--g1);border-radius:999px;padding:12px 12px 12px 22px;font-weight:700}
+.talk a i{font-style:normal;width:30px;height:30px;border-radius:15px;background:var(--g1);color:#fff;display:grid;place-items:center}
+.talk a.o{background:none;color:var(--cream);border:1px solid rgba(243,234,216,.35)}.talk a.o i{background:rgba(243,234,216,.15)}
+footer{border-top:1px solid var(--line);padding:34px 0 60px;font-size:13.5px;color:var(--mute)}
+footer .in{display:flex;justify-content:space-between;gap:20px}
+footer b{color:var(--ink)}
+.fl{display:flex;gap:18px;flex-wrap:wrap}.fl a:hover{color:var(--gold)}
+a:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:8px}
+@keyframes drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.pc{animation:drift 6s ease-in-out infinite;transform-box:fill-box}
+.pc:nth-child(2n){animation-duration:7.5s;animation-delay:-2s}.pc:nth-child(3n){animation-duration:9s;animation-delay:-4s}
+@media (prefers-reduced-motion:reduce){.pc,.card,.pt{animation:none;transition:none}}
+@media (max-width:1100px){.stage{grid-template-columns:1fr;padding:40px 30px}.big{font-size:60px}.feat{grid-template-columns:1fr 1fr}.sh{grid-template-columns:1fr}}
+@media (max-width:860px){.stage svg.art .pc{display:none}.links{display:none}.pill{margin-left:auto;font-size:13px;padding:8px 12px 8px 14px}.top{grid-template-columns:1fr;padding:36px 0 22px}.top h1{font-size:34px}.stage{padding:30px 20px;border-radius:28px}.stage::before,.stage::after{display:none}.big{font-size:46px;margin:18px 0 12px}.pt{grid-template-columns:50px 1fr;padding:14px}.pt img{width:50px;height:50px}.pt>i{display:none}.pt b{font-size:18px}.under span:last-child{display:none}.why{grid-template-columns:1fr;gap:20px;padding:70px 0 60px}.why h2,.ph h2,.sec h2{font-size:30px}.cnt{border-left:0;padding-left:0}.cnt b{font-size:72px}.proj{padding:70px 0 40px}.ph{display:block}.ph .r{text-align:left;margin-top:12px}.cards{grid-template-columns:1fr}.sec{padding:64px 0}.feat{grid-template-columns:1fr}.fc{padding:30px 22px;border-radius:28px}.fcvis .k{grid-template-columns:1fr 1fr}.fcvis .k div:last-child{display:none}.pg{grid-template-columns:1fr 1fr}.pg div,.pg div+div{padding:24px 14px 8px;border-left:0}.pg div:nth-child(2n){border-left:1px solid var(--line)}.nl a{grid-template-columns:1fr auto;gap:4px 10px;padding:16px 4px}.nl a span.t{grid-column:1/3}.nl i{display:none}.talk{grid-template-columns:1fr;padding:44px 26px}.talk h2{font-size:30px}footer .in{display:block}.eye{letter-spacing:.1em}}
+</style></head>
+<body>
+<header class="nav"><div class="in">
+  <a class="brand" href="#top" aria-label="나눔스튜디오 처음으로"><svg viewBox="0 0 120 120" aria-hidden="true"><path d="M14 30a16 16 0 0 1 16-16h56L14 86z" fill="#1B2027"/><path d="M106 34v56a16 16 0 0 1-16 16H34z" fill="#D7A34B"/></svg>나눔스튜디오</a>
+  <nav class="links" aria-label="주 메뉴"><a href="#p">프로그램</a><a href="../index.html">남은 조각</a><a href="#worshipflow">WorshipFlow</a><a href="#fitchurch">핏처치</a><a href="#why">만드는 마음</a><a href="#news">소식</a><a href="../board.html">묻고 답하기</a></nav>
+  <a class="pill" href="fitchurch.html">핏처치 체험하기 <i>↗</i></a>
+</div></header>
+
+<main class="in" id="top">
+  <section class="top">
+    <div><div class="eye">Gather the pieces · Share the grace</div><h1>주일에 받은 은혜를,<br><em>한 주 내내 나누도록.</em></h1></div>
+    <div><p>설교를 나누고, 예배를 비추고, 교회 살림을 돌보는 일.<br>목회자가 만들고 우리 교회에서 먼저 쓰는<br>나눔스튜디오의 프로그램입니다.</p><a class="dn" href="#p">프로그램 살펴보기 <i>↓</i></a></div>
+  </section>
+
+  <section class="stage" aria-label="나눔스튜디오의 세 프로그램">
+    <svg class="art" viewBox="0 0 1176 560" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs><radialGradient id="lg" cx="30%" cy="35%" r="70%"><stop offset="0" stop-color="#3A3324"/><stop offset=".5" stop-color="#1F232A"/><stop offset="1" stop-color="#111418"/></radialGradient>
+      <linearGradient id="gd" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F0D58F"/><stop offset="1" stop-color="#B98F38"/></linearGradient></defs>
+      <rect width="1176" height="560" fill="url(#lg)"/>
+      <g transform="translate(960 360) scale(.6)" opacity=".14"><path d="M60 60a40 40 0 0 1 40-40h170L60 270z" fill="#F3EAD8"/><path d="M330 90v170a40 40 0 0 1-40 40H120z" fill="url(#gd)"/></g>
+      <g fill="#F3EAD8">
+        <g class="pc"><rect x="520" y="70" width="20" height="20" rx="5" opacity=".45" transform="rotate(18 530 80)"/></g>
+        <g class="pc"><rect x="1120" y="40" width="14" height="14" rx="4" opacity=".35" transform="rotate(-20 1127 47)"/></g>
+        <g class="pc"><rect x="70" y="470" width="18" height="18" rx="4" opacity=".35" transform="rotate(-12 79 479)"/></g>
+      </g>
+      <g fill="#E8C779">
+        <g class="pc"><rect x="560" y="440" width="18" height="18" rx="4" opacity=".55" transform="rotate(-30 569 449)"/></g>
+        <g class="pc"><rect x="470" y="210" width="12" height="12" rx="3" opacity=".6"/></g>
+      </g>
+    </svg>
+    <div>
+      <span class="chip">• FOR THE LOCAL CHURCH</span>
+      <div class="big">거두고,<br><em>나눕니다.</em></div>
+      <p class="lead">설교 한 편, 예배 한 번, 교회의 하루가 성도에게 오래 남도록 — 세 가지 프로그램으로 돕습니다.</p>
+      <span class="cap">“남은 조각을 거두고 버리는 것이 없게 하라” · 요한복음 6:12</span>
+    </div>
+    <div class="three">
+      <a class="pt hot" href="../index.html"><img src="../icon.png" alt=""><div><small>01 · 설교 쇼츠</small><b>남은 조각</b><span class="d">설교 영상을 넣으면 쇼츠 완성본 6개 — 설명란 · 해시태그까지</span><span class="tag t-on">NEW 2.0.20 새 디자인 · 판매 중</span></div><i>↗</i></a>
+      <a class="pt" href="#worshipflow"><img src="img/worshipflow.png" alt=""><div><small>02 · 예배 자막</small><b>WorshipFlow</b><span class="d">찬양 가사 · 성경 구절을 예배당 화면 · 생중계 · 강단에 함께</span><span class="tag t-soon">테스트 중 · 곧 출시 · 체험판 열림</span></div><i>↓</i></a>
+      <a class="pt" href="fitchurch.html"><img src="img/fitchurch.svg" alt=""><div><small>03 · 교회 행정</small><b>핏처치 <span style="font-size:13px;font-weight:500;opacity:.7">Fit Church</span></b><span class="d">중소형 교회에 꼭 맞춘 미니멀 행정 — 성도 · 출석 · 심방 · 헌금 · 주보</span><span class="tag t-try">체험판 열림 · 지금 눌러 보기</span></div><i>↗</i></a>
+    </div>
+  </section>
+  <div class="under"><span>목회자가 만들고, 목회자가 먼저 씁니다.</span><span>SCROLL TO EXPLORE ↓</span></div>
+
+  <section class="why" id="why">
+    <div class="eye"><b>(01)</b>Why we make</div>
+    <div><h2>교회의 크기보다,<br><em>목회의 한 주를 봅니다.</em></h2>
+      <p>주일마다 설교를 준비하고, 화면을 띄우고, 교회 살림을 정리하며 “이건 도구가 대신해 주면 좋겠다” 싶었던 일을 하나씩 프로그램으로 만들어 왔습니다. 모든 프로그램은 행복드림교회에서 먼저 써 보고 고친 뒤에 내놓습니다.</p>
+      <a class="lk" href="../studio.html">나눔스튜디오 · 로고 안내 →</a></div>
+    <div class="cnt"><b>03<sup>↗</sup></b><p>한 교회의 한 주에서 시작한<br>세 가지 프로그램</p><small>ONE WEEK · THREE TOOLS</small></div>
+  </section>
+
+  <section class="proj" id="p">
+    <div class="ph"><div><div class="eye"><b>(02)</b>Programs</div><h2>예배를 위한 도구,<br><em>나눔을 위한 기술.</em></h2></div>
+      <div class="r">교회의 필요에서 시작해,<br>매주의 사역 곁으로.</div></div>
+    <div class="cards">
+      <a class="card" href="../index.html"><div class="vis v1"><img class="ic" src="../icon.png" alt=""><img class="s" src="../img/v2_2.jpg?v=201" alt="남은 조각 2.0.20 완성본 고르기 화면" loading="lazy"></div>
+        <div class="body"><div class="meta"><span>01 / 설교 쇼츠</span><span class="tag t-on">판매 중 · 2.0.20</span></div><div class="ttl"><h3>남은 조각</h3><i>↗</i></div><p>설교 영상을 넣으면 받아쓰고, 은혜로운 대목을 골라 제목 · 자막 · 음악까지 입힌 쇼츠로 만들어 줍니다. 맥 · Windows.</p></div></a>
+      <a class="card" href="worshipflow/index.html"><div class="vis v2"><img class="ic" src="img/worshipflow.png" alt=""><div class="scr"><b>주 하나님 지으신 모든 세계<br>내 마음 속에 그리어 볼 때</b><span>새찬송가 79장</span></div></div>
+        <div class="body"><div class="meta"><span>02 / 예배 자막</span><span class="tag t-soon">테스트 중 · 체험판</span></div><div class="ttl"><h3>WorshipFlow</h3><i>↓</i></div><p>찬양 가사와 성경 구절을 예배당 화면 · 유튜브 생중계 · 강단 태블릿에 함께 띄웁니다. 행복드림교회 주일 예배에서 시험하고 있어요.</p></div></a>
+      <a class="card" href="fitchurch.html"><div class="vis v3"><img class="ic" src="img/fitchurch.svg" alt=""><div class="win"><div class="sd"><b>홈</b><span>연간 일정</span><span>행사 준비</span><span>주간 사역</span><span>성도 관리</span></div><div class="mn"><h4>이번 주 사역</h4><div class="k"><div>지난 주일<b>41명</b></div><div>심방<b>4건</b></div></div><div class="bar"><i style="height:62%"></i><i style="height:70%"></i><i style="height:66%"></i><i style="height:76%"></i><i style="height:84%"></i></div></div></div></div>
+        <div class="body"><div class="meta"><span>03 / 교회 행정</span><span class="tag t-try">체험판 열림</span></div><div class="ttl"><h3>핏처치</h3><i>↗</i></div><p>중소형 교회에 꼭 맞춘 행정 — 성도 · 출석 · 심방 · 헌금부터 주보와 노회 서류까지. 가상의 교회로 바로 눌러 볼 수 있어요.</p></div></a>
+    </div>
+  </section>
+
+  <section class="sec" id="worshipflow">
+    <div class="sh">
+      <div>
+        <div class="eye"><b>(03)</b>WorshipFlow</div>
+        <h2>예배 화면을,<br><em>단추 하나로 넘깁니다.</em></h2>
+        <p class="lede">예배 순서 · 성경 · 찬양 가사 · 광고를 미리 준비해 두고, 예배 중에는 <b>다음 단추 하나</b>로 예배당 화면을 넘기는 맥 앱입니다. 파워포인트를 한 장씩 고치던 방송실 일을 줄이고, <b>예배당 화면 · 유튜브 생중계 자막 · 강단 태블릿</b>에 같은 내용을 함께 띄웁니다.</p>
+        <div class="idrow"><img src="img/worshipflow.png" alt=""><div class="nm"><b>WorshipFlow</b>맥 앱 · <span class="tag t-soon">테스트 중 · 곧 출시</span></div></div>
+        <p class="small">지금 행복드림교회 주일 예배에서 시험하며 다듬고 있습니다. 출시되면 이곳과 묻고 답하기 게시판에 알려 드립니다. 성경 · 찬송가 본문은 교회가 가진 파일을 불러와 씁니다.</p>
+        <div class="btns"><a class="btn p" href="worshipflow/index.html">WorshipFlow 체험하기 <i>↗</i></a><a class="btn o" href="../board.html">출시 알림 · 궁금한 점 남기기 <i>↗</i></a></div>
+        <p class="small">체험판은 실제 앱 화면 그대로입니다. 컴퓨터에서 열어 순서를 누르고, 위쪽 ‘예배 중’에서 → 키나 ‘다음’으로 넘겨 보세요. 강단 페이지 · 생중계 자막도 새 창으로 함께 볼 수 있어요. 두 번째 모니터 · OBS · ATEM 연결과 파일 가져오기는 맥 앱에서만 됩니다.</p>
+      </div>
+      <div class="wfvis" aria-hidden="true">
+        <div class="m"><label>예배당 화면</label><b>주 하나님 지으신 모든 세계<br>내 마음 속에 그리어 볼 때</b><span>새찬송가 79장 · 1절</span></div>
+        <div class="o o1"><label>생중계 자막</label><div class="ly">주 하나님 지으신 모든 세계</div></div>
+        <div class="o o2"><label>강단 태블릿</label><em>지금</em><b>79장 1절</b><small>다음 · 후렴 — 남은 시간 32:10</small></div>
+      </div>
+    </div>
+    <div class="feat">
+      <div><span class="n">01</span><h4>예배 순서대로 준비</h4><p>순서 목록에 곡 · 구절 · 광고를 넣어 두면 그대로 넘어갑니다. 지난주 예배를 복사하면 바뀌는 항목에 ‘지난주’ 표시가 붙어 실수를 막아요.</p></div>
+      <div><span class="n">02</span><h4>성경 구절 바로 찾기</h4><p>‘요 3:16’이나 초성 ‘ㅇㅎ 3:16’으로 찾고, 긴 본문은 화면에 맞게 저절로 나눕니다. 두 역본을 함께 띄울 수도 있어요.</p></div>
+      <div><span class="n">03</span><h4>찬송가 번호 · 가사</h4><p>번호를 치고 Enter로 고르기. 절 · 후렴 · 브리지에 색 꼬리표가 붙어 지금 어디를 부르는지 한눈에 보입니다.</p></div>
+      <div><span class="n">04</span><h4>쓰던 자료 그대로</h4><p>파워포인트(모양 그대로) · 한글 큐시트 · 프로프리젠터 파일을 가져와 이어서 씁니다. 지금 방송실 자료를 버리지 않아도 돼요.</p></div>
+      <div><span class="n">05</span><h4>세 화면을 함께</h4><p>예배당 화면, OBS로 나가는 생중계 하단 자막, 설교자 · 인도자가 보는 강단 태블릿(지금 · 다음 · 남은 시간)을 한 번에.</p></div>
+      <div><span class="n">06</span><h4>영상 · 광고 · 카운트다운</h4><p>예배 전 카운트다운 6가지, 광고 그림 · 영상, 배경 영상, 예배 전 음악 재생 목록. 맥에서 안 열리는 영상은 넣을 때 바꿔 둡니다.</p></div>
+      <div><span class="n">07</span><h4>예배 중 안전장치</h4><p>검은 화면 · 글 지우기 · 되돌리기 단축키, 예배 전 점검표(빠진 곡 · 넘치는 화면 · 화면 연결), 설교 중 화면 꺼짐 막기.</p></div>
+      <div><span class="n">08</span><h4>휴대폰 리모컨 · 순서표</h4><p>같은 와이파이의 휴대폰으로 다음 · 이전 · 검은 화면. 방송 봉사자용 순서표를 저장 · 인쇄합니다.</p></div>
+    </div>
+  </section>
+
+  <section class="sec" id="fitchurch">
+    <div class="fc">
+      <div class="sh">
+        <div>
+          <div class="eye"><b>(04)</b>Fit Church</div>
+          <h2>우리 교회에<br><em>꼭 맞춘 행정.</em></h2>
+          <div class="fcm"><span class="eq">Fit <span>+</span> Church</span><p>대형 교회용 무거운 프로그램이 아니라, 중소형 교회 규모에 <b>꼭 맞춘(Fit)</b> 미니멀하고 똑똑한 행정 프로그램입니다.</p></div>
+          <p class="lede">성도 · 출석 · 심방 · 헌금 같은 교회 살림과, 연간 일정 · 행사 준비 · 주간 사역 · 주보 · 노회 서류 같은 목회 일을 <b>한 화면</b>에서. 아는 것만 크게, 쓰지 않는 것은 숨겨 둡니다.</p>
+          <div class="idrow"><img src="img/fitchurch.svg" alt=""><div class="nm"><b>핏처치</b>교회 행정 · <span class="tag t-try">체험판 열림</span></div></div>
+          <div class="btns"><a class="btn n" href="fitchurch.html">핏처치 체험하기 <i>↗</i></a><a class="btn o" href="../board.html">우리 교회에 필요한 기능 남기기 <i>↗</i></a></div>
+          <p class="small">체험판의 교회 이름 · 성도 · 금액은 모두 가상의 자료이며, 눌러 본 내용은 어디에도 저장되지 않습니다.</p>
+        </div>
+        <a class="fcvis" href="fitchurch.html" aria-label="핏처치 체험판 열기"><div class="win"><div class="sd"><b>홈</b><span>연간 일정</span><span>행사 준비</span><span>주간 사역</span><span>주보 작업</span><span>성도 관리</span><span>출석 · 심방</span><span>헌금 관리</span></div><div class="mn"><h4>이번 주 사역</h4><div class="k"><div>지난 주일<b>41명</b></div><div>이번 주 심방<b>4건</b></div><div>할 일<b>7</b></div></div><div class="bar"><i style="height:58%"></i><i style="height:64%"></i><i style="height:61%"></i><i style="height:70%"></i><i style="height:72%"></i><i style="height:80%"></i><i style="height:86%"></i></div></div></div></a>
+      </div>
+      <div class="feat fcf">
+        <div><span class="n">01</span><h4>이번 주 사역</h4><p>홈 한 화면에 주일 준비 · 출석 · 심방 · 살펴볼 분. 설교문 · 칼럼 · 주보 · 예배 큐시트 · 문자 · 카톡을 한 주 흐름으로.</p></div>
+        <div><span class="n">02</span><h4>성도 · 출석 · 심방</h4><p>구역별 성도 명부, 주일 출석 체크, 3주 이상 못 오신 분 알림과 심방 일정 · 기록.</p></div>
+        <div><span class="n">03</span><h4>재정 금고</h4><p>헌금 · 재정 관리 · 예산안 · 기부금영수증. 재정부와 담임목사만 열리고 교회 컴퓨터에만 따로 잠가 둡니다.</p></div>
+        <div><span class="n">04</span><h4>일정 · 회의 · 문서</h4><p>연간 일정과 사역계획안, 행사 준비, 당회 결의와 할 일, 업무 공유 · 시설 예약, 지출 청구, 양식 · 노회 서류, 사역 아카이브.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="prom" id="promise">
+    <div class="ph"><div><div class="eye"><b>(05)</b>Our promise</div><h2>나눔스튜디오가<br><em>지키는 네 가지.</em></h2></div><div class="r">프로그램이 늘어도<br>바뀌지 않는 약속입니다.</div></div>
+    <div class="pg">
+      <div><span class="no">01</span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg><h4>내 컴퓨터 안에서</h4><p>설교 영상과 성도 정보는 나눔스튜디오 서버로 보내지 않습니다.</p></div>
+      <div><span class="no">02</span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></svg><h4>광고 없이</h4><p>프로그램 안에 광고를 넣지 않습니다. 알림은 우리 소식뿐입니다.</p></div>
+      <div><span class="no">03</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg><h4>작은 교회도</h4><p>무료로 시작할 수 있고, 값은 작은 교회 기준으로 정합니다.</p></div>
+      <div><span class="no">04</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg><h4>직접 답하기</h4><p>묻고 답하기에 남겨 주시면 만든 사람이 직접 답합니다.</p></div>
+    </div>
+  </section>
+
+  <section class="news" id="news">
+    <div class="eye"><b>(06)</b>News</div>
+    <div class="nl">
+      <a href="../updates.html"><time>2026.11.09</time><span class="l">남은 조각</span><span class="t">2.0.20 — 새 디자인, 설명란 · 해시태그까지 AI가 함께 씁니다</span><i>→</i></a>
+      <a href="fitchurch.html"><time>2026.11.09</time><span class="l">핏처치</span><span class="t">교회 행정 프로그램의 새 이름은 ‘핏처치’ — 체험판을 열었습니다</span><i>→</i></a>
+      <a href="worshipflow/index.html"><time>2026.11.09</time><span class="l">WorshipFlow</span><span class="t">실제 앱 화면 그대로 눌러 보는 체험판을 열었습니다 — 곧 출시</span><i>→</i></a>
+    </div>
+  </section>
+
+  <section class="talk">
+    <div><div class="eye">Let's talk</div><h2>우리 교회에는<br><em>무엇이 필요하신가요?</em></h2></div>
+    <div><p>쓰시다 막히는 곳, 새로 있었으면 하는 기능을 들려주세요. 만든 사람이 직접 답합니다.</p><div class="tb"><a href="../board.html">묻고 답하기 <i>↗</i></a><a class="o" href="worshipflow/index.html">WorshipFlow 체험하기 <i>↗</i></a><a class="o" href="fitchurch.html">핏처치 체험하기 <i>↗</i></a></div></div>
+  </section>
+</main>
+<footer><div class="in"><div><b>나눔스튜디오</b> · 대표 최완수 · 사업자등록번호 252-10-03077<br>통신판매업 신고번호 (신고 후 표시)</div><nav class="fl" aria-label="아래 메뉴"><a href="../index.html">남은 조각</a><a href="../terms.html">이용 약관</a><a href="../privacy.html">개인정보처리방침</a><a href="../studio.html#ci">로고 안내</a><a href="../updates.html">업데이트 내역</a></nav></div></footer>
+</body></html>

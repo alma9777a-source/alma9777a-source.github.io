@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ko">
+<head><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300..900&family=Gowun+Batang:wght@400;700&family=Nanum+Myeongjo:wght@800&display=block" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>WorshipFlow 강단</title>
+<link rel="stylesheet" href="shared/stage.css">
+<link rel="stylesheet" href="stage.css">
+<script src="es-shim.js"></script>
+</head>
+<body>
+<header><span id="item">연결 중…</span><span class="grow"></span><span id="timer"></span><span id="clock"></span></header>
+<div id="msg" class="hidden"></div>
+<main>
+  <section id="now"><div class="lab">지금 <span id="nowLab"></span></div><div class="txt" id="nowTxt"></div></section>
+  <section id="next"><div class="lab">다음 <span id="nextLab"></span></div><div class="txt" id="nextTxt"></div></section>
+</main>
+<div id="flag" class="hidden"></div>
+<div id="off" class="hidden">WorshipFlow와 연결이 끊겼습니다 — 다시 연결 중…</div>
+<script src="stage.js"></script>
+</body>
+</html>

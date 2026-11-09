@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="ko">
+<head><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300..900&family=Gowun+Batang:wght@400;700&family=Nanum+Myeongjo:wght@800&display=block" rel="stylesheet">
+<meta charset="utf-8">
+<title>WorshipFlow 체험판 — 나눔스튜디오</title>
+<link rel="stylesheet" href="shared/stage.css">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="glass.css">
+</head>
+<body>
+<header id="top" data-tauri-drag-region>
+  <div class="brand">WorshipFlow</div>
+  <button id="svcBtn" class="svc-btn" title="예배 고르기 · 만들기"><span id="svcTitle">예배</span><span class="caret">▾</span></button>
+  <nav class="tabs" id="tabs">
+    <button data-mode="prep" class="on">준비</button>
+    <button data-mode="live">예배 중</button>
+    <button data-mode="library">보관함</button>
+    <button data-mode="settings">설정</button>
+  </nav>
+  <div class="grow"></div>
+  <div class="chips">
+    <span class="chip" id="chipProj"><i class="dot off"></i><span>예배당 화면 꺼짐</span><button id="projBtn" class="btn xs projbtn">켜기</button></span>
+    <span class="chip hidden clickable" id="chipObs" title="누르면 방송 제어"><i class="dot"></i><span>OBS</span></span>
+    <span class="chip hidden" id="chipAtem" title="ATEM 전환기(카메라 단추는 예배 중 화면)"><i class="dot"></i><span>ATEM</span></span>
+    <span class="chip hidden clickable" id="chipStage" title="누르면 강단 화면 끄기"><i class="dot"></i><span>강단 화면</span></span>
+    <span class="chip hidden clickable" id="chipAudio" title="누르면 잠깐 멈춤 · 다시 재생"><i class="dot"></i><span></span></span>
+    <span class="chip warn hidden" id="chipFlag"><i class="dot"></i><span></span></span>
+  </div>
+  <button id="helpBtn" class="btn" title="단축키와 쓰는 순서">도움말</button>
+  <button id="checkBtn" class="btn" title="예배 전에 빠진 것이 없는지 한 화면에서 확인">점검</button>
+</header>
+
+<div id="banner" class="banner hidden"></div>
+
+<main id="main">
+  <!-- 준비 -->
+  <section id="v-prep" class="view on">
+    <aside class="shelf" id="shelf">
+      <button class="btn sm shelf-close" id="shelfClose" title="보관함 꺼내기 칸 접기 (Esc)">◂ 접기</button>
+      <div class="panel shsec">
+        <div class="phead"><b>보관함 · 곡 묶음</b><span class="cnt" id="shSFCount"></span><div class="grow"></div><button class="btn xs" id="shSFAdd" title="곡 묶음 만들기">＋</button></div>
+        <div class="shlist" id="shSongFolders"></div>
+      </div>
+      <div class="panel shsec" hidden><!-- 예배 고르기는 위쪽 예배 이름 단추 한 곳에서 -->
+        <div class="phead"><b>예배 목록</b><span class="cnt" id="shSvcCount"></span><div class="grow"></div><button class="btn xs" id="shSvcAdd" title="새 예배 · 복제">＋</button></div>
+        <div class="shlist" id="shServices"></div>
+      </div>
+      <div class="panel shsec grow2">
+        <div class="phead"><b id="shSongsTitle">곡</b><span class="cnt" id="shSongsCount"></span><div class="grow"></div><button class="btn xs" id="shSongAdd" title="새 곡">＋</button></div>
+        <div class="shq"><input id="shSearch" placeholder="번호 · 제목 · 초성 · 가사 찾기" autocomplete="off"></div>
+        <div class="shlist" id="shSongs"></div>
+      </div>
+      <div class="panel shsec">
+        <div class="phead"><b>보관함 · 그림 · 영상 · 소리</b><span class="cnt" id="shMFCount"></span><div class="grow"></div><button class="btn xs" id="shMFAdd" title="미디어 묶음 만들기">＋</button></div>
+        <div class="shlist" id="shMediaFolders"></div>
+      </div>
+    </aside>
+    <aside class="panel order">
+      <div class="phead"><button class="btn xs" id="shelfToggle" title="왼쪽 보관함 꺼내기 칸 열기 · 접기">보관함 ▸</button><b>예배 순서</b><span class="muted" id="orderSum"></span><div class="grow"></div><button class="btn sm" id="addItemBtn">＋ 더하기</button></div>
+      <div id="orderList" class="olist"></div>
+      <div class="muted small pad">끌어서 순서를 바꿉니다. 두 번 누르면 이름을 고칩니다.</div>
+    </aside>
+    <div class="center">
+      <div class="panel">
+        <div class="phead" id="itemHead"></div>
+        <div id="itemSource" class="source"></div>
+        <div id="slideGrid" class="sgrid"></div>
+      </div>
+      <div class="docktabs" id="dockTabs"><span class="dlab">이 순서 꾸미기</span><div class="dseg"><button data-dock="text" class="on">화면 글</button><button data-dock="bar">순서 자막바</button><button data-dock="tc">제목 화면</button><i class="dsep"></i><button data-dock="media">그림 · 소리 <span id="dockAudioDot" class="adot hidden">♪</span></button></div><div class="grow"></div><button class="dockfold" id="dockFold" title="아래 칸 접기 · 펴기">접기 ▾</button></div>
+      <div class="row2 dock" id="dockCard" hidden><div class="panel dockcard"><div class="bcard" id="barCard"></div><div class="bcard" id="tcCard"></div></div></div>
+      <div class="row2 dock" id="dockMedia" hidden>
+        <div class="panel mbin">
+          <div class="phead"><div class="subtabs" id="binTabs"></div><button class="btn xs" id="binAdd">＋ 넣기</button></div>
+          <div class="bingrid" id="binGrid"></div>
+          <div class="muted small binhint">누르면 ‘다음’ · 두 번 누르면 바로 내보냄 · 끌어서 순서에 넣기</div>
+        </div>
+        <div class="panel aplay">
+          <div class="phead"><div class="subtabs" id="audTabs"></div><button class="btn xs" id="audRepeat" title="목록 반복">반복</button><button class="btn xs" id="audShuffle" title="섞어서 재생">섞기</button><button class="btn xs" id="audAdd">＋ 넣기</button></div>
+          <div class="alist" id="audList"></div>
+          <div class="abar">
+            <button class="abtn" id="audPlay" title="재생 · 잠깐 멈춤">▶</button><button class="abtn" id="audStop" title="멈춤">■</button><button class="abtn" id="audNext" title="다음 곡">⏭</button>
+            <div class="aprog" id="audProg"><i></i></div><span class="atime" id="audTime">0:00</span>
+            <input type="range" id="audVol" min="0" max="100" value="80" title="소리 크기">
+            <button class="btn xs" id="audFade" title="5초 동안 서서히 줄이고 멈춤">서서히 끄기</button>
+          </div>
+        </div>
+      </div>
+      <div class="row2 dock" id="dockEdit">
+        <div class="panel edit">
+          <div class="phead"><b>화면 글</b><span class="muted small">쓰는 대로 바로 반영됩니다 · 잘못 고쳤으면 ⌘Z</span></div>
+          <textarea id="slideText" spellcheck="false" placeholder="화면을 고르면 글이 여기 나옵니다"></textarea>
+          <div class="tools">
+            <button class="btn sm" id="accBtn" title="고른 글자를 강조색으로">강조색</button>
+            <button class="btn sm" id="splitBtn" title="커서 자리에서 화면을 둘로">화면 나누기</button>
+            <button class="btn sm" id="joinBtn" title="다음 화면과 합치기">다음과 합치기</button>
+            <button class="btn sm" id="delSlideBtn">화면 빼기</button>
+            <div class="grow"></div>
+            <span class="muted small" id="editState"></span>
+            <button class="btn primary" id="applyBtn" hidden>적용</button>
+          </div>
+        </div>
+        <div class="panel theme">
+          <div class="phead"><b>모양</b><span class="muted small" id="themeKind"></span><div class="grow"></div><label class="small"><input type="checkbox" id="themeOwn"> 이 항목만</label></div>
+          <div id="themeForm" class="tform"></div>
+        </div>
+      </div>
+    </div>
+    <aside class="panel preview">
+      <div class="phead"><b>나가는 화면 미리보기</b></div>
+      <div class="plabel"><span>① 예배당 화면 · 고른 화면</span><span class="tag" id="pvTag">준비</span></div>
+      <div class="pv" id="pvSel"></div>
+      <div class="plabel"><span>지금 예배당에 나가는 화면</span><span class="vtime hidden" id="pvLiveVtime"></span><span class="tag live" id="pvLiveTag">-</span></div>
+      <div class="pv" id="pvLive"></div>
+      <div class="plabel"><span id="pvOvLabel">② 생중계 자막 · OBS</span><span class="tag" id="pvOvTag">카메라 위</span></div>
+      <div class="pv cam" id="pvOv"></div>
+      <div class="ovmedia hidden" id="ovMedia"></div>
+      <div class="ovtpl" id="ovTpl"></div>
+      <div class="plabel"><span>③ 강단 페이지 · 태블릿</span><span class="tag">지금 / 다음</span></div>
+      <div class="pv stagepv" id="pvStage"></div>
+    </aside>
+  </section>
+
+  <!-- 예배 중 -->
+  <section id="v-live" class="view">
+    <aside class="panel order live-order">
+      <div class="phead"><b>순서</b><div class="grow"></div><label class="small" title="예배당 화면으로 내보내지 않고 흐름만 점검"><input type="checkbox" id="rehearsal"> 리허설</label></div>
+      <div class="ovrow"><button class="btn sm" id="ovToggle" title="OBS 생중계 자막을 켜고 끕니다(예배당 화면은 그대로)">생중계 자막 켜짐</button><button class="btn sm" id="barKick" title="지금 순서의 자막바를 한 번 더 띄웁니다 (T)">순서 자막바 ▶</button><button class="btn sm hidden" id="mediaLiveBtn" title="지금 나가는 그림 · 영상을 생중계(OBS)에도 띄우거나 거둡니다(카메라로)"></button></div>
+      <div id="liveOrder" class="olist"></div>
+      <div class="muted small pad">순서 이름을 누르면 그 항목 첫 화면이 ‘다음’에 올라갑니다. 바로 내보내지 않습니다.</div>
+    </aside>
+    <div class="center live-center">
+      <div class="nowrow">
+        <div class="nowcol">
+          <div class="plabel"><span class="tag red">지금 나가는 화면</span><span id="nowLabel"></span><span class="tag" id="nowOvTag" title="지금 생중계(OBS)에 나가는 모양"></span><span class="vtime hidden" id="nowVtime"></span></div>
+          <div class="pv big now" id="pvNow"></div>
+        </div>
+        <div class="nextcol">
+          <div class="plabel"><span class="tag green">다음</span><span id="nextLabel"></span></div>
+          <div class="pv next" id="pvNext"></div>
+          <div class="panel timebox">
+            <div class="trow"><span>예배 시작부터</span><b id="tService">-</b></div>
+            <div class="trow"><span>이 순서</span><b id="tItem">-</b></div>
+            <div class="trow"><span>지금 시각</span><b id="tClock">-</b></div>
+          </div>
+        </div>
+      </div>
+      <div id="liveNote" class="livenote hidden"></div>
+      <div id="liveStrip" class="strip"></div>
+      <div id="atemBar" class="atembar hidden"></div>
+      <div class="bigbtns">
+        <button id="bPrev" class="bb"><b>◀ 이전</b><kbd>←</kbd></button>
+        <button id="bNext" class="bb go"><b>다음 ▶</b><kbd>→ / Space</kbd></button>
+        <button id="bBlack" class="bb"><b>검은 화면</b><kbd>B</kbd></button>
+        <button id="bClear" class="bb"><b>글 지우기</b><kbd>C</kbd></button>
+        <button id="bLogo" class="bb"><b>로고 · 대기</b><kbd>L</kbd></button>
+        <button id="bCam" class="bb" title="자막 없이 카메라만(예배당 TV는 카메라, 없으면 검은 화면)"><b>투명 화면</b><kbd>V</kbd></button>
+        <button id="bEmerg" class="bb danger"><b>긴급 대기</b><kbd>F9</kbd></button>
+      </div>
+      <div class="row2">
+        <div class="panel" id="jumpPanel">
+          <div class="phead"><b id="jumpTitle">바로 가기</b><span class="muted small" id="jumpHint"></span></div>
+          <div id="jumpBtns" class="jumps"></div>
+        </div>
+        <div class="panel">
+          <div class="phead"><b>강단에 보낼 말</b><span class="muted small">강단 태블릿에만 보입니다</span></div>
+          <div class="qrow"><input id="stageMsg" placeholder="예: 한 곡 더 · 천천히" autocomplete="off"><button class="btn" id="stageMsgGo">보내기</button></div>
+          <div class="jumps" id="stageQuick"><button class="jbtn sm">한 곡 더</button><button class="jbtn sm">천천히</button><button class="jbtn sm">마무리해 주세요</button><button class="jbtn sm">마이크 확인</button><button class="jbtn sm clear">지우기</button></div>
+        </div>
+        <div class="panel">
+          <div class="phead"><b>빠른 구절</b><span class="muted small">장절을 치고 Enter → ‘다음’에 올림</span></div>
+          <div class="qrow"><input id="quickRef" placeholder="예: 요 13:34  ·  롬 5:8  ·  ㅅ 23" autocomplete="off"><button class="btn" id="quickGo">올리기</button></div>
+          <div class="muted small" id="quickMsg"></div>
+          <div class="listen">
+            <div class="lrow"><button class="btn sm" id="listenBtn" title="맥 내장 받아쓰기로 설교를 듣고 장절이 나오면 후보를 보여 줍니다">🎙 들은 말에서 구절 찾기</button><span class="muted small" id="listenState">꺼짐</span></div>
+            <div class="heard muted small" id="heardText"></div>
+            <div class="cands" id="cands"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 보관함 -->
+  <section id="v-library" class="view">
+    <aside class="panel libnav">
+      <div class="phead"><b>보관함</b></div>
+      <div class="subtabs" id="libTabs">
+        <button data-lib="songs" class="on">찬양 · 곡</button>
+        <button data-lib="bibles">성경 역본</button>
+        <button data-lib="fixed">고정 문구</button>
+        <button data-lib="media">그림 · 영상</button>
+      </div>
+      <div class="qrow"><input id="libSearch" placeholder="찾기"></div>
+      <div id="libList" class="olist"></div>
+      <div class="pad"><button class="btn" id="libAdd">＋ 새로</button></div>
+    </aside>
+    <div class="panel libedit" id="libEdit"></div>
+  </section>
+
+  <!-- 설정 -->
+  <section id="v-settings" class="view">
+    <div class="panel settings" id="settingsBox"></div>
+  </section>
+</main>
+
+<footer id="keys">
+  <span class="k-save" id="chipSave"><i class="dot"></i><span>저장됨</span></span><span class="k-nav"><kbd>→</kbd> 다음</span><span class="k-nav"><kbd>←</kbd> 이전</span><span class="k-live"><kbd>↓</kbd><kbd>↑</kbd> 다음 순서</span><span class="k-nav"><kbd>B</kbd> 검은 화면</span><span class="k-nav"><kbd>C</kbd> 글 지우기</span><span class="k-nav"><kbd>L</kbd> 로고</span><span class="k-nav"><kbd>V</kbd> 투명 화면</span><span class="k-nav"><kbd>F9</kbd> 긴급 대기</span><span class="k-live"><kbd>1</kbd><kbd>2</kbd><kbd>R</kbd><kbd>G</kbd> 찬양 부분</span><span class="k-live"><kbd>⌘Z</kbd> 되돌리기</span>
+  <div class="grow"></div><span id="editingNote" class="muted">글 편집 중에는 단축키가 꺼집니다</span><span class="k-help"><button class="btn xs" id="keysHelp" title="단축키와 쓰는 순서(도움말)">⌨ 단축키</button></span>
+</footer>
+
+<div id="menu" class="menu hidden"></div>
+<div id="modal" class="modal hidden"><div class="mbox" id="mbox"></div></div>
+
+<script src="shared/bible.js"></script>
+<script src="shared/cdmotion.js"></script>
+<script src="shared/render.js"></script>
+<script src="samples.js"></script>
+<script src="demo-pre.js"></script>
+<script src="store.js"></script>
+<script src="app.js"></script>
+<script src="bars.js"></script>
+<script src="shared/hwp.js"></script>
+<script src="cue.js"></script>
+<script src="shared/zip.js"></script>
+<script src="pptx.js"></script>
+<script src="propresenter.js"></script>
+<script src="prep.js"></script>
+<script src="stageedit.js"></script>
+<script src="shelf.js"></script>
+<script src="camfeed.js"></script>
+<script src="live.js"></script>
+<script src="library.js"></script>
+<script src="settings.js"></script>
+<script src="check.js"></script>
+<script src="obs.js"></script>
+<script src="atem.js"></script>
+<script src="listen.js"></script>
+<script src="wizard.js"></script>
+<script src="demo-post.js"></script>
+</body>
+</html>

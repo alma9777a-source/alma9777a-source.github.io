@@ -1,0 +1,27 @@
+/* 화면 한 장(1920×1080) 모양 — 미리보기 · 예배당 화면 공통 */
+.wf-stage { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: #000; color: #fff; -webkit-font-smoothing: antialiased; word-break: keep-all; overflow-wrap: anywhere; }
+.wf-bg, .wf-media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.wf-media { object-fit: contain; background: #000; }
+.wf-dim { position: absolute; inset: 0; background: #000; }
+.wf-box { position: absolute; display: flex; flex-direction: column; gap: 0; }
+.wf-text { white-space: normal; letter-spacing: -0.01em; text-wrap: balance; }
+.wf-text.wf-leader { color: var(--wf-acc, #f5c84c); }
+.wf-acc { color: var(--wf-acc, #f5c84c); }
+.wf-ref { letter-spacing: 0.02em; margin: 0 0 22px; }
+.wf-text + .wf-ref { margin: 22px 0 0; }
+.wf-role { font-size: 44px; opacity: .85; margin-bottom: 10px; }
+.wf-name { font-size: 96px; line-height: 1.2; margin-bottom: 40px; }
+.wf-sub { font-size: 48px; margin-bottom: 30px; font-weight: 600; letter-spacing: .02em; }
+.wf-title { line-height: 1.35; }
+.wf-foot { font-size: 46px; opacity: .8; margin-top: 34px; font-weight: 500; }
+.wf-logo { max-width: 46%; max-height: 46%; object-fit: contain; margin-bottom: 40px; }
+.wf-standby { font-size: 96px; line-height: 1.4; }
+
+/* 생중계 자막 띠 */
+.wf-ov { background: transparent !important; }
+.wf-band { position: absolute; box-sizing: border-box; padding: 18px 40px 20px; border-radius: 14px; }
+.wf-band.tag { padding: 16px 44px 18px; border-left: 8px solid var(--wf-acc, #f5c84c); border-radius: 6px 14px 14px 6px; }
+.wf-band-ref { font-size: 30px; letter-spacing: .02em; margin-bottom: 6px; }
+.wf-band-text { text-wrap: balance; letter-spacing: -0.005em; }
+.wf-count { font-size: 64px; margin-top: 36px; font-weight: 700; color: var(--wf-acc, #f5c84c); font-variant-numeric: tabular-nums; }
+.wf-text2 { margin-top: 24px; opacity: .78; letter-spacing: 0; }

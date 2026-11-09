@@ -1,0 +1,22 @@
+/* 강단 페이지(태블릿) — 멀리서 읽히게 크게, 보기 전용 */
+html, body { margin: 0; height: 100%; background: #000; color: #fff; font-family: "Noto Sans KR", -apple-system, sans-serif; -webkit-font-smoothing: antialiased; overflow: hidden; word-break: keep-all; }
+body { display: flex; flex-direction: column; }
+.hidden { display: none !important; }
+.grow { flex: 1; }
+header { display: flex; gap: 22px; align-items: center; padding: 12px 22px; font-size: clamp(16px, min(2.4vw, 3.4vh), 38px); color: #aab2c2; border-bottom: 1px solid #222; font-weight: 600; }
+#clock { color: #fff; font-variant-numeric: tabular-nums; font-size: 1.25em; }
+#timer { font-variant-numeric: tabular-nums; font-size: 1.25em; color: #7fe0a6; }
+#timer.near { color: #f2c94c; } #timer.over { color: #ff6b62; }
+#msg { background: #f2c94c; color: #1a1400; font-weight: 800; font-size: clamp(22px, min(4vw, 6vh), 64px); padding: 10px 22px; text-align: center; }
+main { flex: 1; display: flex; flex-direction: column; min-height: 0; }
+section { padding: 14px 26px; min-height: 0; }
+.lab { font-size: clamp(14px, min(2vw, 2.8vh), 32px); color: #8b93a4; font-weight: 700; margin-bottom: 6px; }
+.lab span { color: #f2c94c; margin-left: 8px; }
+#now { flex: 1.7; display: flex; flex-direction: column; border-bottom: 1px solid #222; }
+#now .txt { flex: 1; min-height: 0; font-size: clamp(28px, min(5.6vw, 10vh), 124px); font-weight: 700; line-height: 1.35; overflow: hidden; }
+#next { flex: 1; display: flex; flex-direction: column; min-height: 0; }
+#next .txt { flex: 1; min-height: 0; font-size: clamp(20px, min(3.4vw, 6vh), 76px); font-weight: 600; line-height: 1.35; color: #9aa3b5; overflow: hidden; }
+.txt .wf-acc { color: #f5c84c; }
+#flag { position: fixed; right: 18px; bottom: 18px; background: #ef6b62; color: #fff; font-weight: 800; font-size: 22px; padding: 8px 16px; border-radius: 10px; }
+#off { position: fixed; inset: auto 0 0 0; background: #5a1f1f; color: #fff; text-align: center; padding: 10px; font-size: 18px; }
+.wait { color: #6b7385; font-weight: 600; } body.idle #next { visibility: hidden; } body.idle #item { color: #7fe0a6; }

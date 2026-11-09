@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ko">
+<head><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300..900&family=Gowun+Batang:wght@400;700&family=Nanum+Myeongjo:wght@800&display=block" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>WorshipFlow 리모컨</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #111318; color: #eef0f4; font-family: -apple-system, "Apple SD Gothic Neo", sans-serif; -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; }
+  body { display: flex; flex-direction: column; padding: env(safe-area-inset-top) 12px env(safe-area-inset-bottom); box-sizing: border-box; }
+  .top { padding: 12px 4px 6px; font-size: 14px; color: #8b93a4; display: flex; justify-content: space-between; }
+  .now { background: #000; border: 2px solid #ef6b62; border-radius: 12px; padding: 12px; min-height: 80px; font-size: 18px; font-weight: 700; line-height: 1.4; word-break: keep-all; }
+  .next { margin-top: 8px; border: 2px dashed #4fbf7c; border-radius: 12px; padding: 10px 12px; color: #9aa3b5; font-size: 15px; line-height: 1.4; min-height: 44px; word-break: keep-all; }
+  .lab { font-size: 12px; color: #8b93a4; margin-bottom: 4px; font-weight: 700; }
+  .lab b { color: #f2c94c; }
+  .secs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .secs button { flex: 1 0 22%; padding: 12px 0; border-radius: 10px; border: 1px solid #3b4252; background: #262b35; color: #eef0f4; font-size: 16px; font-weight: 700; }
+  .grow { flex: 1; min-height: 10px; }
+  .row { display: flex; gap: 10px; margin-bottom: 10px; }
+  .row button { flex: 1; border: 0; border-radius: 16px; font-size: 22px; font-weight: 800; padding: 22px 0; color: #eef0f4; background: #262b35; }
+  #next { background: #4fbf7c; color: #0d2016; font-size: 30px; padding: 46px 0; }
+  #prev { font-size: 22px; padding: 46px 0; flex: 0.6; }
+  .row.small button { font-size: 17px; padding: 16px 0; }
+  .on { box-shadow: 0 0 0 3px #f2c94c inset; }
+  #off { position: fixed; left: 0; right: 0; top: 0; background: #5a1f1f; text-align: center; padding: 8px; font-size: 14px; display: none; }
+  button:active { filter: brightness(1.3); }
+</style>
+</head>
+<body>
+<div id="off">연결이 끊겼습니다 — 다시 연결 중…</div>
+<div class="top"><span id="item">연결 중…</span><span id="clock"></span></div>
+<div class="now"><div class="lab">지금 <b id="nowLab"></b></div><div id="nowTxt"></div></div>
+<div class="next"><div class="lab">다음 <b id="nextLab"></b></div><div id="nextTxt"></div></div>
+<div class="secs" id="secs"></div>
+<div class="grow"></div>
+<div class="row small"><button data-a="black" id="bBlack">검은 화면</button><button data-a="clear" id="bClear">글 지우기</button><button data-a="logo" id="bLogo">로고</button></div>
+<div class="row"><button data-a="prev" id="prev">◀</button><button data-a="next" id="next">다음 ▶</button></div>
+<script src="remote.js"></script>
+</body>
+</html>

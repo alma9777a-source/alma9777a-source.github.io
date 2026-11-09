@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="ko">
+<head><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300..900&family=Gowun+Batang:wght@400;700&family=Nanum+Myeongjo:wght@800&display=block" rel="stylesheet">
+<meta charset="utf-8">
+<title>WorshipFlow 생중계 자막</title>
+<link rel="stylesheet" href="shared/stage.css">
+<style>
+  html, body { margin: 0; height: 100%; background: transparent !important; overflow: hidden; }
+  #wrap { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; }
+  .layer { position: absolute; inset: 0; transition: opacity .2s linear; }
+  .layer.off { opacity: 0; }
+  #bar { position: absolute; left: 96px; bottom: 76px; width: 900px; opacity: 0; transition: opacity .45s ease, transform .45s ease; transform: translateX(-30px); z-index: 3; }
+  #bar.on { opacity: 1; transform: none; }
+  #barTxt { position: absolute; left: 96px; bottom: 70px; z-index: 4; color: #fff; font: 700 46px 'Noto Sans KR', sans-serif; letter-spacing: .06em; text-shadow: 0 3px 14px rgba(0,0,0,.85); opacity: 0; transition: opacity .45s ease; }
+  #barTxt small { font-size: 32px; font-weight: 500; opacity: .85; letter-spacing: .02em; }
+  #barTxt.on { opacity: 1; }
+  .layer { transition: opacity .3s ease, transform .45s ease, translate .45s cubic-bezier(.2,.8,.2,1); }
+  .layer.enter { translate: 0 28px; } /* 아래 자막 띠가 처음 나올 때 살짝 올라오며 */
+  #proj > .pj { position: absolute; inset: 0; transition: opacity .3s ease; }
+  #proj > .pj.off { opacity: 0; }
+  #wrap.barup .layer { transform: translateY(-250px); } /* 자막바가 있는 동안 가사 띠는 위로 비켜 줌 */
+  #full { position: absolute; inset: 0; background: #000; opacity: 0; transition: opacity .4s ease; }
+  #full.on { opacity: 1; }
+  #proj { position: absolute; inset: 0; opacity: 0; transition: opacity .25s linear; }
+  #proj.on { opacity: 1; }
+  #full > video, #full > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+  #full.bg > video, #full.bg > img { object-fit: cover; }
+  #full > .dim { position: absolute; inset: 0; background: #000; }
+  #warn { position: fixed; left: 8px; top: 8px; font: 14px -apple-system, sans-serif; color: #fff; background: rgba(200,40,40,.8); padding: 4px 8px; border-radius: 6px; display: none; }
+</style>
+<script src="es-shim.js"></script>
+</head>
+<body>
+<div id="wrap"><div id="proj"></div><div id="full"></div><div class="layer" id="a"></div><div class="layer off" id="b"></div><img id="bar" alt=""><div id="barTxt"></div></div>
+<div id="warn">WorshipFlow 연결 끊김 — 다시 연결 중</div>
+<script src="shared/cdmotion.js"></script>
+<script src="shared/render.js"></script>
+<script>
+// OBS 브라우저 소스(1920×1080)에 얹는 투명 자막. 앱이 보내는 지금 상태만 그린다.
+(function () {
+  const wrap = document.getElementById("wrap");
+  let front = document.getElementById("a"), back = document.getElementById("b"), lastKey = "";
+  function fit() { const s = Math.min(innerWidth / 1920, innerHeight / 1080); wrap.style.transform = `scale(${s})`; }
+  addEventListener("resize", fit); fit();
+  // 순서 자막바: key 가 바뀔 때만 다시 띄우고, secs 초 뒤에 내린다(0 = 계속)
+  let barKey = "", barTimer = null, barDone = "", lastSt = null; // barDone: 초가 지나 내려간 자막바(그 뒤로는 하단 자막을 다시 보임)
+  const barEl = document.getElementById("bar"), barTxt = document.getElementById("barTxt");
+  const esc = (x) => String(x == null ? "" : x).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  function bar(b, hideAll) {
+    if (!b || hideAll) { barEl.classList.remove("on"); barTxt.classList.remove("on"); wrap.classList.remove("barup"); barKey = b ? barKey : ""; return; }
+    if (b.key === barKey) return;
+    barKey = b.key; clearTimeout(barTimer);
+    // 생중계가 화면 가득(영상 · 글)일 때는 자막바 그림 대신 왼쪽 아래 글자만
+    const fullNow = projEl.classList.contains("on") || fullEl.classList.contains("on");
+    if (fullNow && b.text && b.text.title) {
+      Object.assign(barTxt.style, b.pos === "center" ? { left: "0", right: "0", textAlign: "center" } : b.pos === "right" ? { left: "auto", right: "96px", textAlign: "right" } : { left: "96px", right: "auto", textAlign: "left" });
+      barTxt.innerHTML = `${esc(b.text.title)}${b.text.side ? `<small> · ${esc(b.text.side)}</small>` : ""}`; barTxt.classList.add("on");
+      if (b.secs) barTimer = setTimeout(() => { barTxt.classList.remove("on"); barDone = b.key; if (lastSt) show(lastSt); }, b.secs * 1000);
+      return;
+    }
+    barTxt.classList.remove("on");
+    barEl.onload = () => { barEl.classList.add("on"); wrap.classList.add("barup"); };
+    barEl.style.width = (b.w || 900) + "px"; Render.barPlace(barEl, b.pos, b.w || 900); barEl.src = b.overlayUrl;
+    if (b.secs) barTimer = setTimeout(() => { barEl.classList.remove("on"); wrap.classList.remove("barup"); barDone = b.key; if (lastSt) show(lastSt); }, b.secs * 1000);
+  }
+  function show(st) {
+    const ovv = st.overlay || {};
+    const ov = st.overlay || {};
+    lastSt = st;
+    const flags = Object.assign({}, st.flags || {}, { overlayOff: ov.on === false, capOff: !!(st.bar && st.bar.hideText && st.bar.key !== barDone) }); // 자막바를 일부러 띄운 하단 자막 화면에서는 글 띠를 숨김
+    const full = Render.overlayFull(st.slide, ov.theme, flags);
+    if (full && full.proj) showProj(st); else { showFull(full); hideProj(); }
+    bar(st.bar, ovv.on === false); // 화면 가득인지 정한 뒤에(가득이면 자막바는 글자만)
+    if (full && full.proj) flags.overlayOff = true; // 예배당 화면 그대로일 때는 아래 띠를 따로 얹지 않음(글 두 번 방지)
+    const key = JSON.stringify([Render.overlayContent(st.slide), ov, flags]);
+    if (key === lastKey) return;
+    lastKey = key;
+    const wasEmpty = !front.innerHTML.trim();
+    Render.drawOverlay(back, st.slide, ov.theme, flags);
+    if (wasEmpty && back.innerHTML.trim()) { back.classList.add("enter"); back.getBoundingClientRect(); requestAnimationFrame(() => back.classList.remove("enter")); }
+    back.classList.remove("off"); front.classList.add("off");
+    const old = front; setTimeout(() => { if (old.classList.contains("off")) old.innerHTML = ""; }, 260);
+    [front, back] = [back, old];
+  }
+  // 카메라 대신 화면 가득: 영상 · 그림 화면, 또는 가사 배경(켰을 때). 같은 파일이면 그대로 두어 영상이 처음으로 돌아가지 않게.
+  const fullEl = document.getElementById("full");
+  let fullKey = "", fullTimer = null;
+  function showFull(f) {
+    const k = f ? JSON.stringify(f) : "";
+    if (k === fullKey) return;
+    const sameFile = f && fullKey && JSON.parse(fullKey).file === f.file;
+    fullKey = k;
+    clearTimeout(fullTimer);
+    if (!f) { fullEl.classList.remove("on"); fullTimer = setTimeout(() => { if (!fullKey) fullEl.innerHTML = ""; }, 450); return; }
+    let el = fullEl.querySelector("video, img");
+    if (!sameFile || !el) {
+      fullEl.innerHTML = "";
+      el = document.createElement(f.video ? "video" : "img");
+      el.src = "/media/" + f.file;
+      if (f.video) { el.playsInline = true; el.autoplay = true; el.preload = "auto"; }
+      fullEl.appendChild(el);
+      const d = document.createElement("div"); d.className = "dim"; fullEl.appendChild(d);
+    }
+    if (f.video) {
+      el.loop = f.loop; el.muted = f.mute;
+      const p = el.play(); if (p && p.catch) p.catch(() => { el.muted = true; el.play().catch(() => {}); });
+    }
+    fullEl.querySelector(".dim").style.opacity = (f.dim || 0) / 100;
+    let cap = fullEl.querySelector(".wf-caption"); if (cap) cap.remove();
+    if (f.caption) { cap = Render.captionBand(f.caption); cap.style.position = "absolute"; fullEl.appendChild(cap); }
+    fullEl.classList.toggle("bg", !!f.bg);
+    fullEl.classList.add("on");
+  }
+  // 찬양 · 성경 등: 예배당 화면 그대로(화면 가득). 앱 안 주소(asset:)는 OBS가 못 열어서 자막 서버의 /media/ 로 바꿔 그림
+  const projEl = document.getElementById("proj");
+  let projKey = "", projSt = null;
+  function webSlide(s) {
+    s = JSON.parse(JSON.stringify(s));
+    const m = (f) => (f ? "/media/" + f : "");
+    if (s.bgFile) s.bgUrl = m(s.bgFile); else delete s.bgUrl;
+    if (s.logoFile) s.logoUrl = m(s.logoFile); else delete s.logoUrl;
+    if (s.adFiles) s.ads = s.adFiles.map(m);
+    if (s.photoFile) s.photo = m(s.photoFile);
+    if (s.loopFile) s.loop = m(s.loopFile);
+    if (s.kind === "titlecard" && s.tc && s.tc.file) s.tc.url = m(s.tc.file);
+    if (s.kind === "media" && s.mediaFile && s.media) s.media.url = m(s.mediaFile);
+    if (s.kind === "design") { s.bgSrc = m(s.bgFile); s.els = (s.els || []).map((e) => Object.assign(e, { src: m(e.file), fillSrc: m(e.fillFile), posterSrc: m(e.poster) })); }
+    return s;
+  }
+  function webTheme(t) { t = Object.assign({}, t || {}); if (t.bgMedia) t.bgUrl = "/media/" + t.bgMedia; else delete t.bgUrl; return t; }
+  function showProj(st) {
+    const k = JSON.stringify([st.slide, st.theme, st.flags]);
+    clearTimeout(fullTimer); fullKey = ""; fullEl.classList.remove("on"); fullEl.innerHTML = "";
+    if (k === projKey) return;
+    projKey = k;
+    const box = document.createElement("div"); box.className = "pj off";
+    Render.draw(box, webSlide(st.slide), webTheme(st.theme), Object.assign({ play: true }, st.flags, { silent: st.slide.kind !== "media" })); // 영상(카운트다운 얹은 것)은 소리도 OBS로
+    // 옛 화면 위에 새 화면을 겹쳐 사라지게(같은 배경 영상은 이어서) — 예전에는 바로 바뀌고 배경 영상이 처음으로 돌아감
+    const olds = [...projEl.children], ms = Render.fadeFor(projSt, st); projSt = st;
+    Render.carryVideo(olds[olds.length - 1], box);
+    box.style.transitionDuration = ms + "ms";
+    projEl.appendChild(box); projEl.classList.add("on");
+    box.getBoundingClientRect(); requestAnimationFrame(() => box.classList.remove("off"));
+    setTimeout(() => olds.forEach((o) => { o.querySelectorAll("video").forEach((v) => { v.pause(); v.removeAttribute("src"); v.load(); }); o.remove(); }), ms + 120);
+  }
+  function hideProj() { if (!projKey) return; projKey = ""; projSt = null; projEl.classList.remove("on"); setTimeout(() => { if (!projKey) projEl.innerHTML = ""; }, 450); }
+  function connect() {
+    const es = new EventSource("/events" + location.search);
+    const dbg = /debug/.test(location.search); // 끊김 표시는 시험할 때만(방송 화면에 나가지 않게)
+    es.onmessage = (e) => { document.getElementById("warn").style.display = "none"; try { show(JSON.parse(e.data)); } catch (x) {} };
+    es.onerror = () => { if (dbg) document.getElementById("warn").style.display = "block"; };
+  }
+  document.fonts.load("700 40px 'Noto Sans KR'").finally(connect);
+})();
+</script>
+</body>
+</html>

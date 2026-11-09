@@ -1,0 +1,777 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>핏처치 체험판 — 나눔스튜디오</title>
+<link rel="icon" href="img/fitchurch.svg">
+<meta name="description" content="중소형 교회에 꼭 맞춘 행정 프로그램 핏처치(Fit Church)를 가상의 교회로 눌러 보는 체험판입니다.">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* 핏처치(옛 이름 사역 행정) 기본 디자인(2026-10-26 캔버스)의 색 · 글꼴 · 배치를 따름 */
+:root{--ac:#24407A;--ac2:#1A2F5A;--acbg:#EEF2FA;--bg:#F5F6F8;--card:#fff;--ink:#1B2230;--ink2:#3A4352;--mute:#5B6474;--line:#E3E6EB;--line2:#D5D9E0;--ok:#2E7D4F;--okbg:#E7F3EC;--warn:#8A5A0E;--warnbg:#FDF4E3;--red:#A33A2E;--redbg:#FBEAE7}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"IBM Plex Sans KR",system-ui,sans-serif;background:var(--bg);color:var(--ink);word-break:keep-all;font-size:14px;line-height:1.55}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+.demo{background:var(--ac);color:#fff;font-size:13px;text-align:center;padding:8px 12px}
+.demo b{color:#FFE7A8}.demo a{color:#fff;margin-left:12px;font-weight:600}
+.app{display:flex;min-height:calc(100vh - 37px)}
+/* 왼쪽 메뉴 */
+.side{width:248px;flex:none;background:#fff;border-right:1px solid var(--line);padding:24px 16px;display:flex;flex-direction:column;gap:20px}
+.who{display:flex;align-items:center;gap:12px;padding:0 8px}
+.who .mk{width:40px;height:40px;border-radius:12px;background:var(--ac);display:grid;place-items:center}
+.who b{display:block;font-size:15px}.who span{font-size:12px;color:var(--mute)}
+.menu{display:flex;flex-direction:column;gap:2px}
+.menu button{display:flex;align-items:center;gap:12px;min-height:42px;padding:0 12px;border-radius:10px;background:none;border:0;color:var(--ink2);font-size:14px;text-align:left}
+.menu button.sub{min-height:36px;padding-left:44px;color:var(--mute);font-size:13px}
+.menu button svg{width:20px;height:20px;flex:none}
+.menu button:hover{background:#F3F5F8}
+.menu button.on{background:var(--acbg);color:var(--ac);font-weight:600}
+.vault{border-top:1px solid var(--line);padding-top:12px}
+.vault .lk{display:flex;align-items:center;gap:6px;padding:0 12px 6px;font-size:11.5px;font-weight:700;color:var(--warn)}
+.store{padding:12px;border-radius:12px;background:var(--bg);font-size:12px;color:var(--mute);margin-top:auto}
+.store b{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink);margin-top:2px}
+.store b i{width:8px;height:8px;border-radius:4px;background:var(--ok)}
+.me{display:flex;align-items:center;gap:10px;padding:0 8px}
+.me .av{background:#DCE3F2;color:var(--ac)}
+.me select{border:1px solid var(--line2);border-radius:8px;padding:3px 6px;font-size:12px;background:#fff;color:var(--mute)}
+/* 본문 */
+main{flex:1;min-width:0;padding:32px 40px 60px;display:flex;flex-direction:column;gap:24px}
+.head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px}
+.head p{font-size:13px;color:var(--mute)}
+.head h1{font-size:28px;font-weight:700;letter-spacing:-.02em;margin-top:4px}
+.btn{height:44px;padding:0 18px;border:0;border-radius:10px;background:var(--ac);color:#fff;font-weight:600;font-size:14px;display:inline-flex;align-items:center;gap:6px}
+.btn:hover{background:var(--ac2)}
+.btn.gh{background:#fff;color:var(--ink2);border:1px solid var(--line2)}
+.btn.sm{height:34px;padding:0 12px;font-size:13px}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.tabs button{border:0;background:none;padding:10px 14px;font-size:14px;color:var(--mute);border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabs button.on{color:var(--ac);border-color:var(--ac);font-weight:600}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px}
+.card h2{font-size:17px;font-weight:700;display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.card h2 small{font-size:12.5px;font-weight:500;color:var(--mute)}
+.grid{display:grid;gap:16px}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}.g2{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.stat{padding:20px}
+.stat small{font-size:13px;color:var(--mute)}
+.stat b{display:block;font-size:26px;font-weight:700;margin-top:4px;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.stat span{font-size:12.5px;color:var(--mute)}
+.pill{font-size:12px;font-weight:600;border-radius:999px;padding:3px 10px;white-space:nowrap;display:inline-block}
+.p-ok{background:var(--okbg);color:var(--ok)}.p-w{background:var(--warnbg);color:var(--warn)}.p-r{background:var(--redbg);color:var(--red)}.p-a{background:var(--acbg);color:var(--ac)}.p-g{background:#EEF0F3;color:var(--ink2)}
+.av{width:34px;height:34px;border-radius:50%;background:var(--acbg);color:var(--ac);display:grid;place-items:center;font-weight:700;font-size:13px;flex:none}
+.rows{list-style:none}
+.rows li{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-top:1px solid #EEF0F3}
+.rows li:first-child{border-top:0;padding-top:0}
+.rows .l{display:flex;align-items:center;gap:12px;min-width:0}
+.mute{color:var(--mute);font-size:13px}
+/* 준비 단계 */
+.steps{list-style:none;display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.steps li{display:flex;flex-direction:column;gap:6px}
+.steps i{height:6px;border-radius:3px;background:var(--line)}
+.steps i.d{background:var(--ac)}.steps i.h{background:#9DB0D6}
+.steps b{font-size:14px;font-weight:600}.steps span{font-size:12px;color:var(--mute)}
+.steps span.d{color:var(--ok)}
+/* 막대 */
+.bars{display:flex;align-items:flex-end;gap:10px;height:160px;padding-top:20px}
+.bars div{flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px}
+.bars i{width:100%;max-width:38px;background:#BFCBE3;border-radius:6px 6px 2px 2px;position:relative}
+.bars i.last{background:var(--ac)}
+.bars i em{position:absolute;top:-19px;left:50%;transform:translateX(-50%);font-style:normal;font-size:12px;font-weight:600}
+.bars span{font-size:12px;color:var(--mute)}
+/* 표 */
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tools input,.tools select{height:40px;border:1px solid var(--line2);background:#fff;border-radius:10px;padding:0 12px}
+.tools input{flex:1;min-width:180px}
+.tbl{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:560px}
+th{text-align:left;font-size:12.5px;color:var(--mute);font-weight:500;padding:8px 10px;border-bottom:1px solid var(--line)}
+td{padding:11px 10px;border-bottom:1px solid #EEF0F3;font-variant-numeric:tabular-nums}
+tbody tr.ck{cursor:pointer}tbody tr.ck:hover{background:#F7F9FC}
+.num{text-align:right}
+.dots{display:flex;gap:4px}.dots i{width:10px;height:10px;border-radius:50%;background:#E3E6EB}.dots i.on{background:var(--ac)}
+/* 출석 */
+.att{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}
+.att button{border:1px solid var(--line2);background:#fff;border-radius:10px;min-height:46px;padding:0 12px;text-align:left;display:flex;justify-content:space-between;align-items:center;font-size:14px}
+.att button small{color:var(--mute);font-size:11.5px}
+.att button.on{background:var(--ac);border-color:var(--ac);color:#fff;font-weight:600}
+.att button.on small{color:#C9D4EC}
+.grp{margin:18px 0 8px;font-weight:600;display:flex;gap:10px;align-items:center}
+.grp span{font-weight:400;color:var(--mute);font-size:13px}
+.lock{display:flex;gap:10px;align-items:flex-start;background:var(--warnbg);color:var(--warn);border-radius:12px;padding:12px 14px;font-size:13px}
+.lock svg{flex:none;margin-top:2px}
+/* 옆 창 */
+.sheet{position:fixed;inset:0;background:rgba(27,34,48,.32);display:none;justify-content:flex-end;z-index:20}
+.sheet.open{display:flex}
+.panel{width:min(480px,100%);background:var(--bg);height:100%;overflow:auto;padding:24px 24px 40px;box-shadow:-12px 0 40px rgba(0,0,0,.14)}
+.panel .x{float:right;border:1px solid var(--line2);background:#fff;border-radius:10px;width:40px;height:40px;font-size:16px}
+.panel h3{font-size:22px;display:flex;gap:12px;align-items:center}
+.panel h4{font-size:14px;margin:22px 0 8px}
+.kv{background:#fff;border:1px solid var(--line);border-radius:14px;padding:4px 16px;margin-top:14px}
+.kv div{display:flex;padding:10px 0;border-top:1px solid #EEF0F3}.kv div:first-child{border-top:0}
+.kv b{width:84px;color:var(--mute);font-weight:500;flex:none}
+.hidebox{background:#fff;border:1px dashed var(--line2);border-radius:12px;padding:14px;color:var(--mute);font-size:13px;display:flex;gap:8px;align-items:center}
+.form label{display:block;font-size:13px;color:var(--mute);margin:14px 0 6px}
+.form input,.form select,.form textarea{width:100%;border:1px solid var(--line2);background:#fff;border-radius:10px;padding:10px 12px}
+.form .r2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.form .btn{margin-top:20px;width:100%;justify-content:center}
+.toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,16px);background:var(--ink);color:#fff;padding:12px 20px;border-radius:12px;font-weight:600;opacity:0;transition:.2s;z-index:30;pointer-events:none}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.kbar{display:flex;flex-direction:column;gap:10px}
+.kbar div{display:grid;grid-template-columns:64px minmax(0,1fr) 60px;gap:10px;align-items:center;font-size:13.5px}
+.kbar .tr{display:block;height:10px;background:#EEF0F3;border-radius:5px}
+.kbar s{display:block;height:10px;border-radius:5px;background:var(--ac)}
+.kbar b{text-align:right;font-weight:600;font-variant-numeric:tabular-nums}
+pre.bl{white-space:pre-wrap;background:#F7F9FC;border:1px solid var(--line);border-radius:12px;padding:14px;font:13.5px/1.8 "IBM Plex Sans KR";max-height:260px;overflow:auto}
+.soon{text-align:center;padding:56px 24px}
+.soon .ic{width:56px;height:56px;border-radius:16px;background:var(--acbg);color:var(--ac);display:grid;place-items:center;margin:0 auto 16px}
+.soon h2{display:block;font-size:20px}
+.soon p{color:var(--mute);max-width:440px;margin:6px auto 18px}
+.hm{}
+@media (max-width:900px){
+ .bsteps{grid-template-columns:1fr 1fr!important}.wkc{grid-template-columns:1fr!important}
+ .side{display:none}
+ .mnav{display:flex!important}
+ main{padding:20px 16px 96px}
+ .g4{grid-template-columns:1fr 1fr}.g2,.g3{grid-template-columns:1fr}
+ .steps{grid-template-columns:1fr 1fr}
+ .hm{display:none}
+ .head h1{font-size:24px}
+}
+.mnav{display:none;position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);z-index:10;justify-content:space-around;padding:6px 4px}
+.mnav button{border:0;background:none;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;color:var(--mute);padding:6px 4px;flex:1;border-radius:10px}
+.mnav button.on{color:var(--ac);font-weight:600;background:var(--acbg)}
+.mnav svg{width:20px;height:20px}
+</style></head>
+<body>
+<div class="demo"><b>체험판</b> · 교회 이름 · 성도 · 금액은 모두 <b>가상의 자료</b>입니다. 마음껏 눌러 보세요(새로 고치면 처음으로). <a href="index.html">← 나눔스튜디오</a></div>
+<div class="app">
+<nav class="side" aria-label="주 메뉴">
+  <div class="who"><img class="mk" src="img/fitchurch.svg" alt="핏처치" style="width:40px;height:40px;border-radius:11px;background:none"><div><b>은혜샘교회</b><span>핏처치 · 가상 교회</span></div></div>
+  <div class="menu" id="menu1"></div>
+  <div class="menu vault"><div class="lk"><svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="9" width="12" height="9" rx="2"/><path d="M7 9V6.5a3 3 0 0 1 6 0V9"/></svg>재정 금고 · 담당자만</div><div id="menu2" style="display:flex;flex-direction:column;gap:2px"></div></div>
+  <div class="store">저장소<b><i></i>이 컴퓨터 · 체험판</b></div>
+  <div class="me"><div class="av">담</div><div><b style="font-size:14px;display:block">보는 사람</b><select id="role" aria-label="화면을 보는 사람"><option value="pastor">담임목사 · 전체</option><option value="fin">재정부</option><option value="staff">교역자 · 간사</option></select></div></div>
+</nav>
+<main id="view"></main>
+</div>
+<nav class="mnav" id="mnav" aria-label="아래 메뉴"></nav>
+<div class="sheet" id="sheet"><div class="panel" id="panel"></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+// ── 메뉴 (기본 디자인의 메뉴 구성 그대로) ──
+const IC={
+home:'<path d="M3 9.5l7-6 7 6V17a1 1 0 0 1-1 1h-4v-5H8v5H4a1 1 0 0 1-1-1z"/>',
+cal:'<rect x="3" y="4" width="14" height="13" rx="2"/><path d="M3 8h14M7 2v4M13 2v4"/>',
+chk:'<path d="M8 5h9M8 10h9M8 15h9M3 5l1 1 2-2M3 10l1 1 2-2M3 15l1 1 2-2"/>',
+book:'<path d="M4 3h9a3 3 0 0 1 3 3v11H7a3 3 0 0 1-3-3z"/><path d="M4 14a3 3 0 0 1 3-3h9"/>',
+doc:'<path d="M5 2h7l4 4v12H5z"/><path d="M12 2v4h4M8 10h5M8 13h5"/>',
+chat:'<path d="M3 4h14v9H8l-4 3v-3H3z"/>',
+team:'<circle cx="7" cy="7" r="3"/><path d="M2 17a5 5 0 0 1 10 0"/><circle cx="14" cy="8" r="2.5"/><path d="M13 13a4 4 0 0 1 5 4"/>',
+box:'<rect x="2" y="3" width="16" height="4" rx="1"/><path d="M4 7v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7M8 11h4"/>',
+rcpt:'<path d="M5 2h10v16l-2-1.5-2 1.5-2-1.5-2 1.5-2-1.5z"/><path d="M8 7h4M8 10h4"/>',
+ppl:'<circle cx="7.5" cy="7" r="2.6"/><path d="M2.5 16c.6-2.8 2.6-4.3 5-4.3s4.4 1.5 5 4.3"/><circle cx="14" cy="8" r="2"/><path d="M13.6 11.8c2 .1 3.4 1.4 3.9 3.6"/>',
+won:'<rect x="2" y="5" width="16" height="11" rx="2"/><circle cx="10" cy="10.5" r="2.5"/>'};
+const svg=k=>`<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[k]}</svg>`;
+// [id, 이름, 아이콘(없으면 하위 메뉴), 체험 가능?, 설명]
+const M1=[["home","홈","home",1],["cal","연간 일정","cal",1,"교회력과 한 해 행사를 한 달력에. 2027 계획 사이클(달력 깔기 → 큰 돌 놓기 → 부서 초안 → 정책당회)을 따라갑니다."],["plan","사역계획안",null,0,"부서별 계획안을 모아 당회 자료로 묶습니다."],["event","행사 준비","chk",1,"추수감사 · 성탄처럼 큰 행사를 D-day 할 일 목록으로 준비합니다."],["weekly","주간 사역","book",1,"설교문 · 칼럼 · 카톡 카드 · 주보 · 문자를 한 주 흐름으로 챙깁니다."],["bulletin","주보 작업",null,1,"주보 템플릿 · 편집기 · 지난 PDF 가져와 고치기."],["time","예배 타임테이블",null,0,"예배 순서와 큐시트 — 방송실 화면과 이어집니다."],["msg","문자·카톡 발송",null,0,"구역 · 부서별로 골라 문자와 카톡 카드를 보냅니다."],["forms","양식·인쇄물","doc",0,"봉투 · 증서 · 노회 서류 양식을 채워 출력합니다."],["presby","노회 서류",null,1],["meet","회의·결의","chat",0,"당회 · 제직회 회의록과 결의 사항을 남깁니다."],["share","업무 공유","team",0,"교역자 · 간사 업무 나누기와 시설 예약."],["arch","사역 아카이브","box",0,"설교 · 사진 · 행사 자료를 해마다 정리해 둡니다."],["exp","지출 청구","rcpt",0,"영수증 사진을 붙여 지출결의서를 올리고 승인합니다."]];
+const M2=[["mem","성도 관리","ppl",1],["att","출석",null,1],["visit","심방",null,1],["ledger","재정 관리",null,0,"수입 · 지출 장부와 월말 결산."],["off","헌금 관리",null,1],["budget","예산안",null,0,"지난해 결산을 바탕으로 새해 예산안을 짭니다."],["rcp","기부금영수증",null,0,"연말에 성도별 기부금영수증을 한 번에 만듭니다."]];
+function menuHTML(L){return L.map(([id,t,ic])=>`<button data-v="${id}" class="${ic?"":"sub"}">${ic?svg(ic):""}<span>${t}</span></button>`).join("")}
+document.getElementById("menu1").innerHTML=menuHTML(M1);
+document.getElementById("menu2").innerHTML=menuHTML(M2);
+document.getElementById("mnav").innerHTML=[["home","홈","home"],["mem","성도","ppl"],["att","출석","chk"],["visit","심방","chat"],["off","헌금","won"]].map(([id,t,ic])=>`<button data-v="${id}">${svg(ic)}${t}</button>`).join("");
+
+// ── 가상의 자료 (늘 같은 자료가 나오게 고정 난수) ──
+let seed=20261027;const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
+const pick=a=>a[Math.floor(rnd()*a.length)];
+const SUR="김이박최정강조윤장임한오서신권황안송류홍".split("");
+const GM=["민준","성호","재훈","영수","동현","준호","상철","정우","태식","현우","승민","광수","도윤","시우"];
+const GF=["은혜","지영","미숙","정희","수진","영자","혜원","순자","하은","서연","경희","선영","옥자","지민"];
+const TODAY=new Date();TODAY.setHours(0,0,0,0);
+const lastSun=new Date(TODAY);lastSun.setDate(TODAY.getDate()-TODAY.getDay());
+const nextSun=new Date(lastSun);nextSun.setDate(lastSun.getDate()+7);
+const SUNS=[...Array(8)].map((_,i)=>{const d=new Date(lastSun);d.setDate(d.getDate()-7*(7-i));return d});
+const ymd=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+const md=d=>`${d.getMonth()+1}/${d.getDate()}`;
+const DOW="일월화수목금토";
+const won=n=>n.toLocaleString("ko-KR")+"원";
+const man=n=>Math.round(n/10000).toLocaleString()+"만";
+const ZONES=["1구역","2구역","3구역","4구역","청년부"];
+let nid=1;const P=[];
+function addPerson(o){const p=Object.assign({id:nid++,memo:""},o);P.push(p);return p}
+for(let f=0;f<17;f++){
+  const sur=pick(SUR),zone=ZONES[f%4],age=35+Math.floor(rnd()*40),reg=2004+Math.floor(rnd()*21),weak=rnd()<.12;
+  const h=addPerson({name:sur+pick(GM),sex:"남",birth:TODAY.getFullYear()-age,role:age>60&&rnd()<.5?"장로":(rnd()<.6?"안수집사":"성도"),zone,reg,fam:f});
+  const w=addPerson({name:pick(SUR)+pick(GF),sex:"여",birth:h.birth+Math.floor(rnd()*4),role:age>58?"권사":(rnd()<.6?"집사":"성도"),zone,reg,fam:f});
+  [h,w].forEach(p=>p.rate=weak?.3:.8+rnd()*.18);
+  if(age<55&&rnd()<.7)addPerson({name:sur+pick(rnd()<.5?GM:GF),sex:rnd()<.5?"남":"여",birth:TODAY.getFullYear()-(6+Math.floor(rnd()*12)),role:"어린이",zone,reg,fam:f,rate:.8});
+}
+for(let i=0;i<9;i++)addPerson({name:pick(SUR)+pick(rnd()<.5?GM:GF),sex:rnd()<.5?"남":"여",birth:TODAY.getFullYear()-(21+Math.floor(rnd()*10)),role:"청년",zone:"청년부",reg:2018+Math.floor(rnd()*8),fam:100+i,rate:.6+rnd()*.35});
+P.forEach(p=>{p.att=SUNS.map(()=>rnd()<p.rate);p.phone=`010-${1000+Math.floor(rnd()*8999)}-${1000+Math.floor(rnd()*8999)}`;p.bday=`${1+Math.floor(rnd()*12)}-${1+Math.floor(rnd()*28)}`;p.status="출석"});
+[["윤","하은","여",31],["장","도윤","남",38],["서","미숙","여",62]].forEach(([s,g,x,a],i)=>{const p=addPerson({name:s+g,sex:x,birth:TODAY.getFullYear()-a,role:"새가족",zone:ZONES[i],reg:TODAY.getFullYear(),fam:200+i,rate:.9});p.phone=`010-2${100+i}-55${10+i}`;p.bday=`5-${3+i}`;p.status="새가족";p.att=SUNS.map((_,k)=>k>=5-i)});
+P.filter(p=>p.role!=="어린이").slice(3,6).forEach((p,i)=>{const d=new Date(TODAY);d.setDate(d.getDate()+i*2);p.bday=`${d.getMonth()+1}-${d.getDate()}`});
+P.filter(p=>p.role==="집사").slice(0,2).forEach(p=>{p.att=p.att.map((v,i)=>i<4?v:false)});
+P.forEach(p=>{if(p.status!=="새가족"&&p.att.slice(-3).every(v=>!v))p.status="장기결석"});
+const nf=()=>P.filter(p=>p.status==="새가족"),lost=()=>P.filter(p=>p.status==="장기결석");
+// 이번 주일 출석은 아직 비어 있음(체험하는 분이 누르도록) — 지난주 기록은 SUNS[7]
+const NOW=P.map(()=>false);P.forEach(p=>p.now=false);
+const plusDays=n=>{const d=new Date(TODAY);d.setDate(d.getDate()+n);return ymd(d)};
+const V=[];let vid=1;
+V.push({id:vid++,pid:nf()[0].id,date:plusDays(1),time:"14:00",kind:"새가족",where:"가정",memo:"등록 3주째, 자녀 둘. 주일학교 안내",done:false});
+V.push({id:vid++,pid:P[4].id,date:plusDays(2),time:"10:30",kind:"병문안",where:"병원",memo:"무릎 수술 뒤 회복 중",done:false});
+if(lost()[0])V.push({id:vid++,pid:lost()[0].id,date:plusDays(3),time:"19:30",kind:"안부",where:"전화",memo:"3주 결석. 직장 일로 바쁘다고 함",done:false});
+V.push({id:vid++,pid:P[10].id,date:plusDays(5),time:"15:00",kind:"대심방",where:"사업장",memo:"사업장 개업 감사 예배",done:false});
+V.push({id:vid++,pid:nf()[1].id,date:plusDays(-6),time:"14:00",kind:"새가족",where:"가정",memo:"첫 만남. 이사 온 지 두 달",done:true});
+V.push({id:vid++,pid:P[20].id,date:plusDays(-9),time:"11:00",kind:"위로",where:"장례식장",memo:"어머니 소천, 위로 예배",done:true});
+const KIND=["주정헌금","십일조","감사헌금","선교헌금","건축헌금"];
+const O=[];let oid=1;const givers=P.filter(p=>p.role!=="어린이");
+for(let w=0;w<13;w++){const d=new Date(lastSun);d.setDate(d.getDate()-7*w);
+  givers.forEach(p=>{if(rnd()<p.rate*.55){const k=rnd()<.35?"십일조":rnd()<.55?"주정헌금":pick(KIND);
+    const amt=k==="십일조"?(5+Math.floor(rnd()*26))*10000:k==="건축헌금"?(5+Math.floor(rnd()*10))*10000:(1+Math.floor(rnd()*5))*10000;
+    O.push({id:oid++,date:ymd(d),pid:p.id,kind:k,amt,way:rnd()<.35?"계좌이체":"현금"})}});
+  O.push({id:oid++,date:ymd(d),pid:0,kind:"주정헌금",amt:(3+Math.floor(rnd()*8))*10000,way:"현금"});
+}
+const byId=id=>P.find(p=>p.id===id);
+const nm=id=>id?byId(id).name:"무명";
+const ini=n=>n.slice(1,2);
+const age=p=>TODAY.getFullYear()-p.birth+1;
+
+// ── 화면 ──
+const $=s=>document.querySelector(s);let cur="home",role="pastor";
+const toast=t=>{const e=$("#toast");e.textContent=t;e.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove("show"),1800)};
+const closeP=()=>$("#sheet").classList.remove("open");
+const openP=h=>{$("#panel").innerHTML=`<button class="x" aria-label="닫기" onclick="closeP()">✕</button>`+h;$("#sheet").classList.add("open")};
+$("#sheet").onclick=e=>{if(e.target.id==="sheet")closeP()};
+document.querySelectorAll("[data-v]").forEach(b=>b.onclick=()=>go(b.dataset.v));
+$("#role").onchange=e=>{role=e.target.value;render();toast(e.target.selectedOptions[0].text.split(" ·")[0]+" 화면으로 봅니다")};
+function go(v){cur=v;document.querySelectorAll("[data-v]").forEach(x=>x.classList.toggle("on",x.dataset.v===v||(v==="mem"&&false)));render();window.scrollTo(0,0)}
+// ── 2026-11-09 채운 메뉴 11개(진짜 핏처치 화면 ui/screens · 디자인-새/project 의 모양을 가상 자료로) ──
+const finLock=(h)=>{$("#view").innerHTML=head("재정 금고",h)+`<section class="card soon"><div class="ic">${svg("won").replace('viewBox','width="26" height="26" viewBox')}</div><h2>재정부와 담임목사만 열 수 있습니다</h2><p>교역자 · 간사 화면에서는 재정 메뉴가 잠겨 있어요. 왼쪽 아래 ‘보는 사람’을 재정부나 담임목사로 바꿔 보세요.</p></section>`};
+const finNote=`<div class="lock"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="9" width="12" height="9" rx="2"/><path d="M7 9V6.5a3 3 0 0 1 6 0V9"/></svg><span>재정 금고 · 교회 컴퓨터에만 저장하고 따로 잠급니다. 금액은 모두 예시입니다.</span></div>`;
+const demoOnly=t=>toast(t||"체험판이라 실제로 보내거나 만들지는 않아요");
+const pn=i=>P[i%P.length].name;
+
+// 1. 사역계획안
+const PLAN=[{k:"wor",name:"예배부",owner:"[부목사]",st:"검토 완료",ev:4,goal:"감사의 기억을 나누는 예배 — 절기마다 간증 한 가정",items:[["3월","고난주간 특별새벽기도","본당","—"],["11월","추수감사주일 간증 예배","본당","행사 준비로"]]},
+ {k:"edu",name:"교육부",owner:"교육부 전도사",st:"제출",ev:6,goal:"아이들이 말씀을 ‘외우는’ 것보다 ‘사는’ 한 해",items:[["7월","여름성경학교","교육관 · 2박 3일","행사 준비로"],["12월","성탄 축하 발표회","본당","행사 준비로"]]},
+ {k:"youth",name:"청년부",owner:"청년부 전도사",st:"작성 중",ev:3,goal:"새로 온 청년이 한 달 안에 소그룹에 들어오도록",items:[["5월","청년 수련회","외부 · 1박 2일","행사 준비로"]]},
+ {k:"mis",name:"선교부",owner:"선교부장",st:"제출",ev:2,goal:"협력 선교사 네 가정과 분기마다 영상 기도회",items:[["8월","단기선교","—","행사 준비로"]]},
+ {k:"wom",name:"여전도회",owner:"여전도회장",st:"미제출",ev:0,goal:"(아직 내지 않았습니다)",items:[]},
+ {k:"new",name:"새가족부",owner:"새가족 담당",st:"검토 완료",ev:2,goal:"등록 뒤 4주 새가족반 · 6주째 환영회",items:[["4월 · 10월","새가족 환영회","친교실","행사 준비로"]]}];
+const plSt={"검토 완료":"p-ok","제출":"p-a","작성 중":"p-w","미제출":"p-r"};
+function plan(){
+  const due=new Date(TODAY.getFullYear(),10,15),dd=dLeft(due),sub=PLAN.filter(d=>d.st==="제출"||d.st==="검토 완료").length;
+  $("#view").innerHTML=head("연간 일정",`${TODAY.getFullYear()+1} 사역계획안`,`<button class="btn gh" onclick="demoOnly('미제출 부서장에게 알림을 보냈어요(체험판)')">미제출 부서에 알림</button><button class="btn" onclick="demoOnly('당회 자료용 취합본은 정식판에서 한글 · PDF로 만들어집니다')">취합본 만들기</button>`)+`
+  <div class="grid g4"><div class="card stat"><small>제출 마감</small><b>11월 15일</b><span>${dd>0?"D-"+dd:dd===0?"오늘":"지남"}</span></div><div class="card stat"><small>낸 부서</small><b>${sub} / ${PLAN.length}</b><span>부서</span></div><div class="card stat"><small>잡힌 행사</small><b>${PLAN.reduce((s,d)=>s+d.ev,0)}개</b><span>연간 일정 후보</span></div><div class="card stat"><small>겹치는 것</small><b>2건</b><span>아래에서 확인</span></div></div>
+  <div class="grid g2"><section class="card"><h2>부서별 계획안 <small>누르면 자세히</small></h2><ul class="rows">${PLAN.map(d=>`<li class="ck" onclick="showPlan('${d.k}')"><span class="l"><span class="av">${d.name[0]}</span><span><b>${d.name}</b><br><span class="mute">${d.owner} · 행사 ${d.ev}개</span></span></span><span class="pill ${plSt[d.st]}">${d.st}</span></li>`).join("")}</ul></section>
+  <section class="card"><h2>연간 일정에 넣기 전 · 겹치는 것</h2><p class="mute" style="margin-bottom:12px">계획안이 모이면 같은 주 · 같은 장소 · 같은 사람을 찾아 줍니다.</p><ul class="rows"><li><span><b>같은 주 · 같은 장소</b><br><span class="mute">교육부 ‘여름성경학교’와 청년부 ‘수련회 준비 모임’이 7월 셋째 주 교육관</span></span><span class="pill p-w">조정</span></li><li><span><b>같은 사람</b><br><span class="mute">[부목사]가 11월 둘째 주 행사 세 개의 담당</span></span><span class="pill p-w">조정</span></li></ul><p class="mute" style="margin-top:12px">당회 승인 뒤에 확정 일정이 되고, 그 전에는 연간 일정에 ‘계획 중’으로 보입니다.</p></section></div>`}
+function showPlan(k){const d=PLAN.find(x=>x.k===k);openP(`<h3>${d.name} 계획안 <span class="pill ${plSt[d.st]}">${d.st}</span></h3><p class="mute">${d.owner}</p>
+  <h4>${TODAY.getFullYear()+1}년 한 줄 목표</h4><div class="kv"><div>${d.goal}</div></div>
+  <h4>주요 행사</h4>${d.items.length?`<div class="tbl"><table style="min-width:0"><thead><tr><th>때</th><th>행사</th><th>장소</th><th></th></tr></thead><tbody>${d.items.map(r=>`<tr><td>${r[0]}</td><td><b>${r[1]}</b></td><td>${r[2]}</td><td class="mute">${r[3]}</td></tr>`).join("")}</tbody></table></div>`:'<p class="mute">아직 없습니다.</p>'}
+  <div class="r2"><button class="btn gh" onclick="setPlan('${k}','작성 중')">수정 요청</button><button class="btn" onclick="setPlan('${k}','검토 완료')">검토 완료</button></div>`)}
+function setPlan(k,st){PLAN.find(x=>x.k===k).st=st;closeP();go("plan");toast(st==="검토 완료"?"검토 완료로 표시했어요":"부서장에게 수정을 요청했어요")}
+
+// 2. 예배 타임테이블 · 큐시트
+const CUE=[["예배 전 찬양","찬양팀",8,"무선 2 · 건반","가사"],["예배로 부름","인도자",2,"강단 마이크","제목 화면"],["찬송 · 교독문","회중",6,"—","가사 · 교독문"],["대표기도",pn(3),4,"강단 마이크","기도자 이름"],["성경 봉독","[부목사]",3,"강단 마이크","본문"],["찬양대 특송","찬양대",5,"합창 마이크 3","곡 제목"],["설교","담임목사",32,"핀 마이크","설교 제목"],["봉헌 · 봉헌기도",pn(7),5,"—","봉헌 화면"],["광고 · 교회 소식","[부목사]",4,"강단 마이크","광고 영상"],["축도","담임목사",2,"강단 마이크","—"]].map(([t,w,m,s,v])=>({t,w,m,s,v}));
+function time(){
+  let at=11*60;const hm=x=>`${Math.floor(x/60)}:${String(x%60).padStart(2,"0")}`;
+  const rows=CUE.map((r,i)=>{const s=hm(at);at+=r.m;return `<tr><td>${s}</td><td><span style="display:inline-flex;align-items:center;gap:6px"><button class="btn gh sm" style="width:30px;padding:0" onclick="cueM(${i},-1)">−</button><b>${r.m}′</b><button class="btn gh sm" style="width:30px;padding:0" onclick="cueM(${i},1)">＋</button></span></td><td><b>${r.t}</b></td><td>${r.w}</td><td class="mute">${r.s}</td><td class="mute">${r.v}</td></tr>`}).join("");
+  const total=CUE.reduce((s,r)=>s+r.m,0);
+  $("#view").innerHTML=head("주간 사역",`${md(nextSun)} 주일 예배 큐시트`,`<button class="btn gh" onclick="demoOnly('지난주 큐시트를 그대로 복사해 시작합니다(체험판)')">지난주 큐시트 복사</button><button class="btn gh" onclick="demoOnly('A4 가로 큐시트는 정식판에서 출력됩니다')">큐시트 출력</button><button class="btn" onclick="demoOnly('WorshipFlow(예배 자막)로 순서 · 기도자 · 설교 제목이 넘어갑니다')">방송실 화면으로 보내기</button>`)+`
+  <div class="grid g4"><div class="card stat"><small>전체 진행</small><b>${total}분</b><span>11:00 시작 · ${hm(11*60+total)} 마침 예정</span></div><div class="card stat"><small>설교</small><b>담임목사</b><span>${W.title}</span></div><div class="card stat"><small>대표기도</small><b>${pn(3)}</b><span>봉헌기도 ${pn(7)}</span></div><div class="card stat"><small>방송실</small><b>2명</b><span>PD · 자막</span></div></div>
+  <section class="card"><h2>순서 <small>소요 시간을 바꾸면 뒤 시각이 다시 계산됩니다</small></h2><div class="tbl"><table><thead><tr><th>시간</th><th>소요</th><th>순서</th><th>맡은 분</th><th>음향</th><th>영상 · 자막</th></tr></thead><tbody>${rows}</tbody></table></div></section>`}
+function cueM(i,d){CUE[i].m=Math.max(1,CUE[i].m+d);time()}
+
+// 3. 문자 · 카톡 발송
+const GRP=[["all","성도 전체",()=>P.filter(p=>p.role!=="어린이").length],...ZONES.map(z=>[z,z,()=>P.filter(p=>p.zone===z).length]),["new","새가족",()=>nf().length],["lost","3주 이상 결석",()=>lost().length]];
+let MSEL=new Set(["new"]),MSG=null,RES=[{when:"토 오후 4:00",title:"주일 말씀 미리 보기",to:"성도 전체",kind:"카톡 카드"}];
+function msg(){
+  if(MSG===null)MSG=`{이름} 님, 이번 주일 말씀은 「${W.title}」입니다. 주일에 반갑게 뵙겠습니다. — 은혜샘교회`;
+  const n=[...MSEL].reduce((s,k)=>s+GRP.find(g=>g[0]===k)[2](),0),bytes=new Blob([MSG.replace("{이름}","김민준")]).size;
+  $("#view").innerHTML=head("주간 사역","문자 · 카톡 발송")+`
+  <div class="grid g2"><section class="card"><h2>새로 보내기</h2>
+   <p class="mute">받는 사람 · ${n}명</p><div style="display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 14px">${GRP.map(([k,l,f])=>`<button class="btn ${MSEL.has(k)?"":"gh"} sm" onclick="mTog('${k}')">${l} ${f()}</button>`).join("")}</div>
+   <div class="form"><label for="mt">문안 <span class="mute">· {이름}은 받는 분 이름으로 바뀝니다</span></label><textarea id="mt" rows="5">${MSG}</textarea></div>
+   <p class="mute" style="margin-top:6px">${bytes}바이트 · ${bytes>90?"장문(LMS)":"단문(SMS)"}</p>
+   <div class="r2"><button class="btn gh" onclick="demoOnly('내 휴대폰으로 먼저 보내 확인합니다(체험판)')">나에게 먼저 보내기</button><button class="btn" onclick="mRes(${n})">토요일 오후 4시 예약</button></div>
+   ${MSEL.has("all")?'<p class="mute" style="margin-top:10px">성도 전체에게 가는 일이라 담임목사 승인 뒤 나갑니다.</p>':""}</section>
+  <section class="card"><h2>받는 분에게는 이렇게</h2><div style="background:#B2C7DA;border-radius:16px;padding:18px"><div style="background:#fff;border-radius:14px;padding:12px 14px;font-size:13.5px;white-space:pre-line">${MSG.replace("{이름}","김민준").replace(/</g,"&lt;")}</div></div>
+   <h2 style="margin-top:18px">예약된 것 · ${RES.length}건</h2><ul class="rows">${RES.map((r,i)=>`<li><span><b>${r.title}</b><br><span class="mute">${r.when} · ${r.to} · ${r.kind}</span></span><button class="btn gh sm" onclick="RES.splice(${i},1);msg();toast('예약을 취소했어요')">취소</button></li>`).join("")}</ul></section></div>`;
+  $("#mt").oninput=e=>{MSG=e.target.value};$("#mt").onchange=()=>msg();}
+function mTog(k){MSEL.has(k)?MSEL.delete(k):MSEL.add(k);if(!MSEL.size)MSEL.add("new");msg()}
+function mRes(n){RES.push({when:"토 오후 4:00",title:MSG.slice(0,18)+"…",to:[...MSEL].map(k=>GRP.find(g=>g[0]===k)[1]).join(" · ")+` (${n}명)`,kind:"문자"});msg();toast("예약했어요 — 체험판이라 실제로 나가지는 않습니다")}
+
+// 4. 양식 · 인쇄물
+const FORMS=[["교인 재적증명서","증명서",["대상 성도","용도"]],["세례(입교) 증명서","증명서",["대상 성도","세례일"]],["교역자 재직증명서","증명서",["교역자","재직 기간"]],["신학교 입학 추천서","추천서",["추천 대상","지원 학교"]],["노회 공문","공문",["받는 곳","제목"]],["헌금봉투(감사)","인쇄물",["행사","부수"]],["임직 증서","증서",["대상","임직일"]],["심방 기록지(빈 양식)","인쇄물",["부수",""]]];
+let DOCNO=47;const ISS=[["행복 2026-046","교인 재적증명서","김○○","10/20","사무간사"],["행복 2026-045","신학교 입학 추천서","이○○","10/14","담임목사"],["행복 2026-044","교역자 재직증명서","박○○ 전도사","10/02","사무간사"]];
+function forms(){
+  $("#view").innerHTML=head("교회 문서","양식 · 인쇄물",`<button class="btn gh" onclick="go('presby')">노회 서류 보기</button>`)+`
+  <div class="grid g2"><section class="card"><h2>양식 <small>누르면 교회 정보가 저절로 채워집니다</small></h2><ul class="rows">${FORMS.map((f,i)=>`<li class="ck" onclick="showForm(${i})"><span class="l"><span class="av">${svg("doc").replace('viewBox','width="16" height="16" viewBox')}</span><span><b>${f[0]}</b><br><span class="mute">${f[1]}</span></span></span><span class="mute">작성 →</span></li>`).join("")}</ul></section>
+  <section class="card"><h2>최근 발급대장</h2><div class="tbl"><table style="min-width:0"><thead><tr><th>문서번호</th><th>종류</th><th>대상</th><th>발급</th></tr></thead><tbody>${ISS.map(r=>`<tr><td class="mute">${r[0]}</td><td><b>${r[1]}</b></td><td>${r[2]}</td><td>${r[3]} · ${r[4]}</td></tr>`).join("")}</tbody></table></div><p class="mute" style="margin-top:10px">증명서는 문서번호가 저절로 붙고 발급대장에 남습니다.</p></section></div>`}
+function showForm(i){const f=FORMS[i];openP(`<h3>${f[0]}</h3><h4>저절로 채워짐</h4><div class="kv"><div><b>교회명</b>은혜샘교회</div><div><b>소속 노회</b>[노회명]</div><div><b>담임목사</b>[담임목사 이름] · 직인 등록됨</div><div><b>문서번호</b>행복 2026-0${DOCNO}</div></div>
+  <div class="form">${f[2].filter(Boolean).map((l,j)=>`<label>${l}</label>${j===0&&/성도|대상|교역자/.test(l)?`<select id="fv">${P.slice(0,12).map(p=>`<option>${p.name}</option>`).join("")}</select>`:`<input value="">`}`).join("")}
+  <button class="btn" onclick="issue(${i})">${f[1]==="인쇄물"?"인쇄 미리보기":"발급하기"}</button></div>`)}
+function issue(i){const f=FORMS[i],who=$("#fv")?$("#fv").value:"—";if(f[1]!=="인쇄물"){const nm2=who.slice(0,1)+"○○";ISS.unshift([`행복 2026-0${DOCNO++}`,f[0],nm2,md(TODAY),"담임목사"]);}closeP();go("forms");toast(f[1]==="인쇄물"?"인쇄 미리보기는 정식판에서 열립니다":"발급대장에 남겼어요(체험판)")}
+
+// 5. 회의 · 결의
+const RES2=[["교육관 난방기 교체 견적 받기","관리 담당","10/20","지연"],["새가족반 교재 선정","새가족 담당","10/31","진행 중"],["성탄 축하 발표회 일정 확정","교육부 전도사","10/25","진행 중"],["추수감사주일 표어 확정","담임목사","10/11","완료"],["2027 사역계획안 양식 배포","사무간사","10/15","완료"],["교회 차량 보험 갱신","재정부","10/10","완료"]];
+const AGENDA=[{t:"2027 사역계획안 취합 일정",by:"사무간사",r:0},{t:"추수감사주일 감사헌금 사용처",by:"재정부",r:0},{t:"성탄 축하 발표회 장소 · 시간",by:"교육부",r:0},{t:"교육관 난방기 교체 예산",by:"관리 담당",r:0}];
+function meet(){
+  const st={"완료":"p-ok","진행 중":"p-a","지연":"p-r"},done=RES2.filter(r=>r[3]==="완료").length;
+  $("#view").innerHTML=head("협업","회의 · 결의",`<button class="btn gh" onclick="demoOnly('소집 통지서는 정식판에서 만들어집니다')">소집 통지서 만들기</button><button class="btn" onclick="demoOnly('새 회의는 정식판에서')">＋ 새 회의</button>`)+`
+  <section class="card"><h2>회의를 열면 이것부터 · 지난 결의 실행 현황 <small>${done}/${RES2.length} 완료</small></h2><div class="tbl"><table><thead><tr><th>결의</th><th>담당</th><th>기한</th><th>상태</th></tr></thead><tbody>${RES2.map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td>${r[2]}</td><td><span class="pill ${st[r[3]]}">${r[3]}</span></td></tr>`).join("")}</tbody></table></div></section>
+  <section class="card"><h2>이번 당회 안건 <small>‘결의로 표시’하면 담당자 할 일로 갑니다</small></h2><ul class="rows">${AGENDA.map((a,i)=>`<li><span><b>${i+1}. ${a.t}</b><br><span class="mute">올린 곳 · ${a.by}</span></span>${a.r?'<span class="pill p-ok">결의됨 · 할 일로 보냄</span>':`<button class="btn sm" onclick="resolve(${i})">결의로 표시</button>`}</li>`).join("")}</ul><p class="mute" style="margin-top:12px">회의록은 저절로 저장되고, 당회록 양식으로 출력됩니다.</p></section>`}
+function resolve(i){const a=AGENDA[i];a.r=1;RES2.unshift([a.t,a.by,md(new Date(TODAY.getTime()+14*864e5)),"진행 중"]);meet();toast("결의로 표시하고 담당자 할 일로 보냈어요")}
+
+// 6. 업무 공유 · 시설 예약
+const ROOMS=["본당","교육관","친교실","소예배실"],BK=[{d:2,r:1,t:"19:30",ti:"교사 모임",dept:"교육부",by:"교육부 전도사",ok:1},{d:3,r:2,t:"10:00",ti:"여전도회 월례회",dept:"여전도회",by:"여전도회장",ok:1},{d:5,r:1,t:"14:00",ti:"성탄 발표회 연습",dept:"교육부",by:"교육부 전도사",ok:0},{d:5,r:1,t:"14:00",ti:"청년 리더 모임",dept:"청년부",by:"청년부 전도사",ok:0},{d:6,r:0,t:"16:00",ti:"찬양대 연습",dept:"찬양대",by:"지휘자",ok:1}];
+function share(){
+  const wk=[1,2,3,4,5,6,7].map(i=>{const d=new Date(lastSun);d.setDate(lastSun.getDate()+i);return d});
+  const clash=(b)=>BK.filter(x=>x!==b&&x.d===b.d&&x.r===b.r&&x.t===b.t).length>0;
+  $("#view").innerHTML=head("협업",`업무 공유 · 시설 예약 <span class="mute" style="font-size:14px;font-weight:400">${md(wk[0])} ~ ${md(wk[6])}</span>`,`<button class="btn gh" onclick="demoOnly('주간 업무 보고는 정식판에서 씁니다')">내 업무 보고 쓰기</button><button class="btn" onclick="newBk()">＋ 시설 예약</button>`)+`
+  <section class="card"><h2>시설 예약 <small>빨간 칸은 같은 시간 · 같은 장소가 겹친 예약</small></h2><div class="tbl"><table><thead><tr><th>장소</th>${wk.map(d=>`<th>${md(d)}(${DOW[d.getDay()]})</th>`).join("")}</tr></thead><tbody>${ROOMS.map((r,ri)=>`<tr><td><b>${r}</b></td>${wk.map((d,di)=>`<td>${BK.filter(b=>b.r===ri&&b.d===di).map(b=>`<span class="pill ${clash(b)?"p-r":b.ok?"p-a":"p-w"} ck" style="display:block;margin:2px 0" onclick="showBk(${BK.indexOf(b)})">${b.t} ${b.ti}</span>`).join("")}</td>`).join("")}</tr>`).join("")}</tbody></table></div></section>
+  <div class="grid g3">${[["교육부 전도사","금 오전","이번 주 교사 모임에서 성탄 발표회 순서 초안 공유","2027 교육부 계획안 초안 제출","토요일 교육관 시간 조정"],["청년부 전도사","목 저녁","리더 모임 준비 · 새로 온 청년 두 명 첫 만남","추수감사주일 청년부 특송 연습 시작",""],["사무간사","금 오후","주보 편집 · 재적증명서 1건 발급","추수감사 현수막 발주 · 헌금봉투 인쇄",""]].map(([w,t,a,b,c])=>`<section class="card"><h2>${w} <small>주간 업무 보고 · ${t}</small></h2><div class="kv"><div><b>이번 주</b>${a}</div><div><b>다음 주</b>${b}</div>${c?`<div><b>도움 필요</b>${c}</div>`:""}</div></section>`).join("")}</div>`}
+function showBk(i){const b=BK[i],c=BK.filter(x=>x!==b&&x.d===b.d&&x.r===b.r&&x.t===b.t);openP(`<h3>${b.ti}</h3>${c.length?`<div class="lock" style="background:var(--redbg);color:var(--red)">같은 시간 겹침 · ${ROOMS[b.r]}에 ‘${c[0].ti}’이(가) 함께 잡혀 있습니다.</div>`:""}<div class="kv"><div><b>장소</b>${ROOMS[b.r]}</div><div><b>시각</b>${b.t}</div><div><b>부서</b>${b.dept}</div><div><b>신청</b>${b.by}</div></div>
+  <div class="r2"><button class="btn gh" onclick="BK[${i}].r=3;BK[${i}].ok=1;closeP();go('share');toast('소예배실로 옮겨 승인했어요')">다른 장소로 · 승인</button><button class="btn" onclick="BK[${i}].ok=1;closeP();go('share');toast('승인했어요')">승인</button></div>`)}
+function newBk(){openP(`<h3>시설 예약</h3><div class="form"><label>무엇</label><input id="b1" value="구역 모임"><div class="r2"><div><label>장소</label><select id="b2">${ROOMS.map((r,i)=>`<option value="${i}">${r}</option>`).join("")}</select></div><div><label>요일</label><select id="b3">${[1,2,3,4,5,6,7].map((n,i)=>`<option value="${i}">${DOW[n%7]}요일</option>`).join("")}</select></div></div><label>시각</label><input id="b4" type="time" value="19:30"><button class="btn" onclick="BK.push({d:+$('#b3').value,r:+$('#b2').value,t:$('#b4').value,ti:$('#b1').value,dept:'구역',by:'담임목사',ok:0});closeP();go('share');toast('예약을 신청했어요')">신청하기</button></div>`)}
+
+// 7. 사역 아카이브
+const ARC=[["2025","추수감사주일 간증 예배","예배부","순서지 · 사진 24장 · 결과 보고"],["2025","여름성경학교 ‘빛의 아이들’","교육부","교재 · 일정표 · 사진 80장"],["2025","청년 수련회","청년부","프로그램 · 숙소 계약서"],["2024","성탄 축하 발표회","교육부","순서 · 영상 1편"],["2025","새가족 환영회(가을)","새가족부","초대장 · 명단(가림)"],["2024","교회 창립 20주년 감사예배","예배부","순서지 · 기념 영상 · 사진"],["2025","단기선교 보고","선교부","보고서 · 사진 40장"]];
+let afilt="";
+function arch(){
+  const L=ARC.filter(a=>!afilt||a[2]===afilt),depts=[...new Set(ARC.map(a=>a[2]))];
+  $("#view").innerHTML=head("협업","사역 아카이브",`<button class="btn gh" onclick="demoOnly('한 해 묶음 내보내기는 정식판에서')">한 해 내보내기</button><button class="btn" onclick="demoOnly('작년 사역을 불러와 올해 행사 준비로 넘깁니다(정식판)')">작년 사역 불러오기</button>`)+`
+  <section class="card"><div class="tools"><button class="btn ${afilt?"gh":""} sm" onclick="afilt='';arch()">전체 ${ARC.length}</button>${depts.map(d=>`<button class="btn ${afilt===d?"":"gh"} sm" onclick="afilt='${d}';arch()">${d}</button>`).join("")}</div>
+  <ul class="rows">${L.map(a=>`<li><span class="l"><span class="av">${a[0].slice(2)}</span><span><b>${a[1]}</b><br><span class="mute">${a[2]} · ${a[3]}</span></span></span><button class="btn gh sm" onclick="handover('${a[2]}')">인수인계 보기</button></li>`).join("")}</ul></section>`}
+function handover(d){openP(`<h3>${d} 인수인계</h3><p class="mute">새로 온 교역자가 첫 주에 보는 한 장입니다.</p><h4>한 해 흐름</h4><div class="kv"><div><b>1~2월</b>새해 계획 · 교사 세우기</div><div><b>5~7월</b>큰 행사 준비 · 진행</div><div><b>11~12월</b>결산 · 다음 해 계획안</div></div><h4>자주 쓰는 자료</h4><div class="kv"><div>행사 순서지 서식</div><div>작년 결과 보고</div><div>물품 목록</div></div><h4>연락처</h4><div class="kv"><div><b>부서장</b>김○○ (전화번호는 정식판에서)</div></div><button class="btn" onclick="demoOnly('인수인계 묶음은 정식판에서 PDF로 만들어집니다')">인수인계 묶음 만들기</button>`)}
+
+// 8. 지출 청구
+const EXP=[{t:"추수감사 현수막 2장",dept:"예배부",date:"11/3",amt:[["현수막 3m",48000],["거치대",22000]],ev:"추수감사주일",step:2,rc:2},{t:"새가족반 교재 10권",dept:"새가족부",date:"11/2",amt:[["교재",90000]],ev:"새가족반",step:1,rc:1},{t:"교사 모임 다과",dept:"교육부",date:"10/30",amt:[["다과",36000]],ev:"교사 모임",step:4,rc:1},{t:"성탄 발표회 소품",dept:"교육부",date:"11/5",amt:[["천 · 소품",64000],["조명 대여",80000]],ev:"성탄 축하 발표회",step:0,rc:3}];
+const ESTEP=["청구","부서장 확인","담임목사 승인","재정부 지급","지급 완료"];let esel=0;
+function exp(){
+  const sum=e=>e.amt.reduce((s,a)=>s+a[1],0),e=EXP[esel];
+  $("#view").innerHTML=head("협업","지출 청구 <span class='mute' style='font-size:14px;font-weight:400'>헌금 관리가 아닌, 사역에 쓴 돈의 청구</span>",`<button class="btn" onclick="newExp()">＋ 지출결의서 쓰기</button>`)+`
+  <div class="grid g4"><div class="card stat"><small>내 승인 대기</small><b>${EXP.filter(x=>x.step===2).length}건</b></div><div class="card stat"><small>재정부 전달</small><b>${EXP.filter(x=>x.step===3).length}건</b></div><div class="card stat"><small>이번 달 지급 완료</small><b>${EXP.filter(x=>x.step===4).length}건</b></div><div class="card stat"><small>청구 합계</small><b>${man(EXP.reduce((s,x)=>s+sum(x),0))}</b><span>원</span></div></div>
+  <div class="grid g2"><section class="card"><h2>청구 목록</h2><ul class="rows">${EXP.map((x,i)=>`<li class="ck" onclick="esel=${i};exp()" style="${i===esel?"background:var(--acbg);margin:0 -10px;padding-left:10px;padding-right:10px;border-radius:10px":""}"><span><b>${x.t}</b><br><span class="mute">${x.dept} · ${x.date}</span></span><span style="text-align:right"><b>${won(sum(x))}</b><br><span class="pill ${x.step===4?"p-ok":x.step===2?"p-w":"p-a"}">${ESTEP[x.step]}</span></span></li>`).join("")}</ul></section>
+  <section class="card"><h2>지출결의서 · ${e.t}</h2><p class="mute">${e.dept} · 연결 행사: ${e.ev} · 영수증 ${e.rc}장</p><ul class="steps" style="grid-template-columns:repeat(5,1fr);margin:14px 0">${ESTEP.map((s,i)=>`<li><i class="${i<=e.step?"d":""}"></i><span>${s}</span></li>`).join("")}</ul>
+   <div class="tbl"><table style="min-width:0"><thead><tr><th>품목</th><th class="num">금액</th></tr></thead><tbody>${e.amt.map(a=>`<tr><td>${a[0]}</td><td class="num">${won(a[1])}</td></tr>`).join("")}<tr><td><b>합계</b></td><td class="num"><b>${won(sum(e))}</b></td></tr></tbody></table></div>
+   ${e.step<4?`<div class="r2"><button class="btn gh" onclick="EXP[esel].step=0;exp();toast('반려하고 부서에 알렸어요')">반려</button><button class="btn" onclick="EXP[esel].step=Math.min(4,EXP[esel].step+1);exp();toast('다음 단계로 넘겼어요')">${e.step===2?"승인하고 재정부로 보내기":"다음 단계로"}</button></div>`:'<p class="mute" style="margin-top:14px">지급이 끝난 청구입니다.</p>'}</section></div>`}
+function newExp(){openP(`<h3>지출결의서 쓰기</h3><div class="form"><label>무엇에 썼나요</label><input id="e1" value="구역 모임 다과"><div class="r2"><div><label>부서</label><select id="e2"><option>예배부</option><option>교육부</option><option>청년부</option><option>새가족부</option></select></div><div><label>금액</label><input id="e3" type="number" value="30000"></div></div><label>영수증</label><input value="사진을 붙이면 품목 · 금액을 읽어 채웁니다(정식판)" disabled><button class="btn" onclick="EXP.unshift({t:$('#e1').value,dept:$('#e2').value,date:md(TODAY),amt:[[$('#e1').value,+$('#e3').value||0]],ev:'—',step:0,rc:1});esel=0;closeP();go('exp');toast('청구를 올렸어요')">청구 올리기</button></div>`)}
+
+// 9. 재정 관리
+const OUTS=[["인건비",3200000],["예배 · 교육",640000],["선교 · 구제",900000],["관리 · 시설",760000],["행사",520000],["사무",180000]];
+const DEPT=[["재정부(본회계)",0],["교육부",1200000],["청년부",640000],["선교부",2100000]];
+function ledger(){
+  if(role==="staff")return finLock("재정 관리");
+  const m=TODAY.getMonth(),from=new Date(lastSun);from.setDate(from.getDate()-21);const inc=O.filter(o=>new Date(o.date)>=from).reduce((s,o)=>s+o.amt,0),out=OUTS.reduce((s,o)=>s+o[1],0),mx=Math.max(...OUTS.map(o=>o[1]));
+  $("#view").innerHTML=head("재정 금고",`재정 관리 · 최근 4주`,`<button class="btn" onclick="newOut()">＋ 지출 입력</button>`)+finNote+`
+  <div class="grid g4"><div class="card stat"><small>최근 4주 수입</small><b>${man(inc)}</b><span>헌금 관리에서 확정한 것</span></div><div class="card stat"><small>최근 4주 지출</small><b>${man(out)}</b><span>${OUTS.length}개 항목</span></div><div class="card stat"><small>차액</small><b>${man(inc-out)}</b><span>원</span></div><div class="card stat"><small>통장과 맞춰 볼 거래</small><b>3건</b><span>기록에 없는 입출금</span></div></div>
+  <div class="grid g2"><section class="card"><h2>항목별 지출</h2><div class="kbar">${OUTS.map(o=>`<div><span>${o[0]}</span><span class="tr"><s style="width:${o[1]/mx*100}%"></s></span><b>${man(o[1])}</b></div>`).join("")}</div><p class="mute" style="margin-top:12px">10만 원이 넘는 지출은 저장하면 지출 청구 결재로 넘어갑니다.</p></section>
+  <section class="card"><h2>부서 장부 <small>부서마다 따로</small></h2><ul class="rows">${DEPT.map(d=>`<li><span><b>${d[0]}</b></span><b>${d[1]?man(d[1])+" 남음":"본회계"}</b></li>`).join("")}</ul></section></div>`}
+function newOut(){openP(`<h3>새 지출 입력</h3><div class="form"><label>항목</label><select id="o1">${OUTS.map((o,i)=>`<option value="${i}">${o[0]}</option>`).join("")}</select><label>금액</label><input id="o2" type="number" value="50000"><label>내용</label><input value="전기 요금"><button class="btn" onclick="OUTS[+$('#o1').value][1]+=(+$('#o2').value||0);closeP();go('ledger');toast(+$('#o2').value>100000?'10만 원이 넘어 지출 청구 결재로 넘겼어요':'지출을 입력했어요')">저장</button></div>`)}
+
+// 10. 예산안
+const BUD={in:[["주정헌금",12000000],["십일조",28000000],["감사헌금",6000000],["선교헌금",4000000],["건축헌금",5000000]],out:[["인건비",27000000],["예배 · 교육",5000000],["선교 · 구제",6000000],["관리 · 시설",7000000],["행사",4000000],["건축 적립",5000000],["예비비",1000000]]};
+const BUD0=JSON.parse(JSON.stringify(BUD));
+function budget(){
+  if(role==="staff")return finLock("예산안");
+  const s=L=>L.reduce((a,x)=>a+x[1],0),tin=s(BUD.in),tout=s(BUD.out);
+  const tb=(k,L)=>`<table style="min-width:0"><thead><tr><th>${k==="in"?"수입":"지출"}</th><th class="num">작년 결산</th><th class="num">${TODAY.getFullYear()+1} 안</th><th class="num">증감</th></tr></thead><tbody>${L.map((x,i)=>{const l=BUD0[k][i][1]*.95,dl=x[1]-l;return `<tr><td>${x[0]}</td><td class="num mute">${man(l)}</td><td class="num"><input type="number" value="${x[1]/10000}" style="width:90px;text-align:right;border:1px solid var(--line2);border-radius:8px;padding:4px 6px" onchange="BUD.${k}[${i}][1]=this.value*10000;budget()">만</td><td class="num" style="color:${dl>=0?"var(--ok)":"var(--red)"}">${dl>=0?"+":""}${man(dl)}</td></tr>`}).join("")}<tr><td><b>합계</b></td><td></td><td class="num"><b>${man(s(L))}</b></td><td></td></tr></tbody></table>`;
+  $("#view").innerHTML=head("재정 금고",`${TODAY.getFullYear()+1} 예산안`,`<button class="btn gh" onclick="Object.assign(BUD,JSON.parse(JSON.stringify(BUD0)));budget();toast('처음 숫자로 되돌렸어요')">처음으로</button><button class="btn" onclick="demoOnly('제직회 자료용 표는 정식판에서 엑셀 · PDF로 나갑니다')">내보내기</button>`)+finNote+`
+  <div class="grid g3"><div class="card stat"><small>수입 합계</small><b>${man(tin)}</b></div><div class="card stat"><small>지출 합계</small><b>${man(tout)}</b></div><div class="card stat"><small>차액</small><b style="color:${tin-tout>=0?"var(--ok)":"var(--red)"}">${man(tin-tout)}</b><span>${tin-tout>=0?"수지가 맞습니다":"지출이 더 많습니다"}</span></div></div>
+  <div class="grid" style="grid-template-columns:1fr 1fr"><section class="card"><div class="tbl">${tb("in",BUD.in)}</div></section><section class="card"><div class="tbl">${tb("out",BUD.out)}</div></section></div>
+  <p class="mute">금액을 고치면 합계와 차액이 바로 다시 계산됩니다. 확정한 예산은 재정 관리의 집행률에 그대로 쓰입니다.</p>`}
+
+// 11. 기부금영수증
+function rcp(){
+  if(role==="staff")return finLock("기부금영수증");
+  const yr=TODAY.getFullYear(),L=givers.slice(0,8).map((p,i)=>({p,tot:O.filter(o=>o.pid===p.id).reduce((s,o)=>s+o.amt,0)*4,ok:i%3!==2,ch:i%2?"홈택스(전자)":"종이"}));
+  $("#view").innerHTML=head("재정 금고",`기부금영수증 · ${yr}년 귀속`,`<button class="btn gh" onclick="demoOnly('신청 안내 문자를 예약했어요(체험판)')">신청 안내 문자 예약</button><button class="btn" onclick="demoOnly('홈택스 일괄 발급 파일은 정식판에서, 재정부 두 사람이 확인해야 만들어집니다')">홈택스 일괄 발급 파일 만들기</button>`)+finNote+`
+  <div class="grid g4"><div class="card stat"><small>신청한 성도</small><b>${L.length}명</b><span>예시</span></div><div class="card stat"><small>동의 받음</small><b>${L.filter(r=>r.ok).length}명</b></div><div class="card stat"><small>전자 발급</small><b>${L.filter(r=>r.ch[0]==="홈").length}명</b><span>연말정산 간소화에 바로</span></div><div class="card stat"><small>발급대장</small><b>5년 보관</b></div></div>
+  <section class="card"><h2>신청한 성도 <small>주민등록번호는 신청한 분에게만 받고, 파일을 만드는 순간에만 풀립니다</small></h2><div class="tbl"><table><thead><tr><th>이름</th><th>주민등록번호</th><th class="num">${yr} 합계</th><th>동의</th><th>받는 방법</th></tr></thead><tbody>${L.map(r=>`<tr><td><b>${r.p.name}</b></td><td class="mute">●●●●●●-●●●●●●●</td><td class="num">${won(r.tot)}</td><td>${r.ok?'<span class="pill p-ok">동의</span>':'<span class="pill p-w">다시 받기</span>'}</td><td>${r.ch}</td></tr>`).join("")}</tbody></table></div></section>`}
+
+const VIEWS={home,mem,att,visit,off,weekly,bulletin,cal,event:evPrep,presby,plan,time,msg,forms,meet,share,arch,exp,ledger,budget,rcp};
+function render(){(VIEWS[cur]||soon)()}
+const head=(p,h,btns="")=>`<header class="head"><div><p>${p}</p><h1>${h}</h1></div><div style="display:flex;gap:8px;flex-wrap:wrap">${btns}</div></header>`;
+const memTabs=t=>`<div class="tabs">${[["mem","성도 목록"],["att","출석"],["visit","심방"]].map(([v,l])=>`<button class="${v===t?"on":""}" onclick="go('${v}')">${l}</button>`).join("")}</div>`;
+const lockNote=`<div class="lock"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="9" width="12" height="9" rx="2"/><path d="M7 9V6.5a3 3 0 0 1 6 0V9"/></svg><span>재정 금고 · 교회 컴퓨터에만 저장하고 따로 잠급니다. 교역자·간사는 이름·연락처·소속까지, 헌금은 재정부, 심방 기록은 담임목사만 봅니다. <b>왼쪽 아래 ‘보는 사람’을 바꿔 보세요.</b></span></div>`;
+const tagFor=p=>p.status==="새가족"?'<span class="pill p-w">새가족</span>':p.status==="장기결석"?'<span class="pill p-r">3주 결석</span>':`<span class="pill p-g">${p.role}</span>`;
+const cnt=i=>P.filter(p=>p.att[i]).length;
+const dateLong=d=>`${d.getFullYear()}년 ${d.getMonth()+1}월 ${d.getDate()}일 ${DOW[d.getDay()]}요일`;
+
+function home(){
+  const dd=Math.round((nextSun-TODAY)/864e5);
+  const a=cnt(7),b=cnt(6),wk=V.filter(v=>!v.done&&v.date<=plusDays(7)).sort((x,y)=>x.date.localeCompare(y.date));
+  const max=Math.max(...SUNS.map((_,i)=>cnt(i)));
+  const bd=P.filter(p=>{const[m,d]=p.bday.split("-").map(Number);const df=(new Date(TODAY.getFullYear(),m-1,d)-TODAY)/864e5;return df>=0&&df<7});
+  $("#view").innerHTML=head(dateLong(TODAY),"이번 주 사역",`<button class="btn" onclick="go('att')">주일 출석 부르기</button>`)+`
+  <section class="card"><h2><span style="display:flex;gap:10px;align-items:center">${md(nextSun).replace("/","월 ")}일 주일 준비 <span class="pill p-w">D-${dd}</span></span><button class="btn sm gh" onclick="go('weekly')">주간 사역 열기 →</button></h2>
+   <p class="mute" style="margin:-6px 0 16px">설교 <b style="color:var(--ink)">${W.title}</b> · ${W.verse}</p>
+   ${stepsHTML()}</section>
+  <div class="grid g4">
+    <div class="card stat"><small>지난 주일 출석</small><b>${a}명</b><span style="color:${a>=b?"var(--ok)":"var(--red)"};font-weight:600">${a>=b?"▲":"▼"} ${Math.abs(a-b)}명</span> <span>지난주보다</span></div>
+    <div class="card stat"><small>등록 성도</small><b>${P.length}명</b><span>새가족 ${nf().length}명</span></div>
+    <div class="card stat"><small>이번 주 심방</small><b>${wk.length}건</b><span>다음 ${wk[0]?md(new Date(wk[0].date))+" "+wk[0].time:"-"}</span></div>
+    <div class="card stat"><small>3주 이상 못 오신 분</small><b>${lost().length}명</b><span>구역장에게 알림</span></div>
+  </div>
+  <div class="grid g2">
+    <section class="card"><h2>주일 어른 출석 · 지난 8주 <small>진한 막대가 지난 주일</small></h2>
+      <div class="bars">${SUNS.map((d,i)=>`<div><i class="${i===7?"last":""}" style="height:${cnt(i)/max*100}%"><em>${cnt(i)}</em></i><span>${md(d)}</span></div>`).join("")}</div></section>
+    <section class="card"><h2>살펴볼 분 <button class="btn sm gh" onclick="go('mem')">성도 관리 →</button></h2><ul class="rows">
+      ${[...lost(),...nf()].map(p=>`<li><span class="l"><span class="av">${ini(p.name)}</span><span><b>${p.name}</b> <span class="mute">${p.zone}</span></span></span>${tagFor(p)}</li>`).join("")}</ul></section>
+  </div>
+  <div class="grid g2">
+    <section class="card"><h2>다가오는 심방 <button class="btn sm gh" onclick="go('visit')">심방 →</button></h2><ul class="rows">
+      ${wk.map(v=>`<li><span class="l"><span class="av">${ini(nm(v.pid))}</span><span><b>${nm(v.pid)}</b> <span class="mute">${md(new Date(v.date))}(${DOW[new Date(v.date).getDay()]}) ${v.time} · ${v.where}</span></span></span><span class="pill p-a">${v.kind}</span></li>`).join("")}</ul></section>
+    <section class="card"><h2>이번 주 생일</h2><ul class="rows">
+      ${bd.map(p=>`<li><span class="l"><span class="av">${ini(p.name)}</span><b>${p.name}</b></span><span class="mute">${p.bday.replace("-","월 ")}일 · 생일 문자 예약</span></li>`).join("")||'<li class="mute">이번 주 생일이 없습니다</li>'}</ul></section>
+  </div>`;
+}
+
+let q="",fz="",fr="";
+function mem(){
+  $("#view").innerHTML=head("성도 관리","성도 목록",`<button class="btn gh" onclick="toast('체험판에서는 엑셀 불러오기를 쉬어 둡니다')">엑셀로 불러오기</button><button class="btn" onclick="newPerson()">＋ 새 성도 등록</button>`)+memTabs("mem")+lockNote+`
+  <div class="grid g4">
+    <div class="card stat"><small>등록 성도</small><b>${P.length}명</b><span>${new Set(P.map(p=>p.fam)).size}세대</span></div>
+    <div class="card stat"><small>새가족</small><b>${nf().length}명</b><span>올해 등록</span></div>
+    <div class="card stat"><small>장기결석</small><b>${lost().length}명</b><span>3주 이상</span></div>
+    <div class="card stat"><small>청년 · 어린이</small><b>${P.filter(p=>p.role==="청년").length} · ${P.filter(p=>p.role==="어린이").length}</b><span>명</span></div>
+  </div>
+  <section class="card"><div class="tools">
+    <input id="q" placeholder="이름 · 전화번호로 찾기" value="${q}" aria-label="찾기">
+    <select id="fz" aria-label="구역"><option value="">모든 구역</option>${ZONES.map(z=>`<option ${z===fz?"selected":""}>${z}</option>`).join("")}</select>
+    <select id="fr" aria-label="직분"><option value="">모든 직분</option>${["장로","권사","안수집사","집사","성도","청년","어린이","새가족"].map(z=>`<option ${z===fr?"selected":""}>${z}</option>`).join("")}</select>
+  </div><div id="tbl" class="tbl"></div></section>`;
+  const draw=()=>{const L=P.filter(p=>(!q||p.name.includes(q)||p.phone.includes(q))&&(!fz||p.zone===fz)&&(!fr||p.role===fr));
+    $("#tbl").innerHTML=`<p class="mute" style="margin-bottom:6px">${L.length}명 · 이름을 누르면 자세히</p><table><thead><tr><th>이름</th><th>직분</th><th>소속</th><th class="hm">나이</th><th>연락처</th><th>최근 8주 출석</th></tr></thead><tbody>
+    ${L.map(p=>`<tr class="ck" onclick="showPerson(${p.id})"><td><b>${p.name}</b></td><td>${tagFor(p)}</td><td>${p.zone}</td><td class="hm">${age(p)}세</td><td>${p.phone}</td><td><div class="dots">${p.att.map(v=>`<i class="${v?"on":""}"></i>`).join("")}</div></td></tr>`).join("")}</tbody></table>`};
+  draw();
+  $("#q").oninput=e=>{q=e.target.value;draw()};$("#fz").onchange=e=>{fz=e.target.value;draw()};$("#fr").onchange=e=>{fr=e.target.value;draw()};
+}
+const hidden=t=>`<div class="hidebox"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="9" width="12" height="9" rx="2"/><path d="M7 9V6.5a3 3 0 0 1 6 0V9"/></svg>${t}</div>`;
+function showPerson(id){const p=byId(id);const fam=P.filter(x=>x.fam===p.fam&&x.id!==id);
+  const gs=O.filter(o=>o.pid===id),gave=gs.reduce((s,o)=>s+o.amt,0);const vs=V.filter(v=>v.pid===id);
+  openP(`<h3><span class="av" style="width:48px;height:48px;font-size:18px">${ini(p.name)}</span>${p.name}</h3>
+  <div style="margin-top:10px;display:flex;gap:6px">${tagFor(p)}<span class="pill p-a">${p.zone}</span></div>
+  <div class="kv"><div><b>나이</b>${age(p)}세 (${p.birth}년생) · ${p.sex}</div><div><b>연락처</b>${p.phone}</div><div><b>생일</b>${p.bday.replace("-","월 ")}일</div><div><b>등록</b>${p.reg}년</div><div><b>가족</b><span>${fam.map(f=>`<a href="#" onclick="showPerson(${f.id});return false" style="color:var(--ac);margin-right:8px">${f.name}</a>`).join("")||"-"}</span></div></div>
+  <h4>최근 8주 출석</h4><div style="display:flex;gap:6px;flex-wrap:wrap">${p.att.map((v,i)=>`<span style="text-align:center;font-size:11px;color:var(--mute)"><i style="display:block;width:22px;height:22px;border-radius:50%;margin:0 auto 3px;background:${v?"var(--ac)":"#E3E6EB"}"></i>${md(SUNS[i])}</span>`).join("")}</div>
+  <h4>헌금 · ${TODAY.getFullYear()} 누계</h4>${role==="staff"?hidden("재정부와 담임목사만 볼 수 있습니다"):`<p style="font-size:18px;font-weight:700">${won(gave)} <span class="mute" style="font-weight:400">· ${gs.length}건</span></p>`}
+  <h4>심방 기록</h4>${role!=="pastor"?hidden("담임목사만 볼 수 있습니다. 재정부도 열지 못합니다."):`<ul class="rows" style="background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px">${vs.map(v=>`<li><span><b>${v.date}</b> · ${v.kind}<br><span class="mute">${v.memo}</span></span><span class="pill ${v.done?"p-ok":"p-a"}">${v.done?"다녀옴":"예정"}</span></li>`).join("")||'<li class="mute">기록 없음</li>'}</ul>
+  <div class="form"><label for="pm">메모 (담임목사만)</label><textarea rows="3" id="pm">${p.memo}</textarea></div><button class="btn gh" style="width:100%;justify-content:center;margin-top:10px" onclick="byId(${id}).memo=$('#pm').value;toast('메모를 저장했어요')">메모 저장</button>`}
+  <button class="btn" style="width:100%;justify-content:center;margin-top:12px" onclick="newVisit(${id})">심방 일정 잡기</button>`)}
+function newPerson(){openP(`<h3>새 성도 등록</h3><div class="form">
+  <label for="n1">이름</label><input id="n1" placeholder="예: 홍길동">
+  <div class="r2"><div><label for="n2">성별</label><select id="n2"><option>남</option><option>여</option></select></div><div><label for="n3">태어난 해</label><input id="n3" type="number" value="1985"></div></div>
+  <div class="r2"><div><label for="n4">소속</label><select id="n4">${ZONES.map(z=>`<option>${z}</option>`).join("")}</select></div><div><label for="n5">직분</label><select id="n5"><option>새가족</option><option>성도</option><option>집사</option><option>권사</option><option>청년</option></select></div></div>
+  <label for="n6">연락처</label><input id="n6" placeholder="010-0000-0000">
+  <button class="btn" onclick="savePerson()">등록하기</button></div>`)}
+function savePerson(){const n=$("#n1").value.trim();if(!n){toast("이름을 넣어 주세요");return}
+  const p=addPerson({name:n,sex:$("#n2").value,birth:+$("#n3").value,zone:$("#n4").value,role:$("#n5").value,reg:TODAY.getFullYear(),fam:900+nid,phone:$("#n6").value||"-",bday:"1-1",att:SUNS.map(()=>false),now:false});
+  p.status=p.role==="새가족"?"새가족":"출석";closeP();q=fz=fr="";render();toast(`${n} 님을 등록했어요`)}
+
+let svc="주일 낮";
+function att(){
+  const here=P.filter(p=>p.now).length;
+  $("#view").innerHTML=head("성도 관리",`출석 · ${nextSun.getMonth()+1}월 ${nextSun.getDate()}일 주일`,`<button class="btn gh" onclick="fillLast()">지난주대로 채우기</button><button class="btn" onclick="toast('${svc} 출석을 마감했어요 · '+P.filter(p=>p.now).length+'명')">출석 마감</button>`)+memTabs("att")+`
+  <section class="card" style="position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:16px 20px">
+    <div class="tabs" style="border:0">${["주일 낮","주일 오후","수요"].map(s=>`<button class="${s===svc?"on":""}" onclick="svc='${s}';render()">${s}</button>`).join("")}</div>
+    <span style="font-size:15px">이름 눌러 출석 · <b id="ac" style="font-size:24px;color:var(--ac)">${here}</b>명 / ${P.length}명</span>
+    <button class="btn sm gh" onclick="P.forEach(p=>p.now=false);render()">모두 지우기</button></section>
+  <section class="card">${ZONES.map(z=>{const L=P.filter(p=>p.zone===z);return `<div class="grp">${z}<span id="g${z}">${L.filter(p=>p.now).length} / ${L.length}명</span></div><div class="att">${L.map(p=>`<button class="${p.now?"on":""}" onclick="togAtt(${p.id},this)">${p.name}<small>${p.role}</small></button>`).join("")}</div>`}).join("")}</section>
+  <div class="grid g2"><section class="card"><h2>숫자만 적기 · 안내위원 계수</h2><p class="mute">이름을 다 누르기 어려운 날은 부서별 인원만 적습니다. 그 주는 개인 출석이 ‘기록 없음’으로 남고 결석으로 세지 않습니다.</p></section>
+  <section class="card"><h2>3주 이상 못 오신 분 · ${lost().length}명</h2><ul class="rows">${lost().map(p=>`<li><span><b>${p.name}</b> <span class="mute">· ${p.zone}</span></span><span style="display:flex;gap:6px"><button class="btn sm gh" onclick="toast('${p.zone} 구역장에게 알렸어요')">구역장에게 알리기</button><button class="btn sm" onclick="newVisit(${p.id})">심방 잡기</button></span></li>`).join("")}</ul></section></div>`;
+}
+function togAtt(id,b){const p=byId(id);p.now=!p.now;b.classList.toggle("on",p.now);$("#ac").textContent=P.filter(x=>x.now).length;
+  const L=P.filter(x=>x.zone===p.zone);document.getElementById("g"+p.zone).textContent=`${L.filter(x=>x.now).length} / ${L.length}명`}
+function fillLast(){P.forEach(p=>p.now=p.att[7]);render();toast("지난 주일 출석대로 채웠어요")}
+
+function visit(){
+  const up=V.filter(v=>!v.done).sort((a,b)=>a.date.localeCompare(b.date)),dn=V.filter(v=>v.done);
+  const row=v=>`<li><span class="l"><span class="av">${ini(nm(v.pid))}</span><span><b>${nm(v.pid)}</b> <span class="pill p-a">${v.kind}</span><br><span class="mute">${v.date.slice(5).replace("-","/")}(${DOW[new Date(v.date).getDay()]}) ${v.time} · ${v.where}${role==="pastor"?" · "+v.memo:""}</span></span></span>${v.done?'<span class="pill p-ok">다녀옴</span>':`<button class="btn sm" onclick="doneVisit(${v.id})">다녀왔어요</button>`}</li>`;
+  $("#view").innerHTML=head("성도 관리","심방",`<button class="btn gh" onclick="toast('빈 기록지는 정식판에서 바로 출력됩니다')">빈 기록지 출력</button><button class="btn" onclick="newVisit()">＋ 심방 일정 잡기</button>`)+memTabs("visit")+`
+  <div class="grid g4"><div class="card stat"><small>이번 주 예정</small><b>${up.length}건</b></div><div class="card stat"><small>다녀온 기록</small><b>${dn.length}건</b></div><div class="card stat"><small>새가족 심방</small><b>${V.filter(v=>v.kind==="새가족").length}건</b></div><div class="card stat"><small>못 오신 분</small><b>${lost().length}명</b></div></div>
+  <div class="grid g2"><section class="card"><h2>예정 <small>기록부를 출력해 가져가고, 다녀와서 입력합니다</small></h2><ul class="rows">${up.map(row).join("")||'<li class="mute">예정된 심방이 없습니다</li>'}</ul></section>
+  <section class="card"><h2>최근 심방 기록</h2><ul class="rows">${dn.map(row).join("")}</ul>${role!=="pastor"?'<p class="mute" style="margin-top:12px">심방 내용은 담임목사만 봅니다. 지금 화면에는 일정만 나옵니다.</p>':""}</section></div>`;
+}
+function doneVisit(id){V.find(v=>v.id===id).done=true;render();toast("최근 심방 기록으로 옮겼어요")}
+function newVisit(pid){openP(`<h3>심방 일정 잡기</h3><div class="form">
+  <label for="v1">누구를</label><select id="v1">${P.filter(p=>p.role!=="어린이").map(p=>`<option value="${p.id}" ${p.id===pid?"selected":""}>${p.name} (${p.zone})</option>`).join("")}</select>
+  <div class="r2"><div><label for="v2">날짜</label><input id="v2" type="date" value="${plusDays(2)}"></div><div><label for="v3">시간</label><input id="v3" type="time" value="14:00"></div></div>
+  <div class="r2"><div><label for="v4">구분</label><select id="v4"><option>새가족</option><option>병문안</option><option>안부</option><option>대심방</option><option>위로</option></select></div><div><label for="v6">장소</label><select id="v6"><option>가정</option><option>병원</option><option>사업장</option><option>교회</option><option>전화</option></select></div></div>
+  <label for="v5">메모 (담임목사만)</label><textarea id="v5" rows="3" placeholder="기도 제목, 찾아갈 곳 등"></textarea>
+  <button class="btn" onclick="saveVisit()">일정에 넣기</button></div>`)}
+function saveVisit(){V.push({id:vid++,pid:+$("#v1").value,date:$("#v2").value,time:$("#v3").value,kind:$("#v4").value,where:$("#v6").value,memo:$("#v5").value||"-",done:false});closeP();go("visit");toast("심방 일정을 넣었어요")}
+
+function off(){
+  if(role==="staff"){$("#view").innerHTML=head("재정 금고","헌금 관리")+`<section class="card soon"><div class="ic">${svg("won").replace('viewBox','width="26" height="26" viewBox')}</div><h2>재정부와 담임목사만 열 수 있습니다</h2><p>교역자 · 간사 화면에서는 헌금 메뉴가 잠겨 있어요. 왼쪽 아래 ‘보는 사람’을 재정부나 담임목사로 바꿔 보세요.</p></section>`;return}
+  const months=[2,1,0].map(m=>new Date(TODAY.getFullYear(),TODAY.getMonth()-m,1));
+  const inM=d=>O.filter(o=>{const x=new Date(o.date);return x.getMonth()===d.getMonth()&&x.getFullYear()===d.getFullYear()}).reduce((s,o)=>s+o.amt,0);
+  const thisM=months[2],sun=ymd(lastSun),sunO=O.filter(o=>o.date===sun);
+  const byK=KIND.map(k=>[k,sunO.filter(o=>o.kind===k)]);const kmax=Math.max(...byK.map(([,L])=>L.reduce((s,o)=>s+o.amt,0)));
+  const cash=sunO.filter(o=>o.way==="현금").reduce((s,o)=>s+o.amt,0),bank=sunO.filter(o=>o.way!=="현금").reduce((s,o)=>s+o.amt,0);
+  const weeks=[...Array(8)].map((_,i)=>{const d=new Date(lastSun);d.setDate(d.getDate()-7*(7-i));return [d,O.filter(o=>o.date===ymd(d)).reduce((s,o)=>s+o.amt,0)]});const wmax=Math.max(...weeks.map(w=>w[1]));
+  const bulletin=KIND.map(k=>{const L=sunO.filter(o=>o.kind===k);return L.length?`${k}(${L.length}): ${[...new Set(L.map(o=>nm(o.pid)))].join(", ")}`:""}).filter(Boolean).join("\n");
+  $("#view").innerHTML=head("재정 금고","헌금 관리",`<button class="btn gh" onclick="navigator.clipboard&&navigator.clipboard.writeText($('#bl').textContent);toast('주보 헌금자 명단을 복사했어요')">주보 헌금자 명단 보내기</button><button class="btn" onclick="newOff()">＋ 헌금 입력</button>`)+lockNote+`
+  <div class="grid g4">
+    <div class="card stat"><small>${md(lastSun)} 주일 합계</small><b>${man(cash+bank)}</b><span>${sunO.length}건</span></div>
+    <div class="card stat"><small>현금 · 계좌이체</small><b style="font-size:20px;margin-top:10px">${man(cash)} · ${man(bank)}</b><span>현금 대조 완료</span></div>
+    <div class="card stat"><small>${thisM.getMonth()+1}월 누계</small><b>${man(inM(thisM))}</b><span>${won(inM(thisM))}</span></div>
+    <div class="card stat"><small>지난달</small><b>${man(inM(months[1]))}</b><span>${months[1].getMonth()+1}월</span></div>
+  </div>
+  <div class="grid g2">
+    <section class="card"><h2>주일별 헌금 · 지난 8주</h2><div class="bars">${weeks.map(([d,v],i)=>`<div><i class="${i===7?"last":""}" style="height:${v/wmax*100}%"><em>${Math.round(v/10000)}</em></i><span>${md(d)}</span></div>`).join("")}</div><p class="mute" style="margin-top:8px">단위: 만 원</p></section>
+    <section class="card"><h2>${md(lastSun)} 종류별 합계</h2><div class="kbar">${byK.map(([k,L])=>{const v=L.reduce((s,o)=>s+o.amt,0);return `<div><span>${k}</span><span class="tr"><s style="width:${kmax?v/kmax*100:0}%"></s></span><b>${man(v)}</b></div>`}).join("")}</div></section>
+  </div>
+  <div class="grid g2">
+    <section class="card"><h2>${md(lastSun)} 주일 계수 <small>입력 · 계수위원 A / 확인 · 계수위원 B</small></h2><div class="tbl"><table><thead><tr><th>이름</th><th>종류</th><th>방법</th><th class="num">금액</th></tr></thead><tbody>
+      ${sunO.slice().sort((a,b)=>b.id-a.id).map(o=>`<tr ${o.pid?`class="ck" onclick="showPerson(${o.pid})"`:""}><td>${nm(o.pid)}</td><td>${o.kind}</td><td>${o.way}</td><td class="num">${won(o.amt)}</td></tr>`).join("")}</tbody></table></div></section>
+    <section class="card"><h2>주보 헌금자 명단 <small>금액은 빠집니다</small></h2><pre class="bl" id="bl">${bulletin}</pre></section>
+  </div>`;
+}
+function newOff(){openP(`<h3>헌금 입력</h3><div class="form">
+  <label for="o1">날짜</label><input id="o1" type="date" value="${ymd(lastSun)}">
+  <label for="o2">봉투 번호 · 이름</label><select id="o2"><option value="0">무명</option>${P.filter(p=>p.role!=="어린이").map(p=>`<option value="${p.id}">${p.name} (${p.zone})</option>`).join("")}</select>
+  <div class="r2"><div><label for="o3">종류</label><select id="o3">${KIND.map(k=>`<option>${k}</option>`).join("")}</select></div><div><label for="o5">방법</label><select id="o5"><option>현금</option><option>계좌이체</option></select></div></div>
+  <label for="o4">금액 (원)</label><input id="o4" type="number" step="10000" value="50000">
+  <button class="btn" onclick="saveOff()">추가</button><p class="mute" style="margin-top:12px">고칠 때는 지우지 않고 ‘정정 기록’으로 남깁니다. 재정부장 · 감사가 매달 확인합니다.</p></div>`)}
+function saveOff(){const a=+$("#o4").value;if(!a){toast("금액을 넣어 주세요");return}const pid=+$("#o2").value;O.push({id:oid++,date:$("#o1").value,pid,kind:$("#o3").value,amt:a,way:$("#o5").value});closeP();render();toast(`${nm(pid)} · ${won(a)} 추가했어요`)}
+
+// ── 주간 사역 · 주보 · 연간 일정 (기본 디자인의 Weekly · Bulletin · Calendar) ──
+const W={title:"감사는 기억에서 시작됩니다",verse:"시편 103:1~5",point:"감사는 새로 받은 것을 세는 일이 아니라, 이미 받은 은혜를 기억하는 일입니다.",
+ column:"다윗은 자기 영혼에게 말을 겁니다. “잊지 말지어다.” 감사가 마르는 까닭은 받은 것이 적어서가 아니라 받은 것을 잊어서입니다. 이번 주일, 새로운 복을 구하기 전에 이미 받은 은혜를 하나씩 불러 보려 합니다.",
+ colTitle:"은택을 잊지 않는 사람",news:"1. 11월 15일은 추수감사주일입니다. 감사헌금 봉투는 입구에 있습니다.\n2. 11월 1일 당회가 모입니다.\n3. 새가족반이 목요일 오후 2시에 소예배실에서 모입니다.",
+ prayer:"추수감사주일을 감사로 준비하도록\n2027년 사역 계획을 위하여\n병중에 있는 성도들을 위하여",
+ st:[2,2,1,1,0],color:2,to:"전체 성도",line:0};
+const STN=["설교문","칼럼","카톡 공유 카드","주보","문자 발송"];
+const STS=[["작성 전","검토 중","완료"],["작성 전","검토 중","완료"],["만들기 전","검토 중","승인됨"],["준비 전","간사 편집 중","인쇄 완료"],["예약 전","예약됨","보냄"]];
+const PAL=[["41주 가을","#3A2A1E",1],["42주 가을","#F4E8DA",0],["43주 가을 · 이번 주","#2E2119",1],["44주 가을","#F3E2CC",0],["45주 추수감사","#3B2418",1],["49주 대림","#1E3326",1]];
+const LINES=["기억은 감사를 낳고, 감사는 다시 예배가 됩니다.","받은 은혜를 세어 보는 한 주 되세요.","잊지 말지어다 — 오늘 받은 은택 하나."];
+function stepsHTML(){return `<ol class="steps">${STN.map((n,i)=>`<li><i class="${W.st[i]===2?"d":W.st[i]===1?"h":""}"></i><b>${n}</b><span class="${W.st[i]===2?"d":""}">${STS[i][W.st[i]]}</span></li>`).join("")}</ol>`}
+const setSt=(i,v)=>{W.st[i]=v;render();toast(`${STN[i]} · ${STS[i][v]}`)};
+function weekly(){
+  const dd=Math.round((nextSun-TODAY)/864e5),c=PAL[W.color],dk=c[2],ink=dk?"#F3EAD8":"#3A2A1E",gold=dk?"#D2AE6A":"#B0703A";
+  const sms=`{이름} 님, 이번 주일 말씀은 「${W.title}」(${W.verse.split(":")[0]})입니다. 한 주 받은 은혜를 함께 기억하는 주일에 뵙기를 기다립니다. — 은혜샘교회`;
+  const stBtn=(i,lab)=>W.st[i]<2?`<button class="btn sm" onclick="setSt(${i},${W.st[i]+1})">${lab}</button>`:`<span class="pill p-ok">${STS[i][2]}</span>`;
+  $("#view").innerHTML=head("주간 사역 패키지",`${nextSun.getMonth()+1}월 ${nextSun.getDate()}일 주일 <span class="pill p-w" style="vertical-align:middle;font-size:13px">D-${dd}</span>`)+`
+  <section class="card">${stepsHTML()}</section>
+  <div class="grid g2">
+   <section class="card"><h2>1 · 설교문 ${stBtn(0,"확정")}</h2><div class="form" style="margin-top:-14px">
+     <label for="w1">설교 제목</label><input id="w1" value="${W.title}"><div class="r2"><div><label for="w2">본문</label><input id="w2" value="${W.verse}"></div><div><label>파일</label><input value="설교문_${md(nextSun).replace("/","")}.hwpx" disabled></div></div>
+     <label for="w3">원포인트</label><textarea id="w3" rows="2">${W.point}</textarea></div>
+     <p class="mute" style="margin-top:10px">여기 적은 제목 · 본문이 주보 표지와 카톡 카드, 문자에 저절로 들어갑니다.</p></section>
+   <section class="card"><h2>2 · 주보 칼럼 ${stBtn(1,"확정")}</h2><div class="form" style="margin-top:-14px"><label for="w4">제목</label><input id="w4" value="${W.colTitle}"><label for="w5">본문 <span id="wcl"></span></label><textarea id="w5" rows="5">${W.column}</textarea></div>
+     <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap"><button class="btn sm gh" onclick="toast('정식판에서는 AI가 설교문으로 다시 써 줍니다')">다시 쓰기</button><button class="btn sm gh" onclick="go('bulletin')">주보 칼럼 칸에 맞춤 →</button></div></section>
+  </div>
+  <div class="grid">
+   <section class="card"><h2>3 · 카톡 공유 카드 ${stBtn(2,"승인")}</h2>
+     <div style="display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:24px;align-items:start" class="wkc">
+      <div style="aspect-ratio:4/5;border-radius:14px;background:${c[1]};color:${ink};padding:22px 20px;display:flex;flex-direction:column;gap:10px;font-family:'Gowun Batang',serif;border:1px solid ${dk?c[1]:"#E3D8C8"}">
+        <span style="font:600 11px 'IBM Plex Sans KR';letter-spacing:.12em;color:${gold}">주일 말씀 · ${md(nextSun)}</span>
+        <b style="font-size:22px;line-height:1.35">${W.title}</b><span style="font-size:12px;color:${gold}">${W.verse}</span>
+        <i style="display:block;height:1px;background:${gold};width:40px;margin:6px 0"></i>
+        <span style="font-size:13px;line-height:1.7;flex:1">${LINES[W.line]}</span>
+        <span style="font:500 11px 'IBM Plex Sans KR';opacity:.75">은혜샘교회</span></div>
+      <div><p class="mute" style="margin-bottom:8px">색 · 교회력 52주에 맞춰 저절로 고릅니다 — 눌러서 바꾸기</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">${PAL.map((p,i)=>`<button aria-label="${p[0]}" title="${p[0]}" onclick="W.color=${i};render()" style="width:34px;height:34px;border-radius:9px;background:${p[1]};border:1px solid ${p[2]?p[1]:"#E3D8C8"};${i===W.color?"box-shadow:0 0 0 2px #fff,0 0 0 4px var(--ac)":""}"></button>`).join("")}</div>
+        <p class="mute" style="margin:16px 0 8px">한 줄 · AI 추천 세 가지</p>
+        ${LINES.map((l,i)=>`<label style="display:flex;gap:8px;align-items:flex-start;padding:8px 10px;border:1px solid ${i===W.line?"var(--ac)":"var(--line)"};border-radius:10px;margin-bottom:6px;cursor:pointer;background:${i===W.line?"var(--acbg)":"#fff"}"><input type="radio" name="ln" ${i===W.line?"checked":""} onchange="W.line=${i};render()" style="margin-top:4px">${l}</label>`).join("")}
+        <p class="mute" style="margin-top:10px">앱이 카톡에 직접 보내지는 않습니다. 그림을 저장해 확인하고 보내 주세요.</p></div></div></section>
+   <section class="card"><h2>4 · 주보 <span class="pill ${W.st[3]===2?"p-ok":"p-a"}">${STS[3][W.st[3]]}</span></h2><ul class="rows">
+     <li><span>표지 · 가을 디자인</span><span class="pill p-ok">완료</span></li><li><span>설교 제목 · 본문</span><span class="pill p-ok">주간 사역에서 ✓</span></li><li><span>칼럼</span><span class="pill ${W.st[1]===2?"p-ok":"p-w"}">${W.st[1]===2?"자동 입력 ✓":"칼럼 확정 기다림"}</span></li><li><span>교회 소식</span><span class="pill p-w">${W.news.split("\n").filter(Boolean).length}건 입력 중</span></li><li><span>출력</span><span class="mute">B4 2단 접지</span></li></ul>
+     <button class="btn" style="width:100%;justify-content:center;margin-top:14px" onclick="go('bulletin')">주보 작업 열기 →</button></section>
+  </div>
+  <section class="card"><h2>5 · 주일 참석 독려 문자 ${W.st[4]===0?`<button class="btn sm" onclick="setSt(4,1)">토요일 오후 4시 예약</button>`:`<span class="pill p-ok">토요일 오후 4:00 예약됨</span>`}</h2>
+    <pre class="bl" style="max-height:none">${sms}</pre>
+    <div style="display:flex;gap:8px;align-items:center;margin-top:12px;flex-wrap:wrap"><span class="mute">받는 사람</span>${["전체 성도","새가족","장기결석"].map(t=>`<button class="btn sm ${W.to===t?"":"gh"}" onclick="W.to='${t}';render()">${t} · ${t==="전체 성도"?P.filter(p=>p.role!=="어린이").length:t==="새가족"?nf().length:lost().length}명</button>`).join("")}<span style="flex:1"></span><button class="btn sm gh" onclick="toast('나에게 먼저 보냈어요 (체험판이라 실제로는 가지 않아요)')">나에게 먼저 보내기</button></div></section>`;
+  const bind=(id,k)=>{$("#"+id).oninput=e=>{W[k]=e.target.value}};bind("w1","title");bind("w2","verse");bind("w3","point");bind("w4","colTitle");bind("w5","column");
+  ["w1","w2"].forEach(id=>$("#"+id).onchange=()=>render());
+}
+
+let bStep=1,bSide="outer",bField="title",bFmt="B4 2단 접지";
+const BF={date:["날짜 · 호수","outer","자동 (주일 날짜)","본고딕 9pt · 왼쪽"],title:["설교 제목","outer","주간 사역 · 설교문","본명조 Bold 22pt · 왼쪽"],verse:["본문","outer","개역개정 데이터","본명조 9.5pt · 왼쪽"],prayer:["기도제목","outer","직접 입력","본명조 8.5pt · 왼쪽"],order:["예배 순서","inner","예배 타임테이블","본명조 8.5pt · 양끝"],column:["칼럼","inner","주간 사역 · 칼럼","본명조 8.5pt · 양끝"],news:["교회 소식","inner","직접 입력","본명조 8.5pt · 왼쪽"]};
+function bulletin(){
+  const STEPS=["디자인 가져오기","칸 지정","자동 채움","출력","업체와 주고받기"];
+  const fz=k=>bStep===2?`onclick="bField='${k}';render()" style="cursor:pointer;outline:${bField===k?"2px solid #24407A":"1px dashed rgba(36,64,122,.35)"};outline-offset:3px;border-radius:3px"`:"";
+  const ser="font-family:'Gowun Batang',serif";
+  const outer=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:0;background:#FBF6EC;border-radius:6px;overflow:hidden;aspect-ratio:1.414/1;${ser};color:#3A2A1E;box-shadow:0 8px 30px rgba(0,0,0,.12)">
+    <div style="padding:7% 7%;border-right:1px dashed #E3D8C8;display:flex;flex-direction:column;gap:6px;font-size:10.5px;line-height:1.7"><b style="font-size:12px" ${fz("prayer")}>함께 기도해 주세요<br><span style="font-weight:400;font-size:10.5px;white-space:pre-line">· ${W.prayer.split("\n").join("\n· ")}</span></b><span style="margin-top:auto;font-family:'IBM Plex Sans KR';font-size:9.5px;color:#7a6a5a">은혜샘교회 · [교회 주소]<br>[전화] · 담임목사 [이름]</span></div>
+    <div style="padding:7% 7%;display:flex;flex-direction:column;gap:8px;background:linear-gradient(160deg,#F4E8DA,#EAD3B5)"><span style="font:600 9.5px 'IBM Plex Sans KR';letter-spacing:.14em;color:#B0703A" ${fz("date")}>은혜샘교회 주보 · ${nextSun.getFullYear()}.${md(nextSun).replace("/",".")}</span>
+      <b style="font-size:21px;line-height:1.35;margin-top:auto" ${fz("title")}>${W.title}</b><span style="font-size:11px;color:#8a5a2a" ${fz("verse")}>${W.verse}</span><span style="font-size:9.5px;color:#7a6a5a">[올해 표어]</span></div></div>`;
+  const ord=[["예배로 부름","사회자"],["찬송","다 함께"],["신앙고백","다 함께"],["대표기도","[기도자]"],["성경봉독",W.verse],["설교",W.title],["봉헌","다 함께"],["교회 소식","사회자"],["축도","담임목사"]];
+  const inner=`<div style="display:grid;grid-template-columns:1fr 1fr;background:#FFFDF8;border-radius:6px;overflow:hidden;aspect-ratio:1.414/1;${ser};color:#3A2A1E;font-size:10px;line-height:1.65;box-shadow:0 8px 30px rgba(0,0,0,.12)">
+    <div style="padding:6%;border-right:1px dashed #E3D8C8"><b style="font-size:12px;display:block;margin-bottom:6px" ${fz("order")}>예배 순서</b>${ord.map(([a,b])=>`<div style="display:flex;justify-content:space-between;border-bottom:1px dotted #E3D8C8;padding:2px 0"><span>${a}</span><span style="max-width:60%;text-align:right;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">${b}</span></div>`).join("")}</div>
+    <div style="padding:6%;display:flex;flex-direction:column;gap:8px"><div ${fz("column")}><b style="font-size:12px">${W.colTitle}</b><p style="margin-top:4px;display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden">${W.column}</p></div>
+    <div ${fz("news")}><b style="font-size:12px">교회 소식</b><p style="margin-top:4px;white-space:pre-line;font-size:${W.news.length>150?"9px":"10px"}">${W.news}</p></div></div></div>`;
+  const f=BF[bField];
+  const right={1:`<h2>디자인 가져오기</h2><p class="mute">업체가 준 디자인이든 교회가 만든 디자인이든, 글자를 뺀 배경을 PDF나 이미지로 올립니다.</p>
+      <ul class="rows" style="margin-top:12px"><li><span><b>가을 디자인</b><br><span class="mute">바깥면 · 안쪽면 2장</span></span><span class="pill p-ok">지금 쓰는 중</span></li><li><span><b>성탄 디자인</b><br><span class="mute">12월 1일부터 적용 예약</span></span><span class="pill p-a">예약</span></li></ul>
+      <div class="hidebox" style="margin-top:14px;justify-content:center;padding:26px">배경 PDF · 이미지를 끌어다 놓기 (체험판에서는 쉬어 둡니다)</div>`,
+    2:`<h2>글자 · 사진 칸</h2><p class="mute">미리보기에서 칸을 누르거나 아래에서 고르세요.</p>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin:12px 0">${Object.entries(BF).map(([k,v])=>`<button class="btn sm ${k===bField?"":"gh"}" onclick="bField='${k}';bSide='${v[1]}';render()">${v[0]}</button>`).join("")}</div>
+      <div class="kv"><div><b>칸</b>${f[0]}</div><div><b>채워지는 곳</b>${f[2]}</div><div><b>글꼴</b>${f[3]}</div><div><b>넘칠 때</b>글자 줄이기</div></div>`,
+    3:`<h2>이번 주 자동 채움</h2><ul class="rows"><li><span>설교 제목 · 본문</span><span class="pill p-ok">주간 사역에서 ✓</span></li><li><span>칼럼</span><span class="pill ${W.st[1]===2?"p-ok":"p-w"}">${W.st[1]===2?"주간 사역에서 ✓":"확정 기다림"}</span></li><li><span>예배 순서 · 위원</span><span class="pill p-ok">타임테이블에서 ✓</span></li><li><span>날짜 · 호수</span><span class="pill p-ok">자동 ✓</span></li></ul>
+      <div class="form"><label for="bn">교회 소식 (직접 입력) — 고치면 미리보기가 바로 바뀝니다</label><textarea id="bn" rows="5">${W.news}</textarea><label for="bp">기도제목</label><textarea id="bp" rows="3">${W.prayer}</textarea></div>
+      ${W.news.length>150?'<p class="pill p-w" style="margin-top:10px">교회 소식 칸이 넘쳐 글자를 줄였습니다</p>':""}`,
+    4:`<h2>출력</h2><p class="mute" style="margin-bottom:10px">판형</p><div style="display:flex;gap:6px;flex-wrap:wrap">${["B4 2단 접지","A4 2단 접지","A4 한 장"].map(t=>`<button class="btn sm ${t===bFmt?"":"gh"}" onclick="bFmt='${t}';render()">${t}</button>`).join("")}</div>
+      <ul class="rows" style="margin-top:14px"><li><span><b>교회 프린터용 PDF</b><br><span class="mute">여백이 가장 작게 나오도록 배율을 맞춥니다</span></span><button class="btn sm" onclick="setSt(3,2)">PDF 만들기</button></li><li><span><b>인쇄소용 재단선 PDF</b><br><span class="mute">배경을 재단선 밖까지 3mm 늘립니다</span></span><button class="btn sm gh" onclick="toast('인쇄소용 PDF는 정식판에서 저장됩니다')">PDF 만들기</button></li></ul>`,
+    5:`<h2>디자인 업체와 주고받기</h2><p class="mute">일러스트레이터에서 열리는 파일로 내보냅니다. 글자는 글자 그대로, 칸마다 레이어를 나눕니다.</p><div style="display:flex;gap:8px;margin-top:12px"><button class="btn sm gh" onclick="toast('PDF로 내보냈어요 (체험판)')">PDF로</button><button class="btn sm gh" onclick="toast('SVG로 내보냈어요 (체험판)')">SVG로</button></div>
+      <p class="mute" style="margin-top:14px">업체가 다듬어 돌려준 배경을 다시 가져오면 칸 위치는 그대로 두고 배경만 바꿉니다.</p>`}[bStep];
+  $("#view").innerHTML=head(`주간 사역 / ${nextSun.getMonth()+1}월 ${nextSun.getDate()}일 주일`,"주보 작업",`<button class="btn gh" onclick="toast('담임목사님께 검토를 요청했어요')">검토 요청</button><button class="btn" onclick="bStep=4;render()">인쇄 PDF 만들기</button>`)+`
+  <div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px" class="bsteps">${STEPS.map((s,i)=>`<button onclick="bStep=${i+1};render()" style="min-height:52px;border-radius:12px;display:flex;align-items:center;gap:10px;padding:0 14px;font-weight:600;${bStep===i+1?"background:var(--ac);color:#fff;border:1px solid var(--ac)":"background:#fff;border:1px solid var(--line)"}"><span style="width:24px;height:24px;border-radius:12px;display:grid;place-items:center;font-size:12px;${bStep===i+1?"background:#fff;color:var(--ac)":"background:#EEF0F3"}">${i+1}</span>${s}</button>`).join("")}</div>
+  <div class="grid g2"><section class="card"><h2>앱 자체 템플릿 · 가을 디자인 <span class="tabs" style="border:0">${[["outer","바깥면 (표지)"],["inner","안쪽면"]].map(([k,l])=>`<button class="${bSide===k?"on":""}" onclick="bSide='${k}';render()">${l}</button>`).join("")}</span></h2>
+    <div style="padding:10px 6px">${bSide==="outer"?outer:inner}</div><p class="mute" style="margin-top:8px">${bFmt} · 미리보기 ${bStep===2?"· 칸을 눌러 고르세요":""}</p></section>
+  <section class="card">${right}</section></div>`;
+  if(bStep===3){$("#bn").oninput=e=>{W.news=e.target.value;clearTimeout(bulletin.t);bulletin.t=setTimeout(()=>{bSide="inner";render();const t=$("#bn");t.focus();t.setSelectionRange(t.value.length,t.value.length)},500)};$("#bp").oninput=e=>{W.prayer=e.target.value}}
+}
+
+const LAY=[["church","교회력·절기","#24407A","#E6EBF6"],["denom","교단 · 노회","#6A3FA0","#F0EAF8"],["court","치리회","#1F6F6A","#E3F2F0"],["event","교회 행사","#A86A10","#FDF4E3"],["dept","부서","#2E6B3A","#E8F3EC"],["society","사회","#7A8394","#EEF0F3"]];
+const EV=[[1,"1/3","신년 감사예배","event"],[1,"1/17","공동의회","court"],[2,"2/6","설 연휴","society"],[2,"2/10","사순절 시작","church","규칙"],[3,"3/2","학교 개학","society"],[3,"3/16","봄노회 서류 마감","denom","알림"],[3,"3/21~27","고난주간","church","규칙"],[3,"3/28","부활절","church","규칙"],[4,"4/13","봄 노회 정기회","denom"],[4,"4/24","중고등부 수련회","dept","초안",1],[4,"4/26~30","중간고사 기간","society"],[5,"5/2","어린이주일","event","규칙"],[5,"5/9","어버이주일","event","규칙"],[5,"5/16","성령강림주일","church","규칙"],[6,"6/13","교사 세미나","dept","초안",1],[6,"6/13","청년부 기도회","dept","초안",1],[7,"7/4","맥추감사주일","church","규칙"],[7,"7/23~24","여름수련회","event","",1],[8,"8/6~7","여름성경학교","event","",1],[9,"9월","총회","denom"],[9,"9/15","추석","society"],[9,"9/28","가을노회 고시부 마감","denom","알림"],[10,"10/12","가을노회 서류 마감","denom","알림"],[10,"10/26","가을 노회 정기회","denom"],[10,"10/31","종교개혁기념주일","church","규칙"],[11,"11/21","추수감사주일","church","규칙"],[11,"11/28","대림절 첫 주일","church","규칙"],[12,"12/12","정책당회","court"],[12,"12/25","성탄절","church"],[12,"12/31","송구영신예배","event"]].map(([m,d,name,layer,tag,warn])=>({m,d,name,layer,tag,warn}));
+const calOff={};let calMode="연간",calM=1,conflictOn=true;
+function cal(){
+  const L=k=>LAY.find(l=>l[0]===k);
+  const evHTML=e=>{const l=L(e.layer);return `<li style="display:flex;gap:8px;align-items:baseline;padding:5px 8px;border-radius:8px;background:${l[3]};${e.warn&&conflictOn?"outline:1.5px solid #C0392B;":""}${e.tag==="초안"?"border:1px dashed "+l[2]+";":""}font-size:12.5px"><b style="color:${l[2]};flex:none;font-variant-numeric:tabular-nums">${e.d}</b><span style="flex:1">${e.name}</span>${e.tag?`<span style="font-size:10.5px;color:var(--mute)">${e.tag}</span>`:""}</li>`};
+  const vis=EV.filter(e=>!calOff[e.layer]);
+  const months=calMode==="연간"?[...Array(12)].map((_,i)=>i+1):[calM];
+  $("#view").innerHTML=head("2027년 · 계획 중 · 3단계 부서 초안","연간 일정",`<button class="btn gh" onclick="toast('2026 일정을 복사했어요 — 규칙 일정은 날짜가 저절로 옮겨집니다')">2026 일정 복사</button><button class="btn" onclick="newEv()">＋ 일정 추가</button>`)+`
+  <section class="card" style="padding:16px 20px;display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+    <div class="tabs" style="border:0">${["연간","월간"].map(t=>`<button class="${calMode===t?"on":""}" onclick="calMode='${t}';render()">${t}</button>`).join("")}</div>
+    ${calMode==="월간"?`<span style="display:flex;gap:6px;align-items:center"><button class="btn sm gh" aria-label="이전 달" onclick="calM=calM>1?calM-1:12;render()">‹</button><b>${calM}월</b><button class="btn sm gh" aria-label="다음 달" onclick="calM=calM<12?calM+1:1;render()">›</button></span>`:""}
+    <span class="mute" style="margin-left:auto">층</span>${LAY.map(l=>`<button onclick="calOff['${l[0]}']=!calOff['${l[0]}'];render()" style="height:36px;padding:0 12px;border-radius:999px;font-size:13px;display:flex;align-items:center;gap:7px;${calOff[l[0]]?"background:#fff;color:#7A8394;border:1px solid var(--line2)":"background:"+l[3]+";border:1px solid "+l[3]+";font-weight:600"}"><i style="width:9px;height:9px;border-radius:5px;background:${calOff[l[0]]?"#C9CED6":l[2]}"></i>${l[1]}</button>`).join("")}</section>
+  <div class="grid g2" style="grid-template-columns:minmax(0,2.2fr) minmax(0,1fr)">
+   <section class="card" style="padding:16px"><div style="display:grid;grid-template-columns:repeat(${calMode==="연간"?"auto-fill,minmax(200px,1fr)":"1,1fr"});gap:10px">${months.map(m=>{const L2=vis.filter(e=>e.m===m);return `<div style="border:1px solid var(--line);border-radius:12px;padding:12px;${m===TODAY.getMonth()+1&&calMode==="연간"?"box-shadow:inset 0 0 0 2px var(--acbg)":""}"><b style="display:block;margin-bottom:8px;cursor:pointer" onclick="calMode='월간';calM=${m};render()">${m}월</b><ul style="list-style:none;display:flex;flex-direction:column;gap:5px">${L2.map(evHTML).join("")||'<li class="mute" style="font-size:12px">켜 둔 층에 일정 없음</li>'}</ul></div>`}).join("")}</div></section>
+   <div style="display:flex;flex-direction:column;gap:16px">
+    <section class="card"><h2>충돌 검사 <span class="pill p-r">3건</span></h2><ul class="rows">
+      <li style="display:block"><b>준비 기간 겹침</b><p class="mute">여름수련회와 여름성경학교의 D-60 준비가 6월에 교육부 한 사람에게 몰립니다.</p></li>
+      <li style="display:block"><b>장소 중복</b><p class="mute">6월 13일 교육관에 교사 세미나와 청년부 기도회가 함께 잡혀 있습니다.</p></li>
+      <li style="display:block"><b>시험 기간</b><p class="mute">중고등부 수련회 초안이 중간고사 기간과 겹칩니다.</p></li></ul>
+      <div style="display:flex;gap:8px;margin-top:12px"><button class="btn sm gh" onclick="conflictOn=!conflictOn;render()">${conflictOn?"표시 끄기":"표시 켜기"}</button><button class="btn sm gh" onclick="toast('다시 검사했어요 · 충돌 3건')">다시 검사</button></div></section>
+    <section class="card"><h2>표시</h2><ul class="rows"><li><span style="padding:2px 8px;border:1px dashed #2E6B3A;border-radius:6px">부서 초안 (확정 전)</span></li><li><span style="padding:2px 8px;outline:1.5px solid #C0392B;border-radius:6px">충돌 있음</span></li><li><span><b>규칙</b> <span class="mute">해마다 날짜가 자동 이동</span></span></li></ul></section>
+    <section class="card"><h2>노회 서류 <span class="pill" style="background:#F0EAF8;color:#6A3FA0">교단 · 노회 층</span></h2><p class="mute">봄노회 3월 16일, 가을노회 10월 12일까지 서류를 냅니다. 마감 전에 휴대폰으로 알립니다.</p>
+      <button class="btn sm" style="margin-top:12px" onclick="toast('2027 사역계획안을 정책당회 자료로 묶었어요 (체험판)')">정책당회 자료로 보내기</button></section>
+   </div></div>`;
+}
+function newEv(){openP(`<h3>일정 추가</h3><div class="form">
+  <label for="e1">이름</label><input id="e1" placeholder="예: 가을 야유회">
+  <div class="r2"><div><label for="e2">달</label><select id="e2">${[...Array(12)].map((_,i)=>`<option value="${i+1}">${i+1}월</option>`).join("")}</select></div><div><label for="e3">날짜</label><input id="e3" placeholder="예: 10/17"></div></div>
+  <label for="e4">층</label><select id="e4">${LAY.map(l=>`<option value="${l[0]}">${l[1]}</option>`).join("")}</select>
+  <label style="display:flex;gap:8px;align-items:center;color:var(--ink)"><input type="checkbox" id="e5" style="width:auto"> 부서 초안 (아직 확정 전)</label>
+  <button class="btn" onclick="saveEv()">달력에 넣기</button></div>`)}
+function saveEv(){const n=$("#e1").value.trim();if(!n){toast("이름을 넣어 주세요");return}const m=+$("#e2").value;EV.push({m,d:$("#e3").value||m+"월",name:n,layer:$("#e4").value,tag:$("#e5").checked?"초안":""});calOff[$("#e4").value]=false;closeP();render();toast(`${m}월에 ‘${n}’을 넣었어요`)}
+
+// ── 행사 준비 · 노회 서류 (기본 디자인의 Event · Presbytery) ──
+const EVDAY=new Date(TODAY.getFullYear(),10,15);
+const dLeft=d=>Math.round((d-TODAY)/864e5);
+const evMD=d=>{const x=new Date(EVDAY);x.setDate(x.getDate()-d);return md(x)};
+const ITEMS=[["섭외·예배","a1","작년 결과 보고 확인","담임목사",60,1],["섭외·예배","a2","감사 간증자 섭외","담임목사",35,1],["섭외·예배","a3","예배 순서·특송 확정","담임목사",30,1],["섭외·예배","a4","본당 음향·영상 점검 예약","사무간사",30,1],["홍보","b1","표어 확정","담임목사",35,1],["홍보","b2","현수막 문구 확정","담임목사",23],["홍보","b3","현수막 발주","사무간사",21,0,"forms","인쇄물 열기"],["홍보","b4","단체 문자 1차","사무간사",14,0,"weekly","문자 만들기"],["물품·인쇄","c1","헌금봉투 디자인","사무간사",35,1],["물품·인쇄","c3","헌금봉투 인쇄","사무간사",28,0,"forms","봉투 만들기"],["물품·인쇄","c2","순서지 템플릿 선택","사무간사",30,1],["재정","d1","행사 예산 승인","재정부",40,1],["재정","d2","과일 바구니 주문","여전도회",10]].map(([g,k,name,role,d,done,link,ll])=>({g,k,name,role,d,done:!!done,link,ll}));
+const SUBP={worship:{name:"예배 · 순서",owner:"[부목사]",date:"10월 8일",ok:true,goal:"감사의 기억을 나누는 예배로 드립니다. 간증 한 가정과 찬양대 특송을 중심에 둡니다.",rows:[["10/25","간증 가정 원고 받기 (5분 분량)","[부목사]","원고 1부",0],["11/1","예배 순서 · 순서지 확정","[부목사] · 사무간사","순서지 150부",0],["11/8","찬양대 특송 리허설","찬양대 지휘자","—",0],["11/14","음향 · 영상 점검, 간증 마이크 준비","방송실","무선 마이크 1",0],["11/15","감사헌금 봉헌 순서 · 봉헌 위원 4명","[부목사]","헌금 바구니 4",0]],people:"봉헌 위원 4명 · 안내 위원 4명 · 간증 가정 1 · 방송실 2명",note:"간증이 길어져 예배가 10분 넘게 늦어졌습니다. 올해는 원고를 미리 받아 5분에 맞춥니다."},
+ fellow:{name:"친교 · 애찬",owner:"여전도회장",date:"작성 중",ok:false,goal:"예배 후 온 교인이 함께 감사 애찬을 나눕니다. 새가족 자리를 따로 마련합니다.",rows:[["11/8","애찬 메뉴 · 인원 확정 (130명)","여전도회","메뉴표",0],["11/13","식재료 장보기","여전도회 2명","130인분",420000],["11/14","친교실 테이블 배치","남전도회","테이블 16 · 의자 130",0],["11/15","배식 · 정리 조 편성","여전도회","일회용품 150",80000]],people:"배식 8명 · 정리 6명",note:"작년에 국이 모자랐습니다. 등록 인원 + 10%로 준비합니다."},
+ deco:{name:"장식 · 전시",owner:"남전도회장",date:"10월 10일",ok:true,goal:"강단과 로비에 감사 열매를 전시합니다. 성도들이 가져온 열매를 함께 놓습니다.",rows:[["11/1","감사 열매 안내 광고","사무간사","주보 · 문자",0],["11/13","강단 장식 (곡식 · 과일)","남전도회","볏단 2 · 과일 상자 3",100000],["11/14","로비 전시대 설치","남전도회","전시대 2",50000]],people:"설치 4명",note:"전시대가 통로를 막았습니다. 올해는 로비 왼쪽 벽으로 옮깁니다."}};
+let evF="all",evPlan=true,evSub="worship";
+function evPrep(){
+  const now=dLeft(EVDAY);
+  const it=ITEMS.map(x=>({...x,late:!x.done&&x.d>now,today:!x.done&&x.d===now}));
+  const done=it.filter(x=>x.done).length,late=it.filter(x=>x.late).length,pct=Math.round(done/it.length*100),circ=188.5;
+  const vis=it.filter(x=>evF==="all"||(evF==="open"&&!x.done)||(evF==="late"&&x.late));
+  const B=[["과일 바구니","여전도회",600000],["현수막 · 인쇄물","사무간사",250000],["장식 · 전시","남전도회",150000],["감사 애찬","여전도회",500000]],bt=B.reduce((s,b)=>s+b[2],0);
+  const sp=SUBP[evSub],subTot=sp.rows.reduce((s,r)=>s+r[4],0);
+  const kv=(k,v)=>`<div><b>${k}</b><span>${v}</span></div>`;
+  $("#view").innerHTML=head("행사 준비 / 추수감사주일",`추수감사주일 <span class="pill ${now>=0?"p-w":"p-g"}" style="vertical-align:middle;font-size:13px">${now>0?"D-"+now:now===0?"D-Day":"지남"}</span>`,`<button class="btn gh" onclick="toast('2025 결과 보고를 엽니다 (체험판)')">2025 결과 보고</button><button class="btn" onclick="newItem()">＋ 준비 항목 추가</button>`)+`
+  <section class="card" style="display:flex;gap:24px;align-items:center;flex-wrap:wrap">
+    <svg width="76" height="76" viewBox="0 0 76 76" aria-hidden="true"><circle cx="38" cy="38" r="30" fill="none" stroke="#EEF0F3" stroke-width="8"/><circle cx="38" cy="38" r="30" fill="none" stroke="#24407A" stroke-width="8" stroke-linecap="round" stroke-dasharray="${(circ*done/it.length).toFixed(1)} ${circ}" transform="rotate(-90 38 38)"/><text x="38" y="43" text-anchor="middle" font-size="16" font-weight="700" fill="#1B2230">${pct}%</text></svg>
+    <div style="flex:1;min-width:220px"><b style="font-size:17px">11월 15일 주일 · 본당</b><p class="mute">책임 · 담임목사 · 템플릿 · 추수감사주일 (2025 결과 반영)</p>
+      <p style="margin-top:6px">준비 <b>${done}/${it.length}</b> · <span style="color:${late?"var(--red)":"var(--ok)"};font-weight:600">지연 ${late}건</span></p></div>
+    <div style="flex:2;min-width:280px"><p class="mute" style="margin-bottom:10px">준비 타임라인</p><div style="position:relative;height:14px;background:#EEF0F3;border-radius:7px">
+      <i style="position:absolute;left:0;top:0;bottom:0;width:${Math.min(100,Math.max(0,(60-now)/60*100))}%;background:var(--acbg);border-radius:7px"></i>
+      ${it.map(x=>`<i title="${x.name}" style="position:absolute;top:0;left:${((60-x.d)/60*100).toFixed(1)}%;width:14px;height:14px;margin-left:-7px;border-radius:7px;background:${x.done?"var(--ok)":x.late?"var(--red)":x.today?"#D9A441":"#fff"};border:2px solid ${x.done?"var(--ok)":x.late?"var(--red)":x.today?"#D9A441":"var(--ac)"}"></i>`).join("")}
+      <i style="position:absolute;top:-6px;bottom:-6px;left:${Math.min(100,Math.max(0,(60-now)/60*100))}%;width:2px;background:var(--ink)"></i></div>
+      <div style="display:flex;justify-content:space-between;font-size:11.5px;color:var(--mute);margin-top:8px"><span>D-60 · ${evMD(60)}</span><span>D-30</span><span>D-14</span><span>D-Day · 11/15</span></div></div></section>
+  <section class="card"><h2>행사 계획안 <span style="display:flex;gap:8px;align-items:center"><span class="pill p-ok">당회 승인 · 10월 11일</span><button class="btn sm gh" onclick="evPlan=!evPlan;render()">${evPlan?"접기":"펼치기"}</button></span></h2>
+    <p class="mute" style="margin-top:-8px">2026 사역계획안의 ‘추수감사주일’에서 넘어왔습니다 · 작년 계획안을 바탕으로 작성</p>
+    ${evPlan?`<div style="display:flex;gap:8px;flex-wrap:wrap;margin:14px 0">${[["작성","10월 2일 · 담임목사"],["교역자회의 검토","10월 6일"],["재정부 예산","10월 6일"],["당회 승인","10월 11일"]].map(([a,b])=>`<span style="display:flex;gap:8px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px"><i style="width:20px;height:20px;border-radius:10px;background:var(--ok);color:#fff;display:grid;place-items:center;font-style:normal;font-size:11px">✓</i><span><b style="font-size:13px">${a}</b><br><span class="mute" style="font-size:12px">${b}</span></span></span>`).join("")}</div>
+    <div class="grid g2"><div class="kv" style="margin:0">${kv("목적","한 해 동안 베푸신 은혜를 함께 기억하며 감사로 예배드립니다. 받은 은혜를 이웃과 나누는 주일로 섬깁니다.")}${kv("일시 · 장소","11월 15일(주일) 오전 11시 · 본당 / 오후 1시 감사 나눔 · 친교실")}${kv("대상","전 교인 · 새가족 초청 · 130명")}${kv("표어","범사에 감사하라 (살전 5:18)")}${kv("홍보","현수막(D-21 발주) · 주보 광고 3주 · 단체 문자 2회 · 카톡 카드")}</div>
+    <div><div class="kv" style="margin:0 0 12px">${[["오전 11시","추수감사예배 · 감사 간증 · 특송"],["예배 후","감사 열매 전시 · 단체 사진"],["오후 1시","감사 애찬 · 과일 바구니 나눔"],["그 주간","이웃 섬김 · 지역 어르신께 과일 바구니"]].map(([a,b])=>kv(a,b)).join("")}</div>
+      <div class="tbl"><table style="min-width:0"><thead><tr><th>예산 · 재정부 승인 10월 6일</th><th>맡은 곳</th><th class="num">금액</th></tr></thead><tbody>${B.map(b=>`<tr><td>${b[0]}</td><td>${b[1]}</td><td class="num">${won(b[2])}</td></tr>`).join("")}<tr><td><b>합계</b></td><td></td><td class="num"><b>${won(bt)}</b></td></tr></tbody></table></div></div></div>`:""}</section>
+  <section class="card"><h2>세부 계획안 <small>맡은 부서가 각자 쓰고, 총괄이 확인합니다 · ${Object.values(SUBP).filter(s=>s.ok).length}/3 확인</small></h2>
+    <div class="tabs" style="margin-bottom:16px">${Object.entries(SUBP).map(([k,s])=>`<button class="${k===evSub?"on":""}" onclick="evSub='${k}';render()">${s.name} ${s.ok?'<span class="pill p-ok" style="font-size:11px">확인</span>':'<span class="pill p-w" style="font-size:11px">작성 중</span>'}</button>`).join("")}</div>
+    <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center"><span><b>${sp.name} 세부 계획</b> <span class="mute">· 작성 ${sp.owner} · ${sp.date}</span></span><span style="display:flex;gap:8px"><button class="btn sm gh" onclick="toast('준비 항목으로 보냈어요 — 아래 목록에 날짜별로 들어갑니다')">준비 항목으로 보내기</button>${sp.ok?'<span class="pill p-ok">총괄 확인됨</span>':`<button class="btn sm" onclick="SUBP.${evSub}.ok=true;render();toast('총괄 확인했어요')">총괄 확인</button>`}</span></div>
+    <p style="margin:10px 0 12px">${sp.goal}</p>
+    <div class="tbl"><table><thead><tr><th>언제</th><th>할 일</th><th>담당</th><th>물품 · 수량</th><th class="num">예산</th></tr></thead><tbody>${sp.rows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td class="num">${r[4]?r[4].toLocaleString():"—"}</td></tr>`).join("")}<tr><td colspan="4"><b>${sp.name} 소계</b></td><td class="num"><b>${won(subTot)}</b></td></tr></tbody></table></div>
+    <div class="grid g2" style="margin-top:14px"><div class="kv" style="margin:0">${kv("필요한 사람",sp.people)}</div><div class="kv" style="margin:0">${kv("작년에서",sp.note)}</div></div></section>
+  <div class="grid g2">
+   <section class="card"><h2>준비 항목 <span class="tabs" style="border:0">${[["all","전체"],["open","남은 일"],["late","지연"]].map(([k,l])=>`<button class="${evF===k?"on":""}" onclick="evF='${k}';render()">${l}</button>`).join("")}</span></h2>
+    ${["섭외·예배","홍보","물품·인쇄","재정"].map(g=>{const L=vis.filter(x=>x.g===g);return L.length?`<div class="grp" style="margin-top:12px">${g}</div><ul class="rows">${L.map(x=>`<li><label style="display:flex;gap:10px;align-items:center;cursor:pointer;min-height:32px"><input type="checkbox" ${x.done?"checked":""} onchange="togItem('${x.k}')" style="width:18px;height:18px;accent-color:#24407A"><span style="${x.done?"color:var(--mute);text-decoration:line-through":""}">${x.name}</span></label><span style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end"><span class="mute">${x.role} · D-${x.d} · ${evMD(x.d)}</span>${x.late?'<span class="pill p-r">지연</span>':x.today?'<span class="pill p-w">오늘</span>':""}${x.link&&!x.done?`<button class="btn sm gh" onclick="go('${x.link}')">${x.ll}</button>`:""}</span></li>`).join("")}</ul>`:""}).join("")||'<p class="mute">해당 항목이 없습니다</p>'}</section>
+   <div style="display:flex;flex-direction:column;gap:16px">
+    <section class="card"><h2>작년에서 배운 점</h2><ul class="rows"><li style="display:block"><span class="pill p-ok">반영됨</span><p class="mute" style="margin-top:4px">현수막이 D-7에 도착해 게시가 빠듯했습니다. 올해는 발주를 D-21로 앞당겼습니다.</p></li><li style="display:block"><span class="pill p-ok">반영됨</span><p class="mute" style="margin-top:4px">과일 바구니가 부족했습니다. 올해는 등록 인원으로 수량을 계산합니다.</p></li></ul></section>
+    <section class="card"><h2>연결된 일</h2><ul class="rows"><li><span>시설 예약 · 본당 11/15</span><span class="pill p-ok">확정</span></li><li><span>현수막 발주</span><span class="pill ${it.find(x=>x.k==="b3").done?"p-ok":"p-g"}">${it.find(x=>x.k==="b3").done?"발주함":"발주 전"}</span></li><li><span>헌금봉투 인쇄</span><span class="pill ${it.find(x=>x.k==="c3").done?"p-ok":"p-r"}">${it.find(x=>x.k==="c3").done?"완료":"지연"}</span></li><li><span>지출 청구</span><span class="pill p-w">2건 대기</span></li></ul></section>
+    <section class="card"><h2>예산 대비 집행 <small>${won(Math.round(bt*.4))} / ${won(bt)}</small></h2><div style="height:12px;background:#EEF0F3;border-radius:6px"><i style="display:block;height:100%;width:40%;background:var(--ac);border-radius:6px"></i></div><p class="mute" style="margin-top:8px">예산은 지출 청구와 이어져, 쓴 만큼 여기에 보입니다.</p></section>
+   </div></div>`;
+}
+function togItem(k){const x=ITEMS.find(i=>i.k===k);x.done=!x.done;render();toast(x.done?`‘${x.name}’ 마쳤어요`:`‘${x.name}’ 다시 남은 일로`)}
+function newItem(){openP(`<h3>준비 항목 추가</h3><p class="mute" style="margin-top:6px">이번 해에만 필요한 항목을 넣습니다.</p><div class="form">
+  <label for="i1">할 일</label><input id="i1" placeholder="예: 새가족 초청 엽서 보내기">
+  <div class="r2"><div><label for="i2">묶음</label><select id="i2"><option>섭외·예배</option><option>홍보</option><option>물품·인쇄</option><option>재정</option></select></div><div><label for="i3">담당</label><select id="i3"><option>담임목사</option><option>사무간사</option><option>재정부</option><option>여전도회</option><option>남전도회</option></select></div></div>
+  <label for="i4">언제까지 (행사 며칠 전)</label><input id="i4" type="number" value="14" min="0" max="60">
+  <button class="btn" onclick="saveItem()">항목 넣기</button></div>`)}
+function saveItem(){const n=$("#i1").value.trim();if(!n){toast("할 일을 넣어 주세요");return}ITEMS.push({g:$("#i2").value,k:"n"+ITEMS.length,name:n,role:$("#i3").value,d:+$("#i4").value||0,done:false});closeP();evF="all";render();toast("준비 항목을 넣었어요")}
+
+let prSess="fall",prFilter="all",prPrev="push";
+const PRDONE={b:true,c:true};const PRRULE={};
+const PRWHEN={60:true,30:true,14:true,7:true,1:true};const PRWAY={push:true,kakao:false,me:true,sms:false,cal:true};
+const FL=[["목사고시 청원","fall"],["목사후보생고시 청원","both"],["장로고시 청원","both"],["전도사고시 청원","both"],["이명이래 청원","both"],["이명이거 청원","both"],["목사안수 청원","fall"],["강도사 인허 청원","fall"],["위임목사 청빙 청원","both"],["시무목사 청빙 청원","both"],["부목사 청빙 청원","both"],["부목사 계속 청빙 청원","both"],["당회 조직을 위한 장로 선거 청원","fall"],["장로증선 청원","both"],["신학계속 청원","both"],["강도사고시 청원","both"],["교회가입 청원","spring"],["선교사 파송 청원","both"],["교회 폐쇄 허락 청원","both"],["교회 명칭 변경 청원","both"],["교역자 생활비 보조 청원","spring"],["구제 청원","spring"],["교정선교 보조 청원","spring"],["학원선교 보조 청원","spring"],["교회 현황 보고서","both","시찰회 서류"],["교회 자립 지원 신청서","spring","시찰회 서류"]];
+const SEASON={spring:"봄",fall:"가을",both:"봄·가을"};
+function presby(){
+  const due=new Date(TODAY.getFullYear(),9,30),dd=dLeft(due),dTxt=dd>0?"D-"+dd:dd===0?"오늘":"지남";
+  const base=[{k:"a",name:"부목사 계속 청빙 청원",no:12,why:"[부목사] 시무가 올해 12월 31일에 끝납니다. 다음 해 계속 청빙을 이번 노회에 받습니다.",docs:["계속 청빙 청원서","당회 결의록"],owner:"사무간사",due:"10월 30일(금)",urgent:1},
+   {k:"b",name:"목사후보생고시 청원",no:2,why:"[신학생] 신대원 입시가 겨울이라 이번 가을노회 추천이 사실상 마감입니다.",docs:["고시 청원서","당회장 추천서","세례 증명"],owner:"담임목사",due:"10월 20일(화) 고시부"},
+   {k:"c",name:"장로고시 청원",no:3,why:"봄노회(4월)에 장로증선 허락을 받았고, 노회 훈련 4개월을 마쳤습니다.",docs:["고시 청원서","공동의회 회의록","훈련 수료증"],owner:"담임목사",due:"10월 20일(화) 고시부"},
+   {k:"d",name:"목사고시 청원",no:1,why:"[강도사] 강도사 인허 뒤 1년이 지났습니다. 목사고시는 가을노회에만 받습니다.",docs:["고시 청원서","강도사 인허증","당회장 추천서"],owner:"담임목사",due:"10월 30일(금)",urgent:1}];
+  const doneN=base.filter(b=>PRDONE[b.k]).length,mine=base.map(b=>b.no);
+  const forms=FL.map((f,i)=>({no:i+1,name:f[0],season:PRRULE[i+1]||f[1],tag:f[2]||""})).filter(f=>prFilter==="all"||(prFilter==="sichal"?f.tag:f.season===prFilter));
+  const firstOpen=base.find(b=>!PRDONE[b.k]&&b.urgent);
+  const msg=firstOpen?`서식 ${firstOpen.no}번 청원서에 당회 결의록을 붙여 10월 30일(금)까지 노회 서기에게 보내 주세요.`:"이번 노회에 낼 서류를 모두 보냈습니다.";
+  const ttl=firstOpen?`노회 서류 마감 ${dTxt} · ${firstOpen.name.replace(" 청원","")}`:"노회 서류 · 모두 보냄";
+  const ways=[["push","휴대폰 앱 푸시","앱을 깐 교역자 · 알림을 누르면 이 화면으로"],["kakao","카카오 알림톡","교회 카카오톡 채널 · 문구 검수 · 건당 비용"],["me","카카오톡 나에게 보내기","담임목사 본인 카톡방으로만"],["sms","문자","위 길이 안 될 때 대신"],["cal","캘린더 등록","구글 캘린더 · 톡캘린더에 마감일"]];
+  const sessBody=prSess==="fall"?`
+  <div class="grid g4">
+    <div class="card stat"><small>정기노회</small><b style="font-size:22px;white-space:nowrap">11월 10일</b><span>화요일 · [노회명] 정기회</span></div>
+    <div class="card stat"><small>일반 서류 마감</small><b style="color:var(--red)">${dTxt}</b><span>10월 30일(금)까지 노회 서기</span></div>
+    <div class="card stat"><small>고시부 서류 마감</small><b style="color:var(--mute)">지남</b><span>10월 20일(화) · 2건 제출</span></div>
+    <div class="card stat"><small>이번 노회에 낼 것</small><b style="color:var(--ac)">${doneN} / ${base.length}</b><span>보낸 것 / 전체</span></div>
+  </div>
+  <div class="grid g2">
+   <section class="card"><h2>이번 노회에 낼 서류 <small>교회 사정을 보고 앱이 골랐습니다 · ${doneN}/${base.length} 보냄</small></h2><ul class="rows">
+    ${base.map(b=>{const dn=!!PRDONE[b.k];return `<li style="display:block;padding:14px 0"><div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center"><b style="font-size:15px">${b.name} <span class="mute" style="font-weight:400">· 서식 ${b.no}번</span></b><span class="pill ${dn?"p-ok":b.urgent?"p-r":"p-w"}">${dn?"제출함":b.urgent?"준비 중 · "+dTxt:"준비 중"}</span></div>
+      <p class="mute" style="margin:6px 0">${b.why}</p><div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px">${b.docs.map(d=>`<span class="pill p-g">${d}</span>`).join("")}</div>
+      <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center"><span class="mute">담당 ${b.owner} · 마감 ${b.due}</span><span style="display:flex;gap:6px"><button class="btn sm gh" onclick="toast('서식 ${b.no}번 청원서를 원본 한글 파일 모양으로 채웁니다 (체험판)')">청원서 만들기</button><button class="btn sm ${dn?"gh":""}" onclick="PRDONE['${b.k}']=!PRDONE['${b.k}'];render()">${dn?"보낸 날 기록됨":"보냈어요"}</button></span></div></li>`}).join("")}</ul></section>
+   <div style="display:flex;flex-direction:column;gap:16px">
+    <section class="card"><h2>다음 노회로 걸어 둔 것</h2><ul class="rows">${[["2027 봄노회","신학계속 청원 (15번)","새 학년 재학 · 성적증명서가 3월 이후에 나와 봄노회에 냅니다."],["2027 봄노회","교역자 생활비 보조 청원 (21번)","보조 청원은 봄노회에만 받습니다."],["2027 가을노회","목사안수 청원 (7번)","이번 가을 목사고시에 합격하면 다음 가을노회에 안수를 청원합니다."]].map(([w,n,y])=>`<li style="display:block"><span class="pill p-a">${w}</span> <b>${n}</b><p class="mute" style="margin-top:4px">${y}</p></li>`).join("")}</ul></section>
+    <section class="card"><h2>교회 사정 <button class="btn sm gh" onclick="toast('교회 사정을 고치면 낼 서류가 다시 계산됩니다')">고치기</button></h2><div class="kv" style="margin:0">${[["[부목사] 시무","2025.1.1 ~ 올해 12.31"],["담임목사 시무","~ 2027.12.31"],["[신학생]","신대원 입시 준비"],["[강도사]","2025.10 강도사 인허"],["장로 선택","올해 4월 허락 · 1명 훈련 수료"]].map(([k,v])=>`<div><b style="width:110px">${k}</b>${v}</div>`).join("")}</div>
+      <p class="mute" style="margin-top:10px">시무 만료일, 학년, 장로 선택 계획을 적어 두면 어느 노회에 무엇을 낼지 앱이 계산합니다.</p></section>
+   </div></div>`:prSess==="spring"?`<section class="card soon"><h2>2027 봄 정기노회 · 4월 13일(화)</h2><p>아직 낼 서류를 고르기 전입니다. 지금은 ‘걸어 둔 것’ 2건(신학계속 청원 · 교역자 생활비 보조 청원)이 기다리고 있어요. 서류 마감 60일 전부터 알림이 갑니다.</p></section>`
+   :`<section class="card"><h2>지난 노회</h2><ul class="rows">${[["2026 봄 정기노회","4월 14일","장로증선 청원 · 교역자 생활비 보조 청원 · 교회 현황 보고서","3건 허락"],["2025 가을 정기노회","10월 14일","강도사 인허 청원 · 부목사 청빙 청원","2건 허락"]].map(([a,b,c,d])=>`<li><span><b>${a}</b> <span class="mute">· ${b}</span><br><span class="mute">${c}</span></span><span class="pill p-ok">${d}</span></li>`).join("")}</ul></section>`;
+  $("#view").innerHTML=head("양식·인쇄물 / 노회 서류",`노회 서류 알림 <span class="pill p-r" style="vertical-align:middle;font-size:13px">서류 마감 ${dTxt}</span>`,`<button class="btn gh" onclick="toast('노회 서기 공문을 넣으면 일정이 저절로 바뀝니다 (체험판)')">서기 공문 넣기</button><button class="btn" onclick="toast('노회 서식 작성 화면은 정식판에서 열립니다')">노회 서식 열기</button>`)+`
+  <div class="tabs">${[["fall","2026 가을 정기노회 · 11월 10일(화)"],["spring","2027 봄 정기노회 · 4월 13일(화)"],["past","지난 노회"]].map(([k,l])=>`<button class="${prSess===k?"on":""}" onclick="prSess='${k}';render()">${l}</button>`).join("")}</div>
+  ${sessBody}
+  <section class="card"><h2>우리 노회 서식 · ${FL.length}종 <span class="tabs" style="border:0">${[["all","전체"],["fall","가을"],["spring","봄"],["both","봄·가을"],["sichal","시찰회 서류"]].map(([k,l])=>`<button class="${prFilter===k?"on":""}" onclick="prFilter='${k}';render()">${l}</button>`).join("")}</span></h2>
+    <p class="mute" style="margin:-6px 0 12px">노회에서 받은 원본 한글 파일을 올려 두면, 입력한 값이 원본 그대로 채워져 출력됩니다. 받는 시기를 바꾸면 알림 계산도 따라 바뀝니다.</p>
+    <div class="tbl" style="max-height:420px;overflow:auto"><table><thead><tr><th>번호</th><th>서식</th><th>받는 노회</th><th>원본</th></tr></thead><tbody>
+    ${forms.map(f=>`<tr style="${mine.includes(f.no)?"background:#F7F9FD":""}"><td>${f.no}</td><td><b>${f.name}</b> ${mine.includes(f.no)?'<span class="pill p-a">이번 노회</span>':""} ${f.tag?`<span class="pill p-w">${f.tag}</span>`:""}</td>
+      <td><span style="display:inline-flex;background:#EEF0F3;border-radius:8px;padding:2px">${["spring","fall","both"].map(o=>`<button onclick="PRRULE[${f.no}]='${o}';render()" style="border:0;border-radius:6px;padding:4px 9px;font-size:12px;${f.season===o?"background:#fff;font-weight:600;color:var(--ac)":"background:none;color:var(--mute)"}">${SEASON[o]}</button>`).join("")}</span></td>
+      <td>${f.tag?'<span class="pill p-ok">등록됨</span>':`<button class="btn sm gh" onclick="toast('한글 원본 올리기는 정식판에서')">올리기</button>`}</td></tr>`).join("")}</tbody></table></div></section>
+  <div class="grid g2">
+   <section class="card"><h2>알림</h2><p class="mute" style="margin-bottom:8px">언제</p><div style="display:flex;gap:6px;flex-wrap:wrap">${[60,30,14,7,1].map(d=>`<button class="btn sm ${PRWHEN[d]?"":"gh"}" onclick="PRWHEN[${d}]=!PRWHEN[${d}];render()">D-${d}</button>`).join("")}</div>
+    <p class="mute" style="margin:16px 0 8px">어떻게</p><ul class="rows">${ways.map(([k,l,n])=>`<li><label style="display:flex;gap:10px;align-items:flex-start;cursor:pointer"><input type="checkbox" ${PRWAY[k]?"checked":""} onchange="PRWAY['${k}']=!PRWAY['${k}'];render()" style="width:18px;height:18px;margin-top:2px;accent-color:#24407A"><span><b>${l}</b><br><span class="mute">${n}</span></span></label></li>`).join("")}</ul>
+    <p class="mute" style="margin-top:12px">받는 사람 · 담임목사 · 사무간사 · 해당 교역자</p></section>
+   <section class="card"><h2>휴대폰에 이렇게 옵니다 <span class="tabs" style="border:0">${[["push","앱 푸시"],["kakao","알림톡"]].map(([k,l])=>`<button class="${prPrev===k?"on":""}" onclick="prPrev='${k}';render()">${l}</button>`).join("")}</span></h2>
+    <div style="max-width:320px;margin:6px auto 0;background:${prPrev==="push"?"linear-gradient(170deg,#3B4A6B,#1B2230)":"#B2C7DA"};border-radius:28px;padding:22px 14px 26px">
+     ${prPrev==="push"?`<p style="text-align:center;color:#fff;font-size:12px;opacity:.85">${TODAY.getMonth()+1}월 ${TODAY.getDate()}일 ${DOW[TODAY.getDay()]}요일</p><p style="text-align:center;color:#fff;font-size:44px;font-weight:300;line-height:1.1;margin-bottom:16px">9:00</p>
+      <div style="background:rgba(255,255,255,.92);border-radius:16px;padding:12px 14px;font-size:13px"><div style="display:flex;justify-content:space-between;color:var(--mute);font-size:11.5px"><span>사역 행정</span><span>지금</span></div><b style="display:block;margin:2px 0">${ttl}</b>${msg}</div>`
+     :`<div style="background:#fff;border-radius:14px;overflow:hidden;font-size:13px"><div style="background:#FEE500;padding:8px 12px;font-weight:700;font-size:12px">알림톡 도착</div><div style="padding:12px 14px"><b>노회 서류 마감 안내</b><p style="margin-top:6px;white-space:pre-line">안녕하세요, 은혜샘교회 행정실입니다.\n\n${msg}\n\n· 마감: 10월 30일(금)\n· 받는 곳: [노회명] 서기</p><div style="margin-top:10px;border:1px solid #E3E6EB;border-radius:8px;text-align:center;padding:8px">앱에서 서류 보기</div></div></div><p style="font-size:11px;color:#3A4352;margin-top:6px;text-align:right">오전 9:00</p>`}
+    </div>
+    <p class="mute" style="margin-top:12px">${prPrev==="kakao"&&!PRWAY.kakao?"알림톡은 지금 꺼져 있어요. 왼쪽에서 켜면 이렇게 갑니다.":"위에서 ‘보냈어요’를 누르면 알림 글도 바뀝니다."}</p></section>
+  </div>`;
+}
+
+function soon(){const it=[...M1,...M2].find(m=>m[0]===cur);
+  $("#view").innerHTML=head("핏처치",it[1])+`<section class="card soon"><div class="ic">${svg(it[2]||"doc").replace('viewBox','width="26" height="26" viewBox')}</div><h2>${it[1]}</h2><p>${it[4]||""}</p><p style="margin-top:-8px"><span class="pill p-w">정식판에 들어갑니다</span></p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><button class="btn gh" onclick="go('home')">홈으로</button><button class="btn" onclick="go('mem')">성도 관리 체험하기</button></div></section>`}
+go(VIEWS[location.hash.slice(1)]?location.hash.slice(1):"home");   // 주소 끝 #msg 처럼 바로 그 메뉴로
+</script>
+</body></html>
