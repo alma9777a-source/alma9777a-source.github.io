@@ -416,3 +416,12 @@ html.buy-open .buySoon{display:none!important}
  .slide-v2 .in{grid-template-columns:1fr}
 }
 @media (prefers-reduced-motion: reduce){.v2fx *,.v2badge,.v2h .shine,.v2chips li,.hero .btn.v2go,.v2scr,.v2ph,.v2ring:before{animation:none!important}}
+/* 2026-11-09 2.0.20 새 디자인: 첫 슬라이드를 앱과 같은 흑연 · 금색으로(목사님 ‘메인 이미지 2.0 출시 이미지도’) */
+.hero:has(.slide-v2.on){background:radial-gradient(900px 600px at 30% 30%,#2a2416 0%,#141210 40%,#0D1014 72%,#090b0e 100%)}
+.slide-v2 .v2fx .o1{background:radial-gradient(circle,#D7A34B,transparent 70%);opacity:.28}
+.slide-v2 .v2fx .o3{background:radial-gradient(circle,#7DB8E8,transparent 70%);opacity:.18}
+.slide-v2 .v2scr img{box-shadow:0 0 0 1px #343B45}
+.v2ring b{font-size:30px;letter-spacing:-.02em}
+@media (max-width:860px){ .v2ring b{font-size:22px} }
+.v2ring span{background:#0D1014}
+
