@@ -438,13 +438,22 @@ html.buy-open .buySoon{display:none!important}
 @media (max-width:860px){ .stvis{min-height:330px;margin-top:8px} .stw.a{right:30px} .stw.b{left:50px;right:-10px;top:130px} }
 
 
-/* 후기 */
-.reviews{background:var(--bg)}
-.rvgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;margin-top:8px}
-.rv{margin:0;display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:20px;padding:24px 24px 20px}
-.rv blockquote{margin:0;font-size:16px;line-height:1.75;color:var(--ink)}
-.rv blockquote::before{content:"“";display:block;font-family:"Gowun Batang",serif;font-size:40px;line-height:1;color:var(--green2,#2f7a52);margin-bottom:6px}
-.rv figcaption{margin-top:14px;font-size:14px;font-weight:700;color:var(--mute)}
-@media (prefers-color-scheme: dark){.rv{background:var(--card)}}
-@media (max-width:520px){.rvgrid{grid-template-columns:1fr}}
-.rv figcaption{margin-top:auto;padding-top:14px}
+/* 후기 — 흐르는 띠 */
+.reviews{background:linear-gradient(180deg,#fffdf7 0%,#f3f8ef 100%);border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden}
+.reviews .sub{margin-bottom:28px}
+.rvband{position:relative;overflow:hidden;padding:8px 0 12px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.rvtrack{display:flex;gap:18px;width:max-content;animation:rvflow 70s linear infinite}
+.rvband:hover .rvtrack,.rvband:focus-within .rvtrack{animation-play-state:paused}
+@keyframes rvflow{from{transform:translateX(0)}to{transform:translateX(calc(-50% - 9px))}}
+.rv{flex:0 0 340px;margin:0;display:flex;flex-direction:column;background:#fff;border:1px solid #ece6d6;border-radius:20px;padding:22px 24px 18px;box-shadow:0 8px 24px rgba(47,122,81,.08)}
+.rv blockquote{margin:0;font-size:15.5px;line-height:1.75;color:var(--ink)}
+.rv blockquote::before{content:"“";display:block;font-family:"Gowun Batang",serif;font-size:38px;line-height:1;color:var(--gold,#c9a24a);margin-bottom:4px}
+.rv figcaption{margin-top:auto;padding-top:14px;font-size:14px;font-weight:700;color:var(--green2,#2f7a51)}
+@media (max-width:520px){.rv{flex-basis:280px}.rvtrack{animation-duration:55s}}
+@media (prefers-reduced-motion:reduce){.rvtrack{animation:none}.rvband{overflow-x:auto;-webkit-mask-image:none;mask-image:none}.rv[aria-hidden]{display:none}}
+@media (prefers-color-scheme: dark){
+  .reviews{background:linear-gradient(180deg,#1c2a21 0%,#203026 100%)}
+  .rv{background:#26372c;border-color:#34493b;box-shadow:none}
+  .rv blockquote{color:#eef3ee}
+  .rv figcaption{color:#8fd3a9}
+}
