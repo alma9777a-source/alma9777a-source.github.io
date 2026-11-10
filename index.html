@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function(){
 <body>
 <nav class="nav"><div class="in">
   <a class="brand" href="#top"><img src="icon.png" alt="">남은 조각</a>
-  <div class="links"><a class="o3" href="#demo">영상</a><a class="o3" href="#why">비교</a><a class="o1" href="#story">이야기</a><a href="#how">쓰는 법</a><a class="o1" href="#screens">화면</a><a href="#features">기능</a><a class="o2" href="#templates">템플릿</a><a class="o2" href="#ipad">아이패드</a><a href="#windows">Windows</a><a class="o1" href="#reviews">후기</a><a href="#price">가격</a><a href="#faq">자주 묻는 질문</a><a href="board.html">묻고 답하기</a></div>
+  <div class="links"><a class="o3" href="#demo">영상</a><a class="o1" href="#reviews">후기</a><a class="o3" href="#why">비교</a><a class="o1" href="#story">이야기</a><a href="#how">쓰는 법</a><a class="o1" href="#screens">화면</a><a href="#features">기능</a><a class="o2" href="#templates">템플릿</a><a class="o2" href="#ipad">아이패드</a><a href="#windows">Windows</a><a href="#price">가격</a><a href="#faq">자주 묻는 질문</a><a href="board.html">묻고 답하기</a></div>
   <a class="langsw" href="en/" onclick="try{localStorage.setItem('nLang','en')}catch(e){}" lang="en">English</a>
   <a class="btn sm" href="#price">무료로 써 보기</a>
 </div></nav>
@@ -116,6 +116,35 @@ document.addEventListener("DOMContentLoaded", function(){
   <div class="howlist" id="howL"><button type="button" class="on" data-h="1">1. 영상 넣고 완성본 고르기</button><button type="button" data-h="2">2. 분위기 · 길이 · 설교자 크기</button><button type="button" data-h="3">3. 자르기 — 군말 · 되풀이 빼기</button><button type="button" data-h="4">4. 제목 · 자막 그 자리에서 고치기</button><button type="button" data-h="5">5. 완성하기 — 썸네일 → 저장 → 유튜브</button><button type="button" data-h="6">6. 한 주 예약 올리기</button><button type="button" data-h="7">7. 바구니 쓰는 법</button></div>
   <script>(function(){var v=document.getElementById("howV"),l=document.getElementById("howL");l.addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;l.querySelectorAll("button").forEach(function(x){x.classList.toggle("on",x===b)});v.poster="video/howto_h"+b.dataset.h+".jpg?v=201";v.querySelector("source").src="video/howto_h"+b.dataset.h+".mp4?v=201";v.load();v.play().catch(function(){});});})();</script>
 </div></section>
+
+<section class="reviews" id="reviews">
+  <div class="in">
+    <h2 class="center">먼저 써 보신 목사님들의 이야기</h2>
+    <p class="sub center">남은 조각을 써 보신 목사님들이 보내 주신 후기입니다.</p>
+  </div>
+  <div class="rvband">
+    <div class="rvtrack r1">
+      <figure class="rv"><span class="rvav" aria-hidden="true">😊</span><div><blockquote>설교 쇼츠 만드는 일이 이렇게 쉬울 줄 몰랐습니다. 30분 정도 익히고 나니 뚝딱 완성됩니다. AI가 자막과 싱크를 맞춰 주고, 배경 음악 넣기와 오타 고치기도 편해서 꼭 권해 드립니다.</blockquote><figcaption>OO교회 OOO 목사</figcaption></div></figure>
+      <figure class="rv"><span class="rvav" aria-hidden="true">🙏</span><div><blockquote>방송팀이 없는 작은 교회인데 영상 수준이 확 올라갔습니다. 설교 영상만 넣으면 AI가 핵심 자막을 뽑아 주니, 주일 설교를 한 주 내내 다시 나누기에 그만입니다.</blockquote><figcaption>OO교회 OOO 목사</figcaption></div></figure>
+      <figure class="rv"><span class="rvav" aria-hidden="true">☀️</span><div><blockquote>매일 아침 1분 큐티 영상을 만드는 데 5분이면 충분합니다. 어울리는 템플릿에 AI가 배경과 글을 알맞게 앉혀 주니, 목회의 아침 시간이 한결 여유로워졌습니다.</blockquote><figcaption>OO교회 OOO 목사</figcaption></div></figure>
+      <figure class="rv"><span class="rvav" aria-hidden="true">⛪</span><div><blockquote>주일 설교 한 편으로 쇼츠 여러 개를 한 번에 만들 수 있어 작업 시간이 80% 넘게 줄었습니다. 사역이 정말 가벼워졌습니다.</blockquote><figcaption>OO교회 OOO 목사</figcaption></div></figure>
+      <figure class="rv" aria-hidden="true"><span class="rvav" aria-hidden="true">😊</span><div><blockquote>설교 쇼츠 만드는 일이 이렇게 쉬울 줄 몰랐습니다. 30분 정도 익히고 나니 뚝딱 완성됩니다. AI가 자막과 싱크를 맞춰 주고, 배경 음악 넣기와 오타 고치기도 편해서 꼭 권해 드립니다.</blockquote><figcaption>OO교회 OOO 목사</figcaption></div></figure>
+      <figure class="rv" aria-hidden="true"><span class="rvav" aria-hidden="true">🙏</span><div><blockquote>방송팀이 없는 작은 교회인데 영상 수준이 확 올라갔습니다. 설교 영상만 넣으면 AI가 핵심 자막을 뽑아 주니, 주일 설교를 한 주 내내 다시 나누기에 그만입니다.</blockquote><figcaption>OO교회 OOO 목사</figcaption></div></figure>
+      <figure class="rv" aria-hidden="true"><span class="rvav" aria-hidden="true">☀️</span><div><blockquote>매일 아침 1분 큐티 영상을 만드는 데 5분이면 충분합니다. 어울리는 템플릿에 AI가 배경과 글을 알맞게 앉혀 주니, 목회의 아침 시간이 한결 여유로워졌습니다.</blockquote><figcaption>OO교회 OOO 목사</figcaption></div></figure>
+      <figure class="rv" aria-hidden="true"><span class="rvav" aria-hidden="true">⛪</span><div><blockquote>주일 설교 한 편으로 쇼츠 여러 개를 한 번에 만들 수 있어 작업 시간이 80% 넘게 줄었습니다. 사역이 정말 가벼워졌습니다.</blockquote><figcaption>OO교회 OOO 목사</figcaption></div></figure>
+    </div>
+    <div class="rvtrack r2">
+      <figure class="rv"><span class="rvav" aria-hidden="true">📣</span><div><blockquote>지역 주민 전도용 30초 메시지를 만드는 데 쓰고 있습니다. 화질 깨짐 없이 깔끔하게 나오고, 디자인도 언제든 바꿀 수 있어 만족합니다.</blockquote><figcaption>OO교회 OOO 목사</figcaption></div></figure>
+      <figure class="rv"><span class="rvav" aria-hidden="true">💛</span><div><blockquote>어르신 성도님들을 위해 글자를 큼직하게 키운 묵상 영상을 만들 때 씁니다. 글 고치기가 문서 작업하듯 쉬워서 편합니다.</blockquote><figcaption>OO교회 OOO 목사</figcaption></div></figure>
+      <figure class="rv"><span class="rvav" aria-hidden="true">🎉</span><div><blockquote>부활절 · 수련회 같은 교회 행사 영상도 10분이면 만듭니다. 디자인을 잘 몰라도 AI가 깔끔하게 균형을 잡아 줍니다.</blockquote><figcaption>OO교회 OOO 목사</figcaption></div></figure>
+      <figure class="rv"><span class="rvav" aria-hidden="true">🤝</span><div><blockquote>처음엔 단추 자리가 조금 낯설었지만 한두 번 해 보니 금방 익숙해졌습니다. 막힐 때 최완수 목사님께 여쭈니 친절히 알려 주셔서 쉽게 배웠습니다.</blockquote><figcaption>OO교회 OOO 목사</figcaption></div></figure>
+      <figure class="rv" aria-hidden="true"><span class="rvav" aria-hidden="true">📣</span><div><blockquote>지역 주민 전도용 30초 메시지를 만드는 데 쓰고 있습니다. 화질 깨짐 없이 깔끔하게 나오고, 디자인도 언제든 바꿀 수 있어 만족합니다.</blockquote><figcaption>OO교회 OOO 목사</figcaption></div></figure>
+      <figure class="rv" aria-hidden="true"><span class="rvav" aria-hidden="true">💛</span><div><blockquote>어르신 성도님들을 위해 글자를 큼직하게 키운 묵상 영상을 만들 때 씁니다. 글 고치기가 문서 작업하듯 쉬워서 편합니다.</blockquote><figcaption>OO교회 OOO 목사</figcaption></div></figure>
+      <figure class="rv" aria-hidden="true"><span class="rvav" aria-hidden="true">🎉</span><div><blockquote>부활절 · 수련회 같은 교회 행사 영상도 10분이면 만듭니다. 디자인을 잘 몰라도 AI가 깔끔하게 균형을 잡아 줍니다.</blockquote><figcaption>OO교회 OOO 목사</figcaption></div></figure>
+      <figure class="rv" aria-hidden="true"><span class="rvav" aria-hidden="true">🤝</span><div><blockquote>처음엔 단추 자리가 조금 낯설었지만 한두 번 해 보니 금방 익숙해졌습니다. 막힐 때 최완수 목사님께 여쭈니 친절히 알려 주셔서 쉽게 배웠습니다.</blockquote><figcaption>OO교회 OOO 목사</figcaption></div></figure>
+    </div>
+  </div>
+</section>
 
 <section class="why" id="why"><div class="in">
   <h2 class="center">교회를 위해, 한 번 구입으로</h2>
@@ -298,35 +327,6 @@ document.addEventListener("DOMContentLoaded", function(){
     <div class="wimg"><img src="img/windows.jpg" data-win-src="img/windows_v2.jpg?v=2" alt="Windows에서 실행한 남은 조각 화면" loading="lazy"><p class="wcap winSoon">출시 전 미리보기 화면입니다. 실제 화면은 달라질 수 있습니다.</p></div>
   </div>
 </div></section>
-
-<section class="reviews" id="reviews">
-  <div class="in">
-    <h2 class="center">먼저 써 보신 목사님들의 이야기</h2>
-    <p class="sub center">남은 조각을 써 보신 목사님들이 보내 주신 후기입니다.</p>
-  </div>
-  <div class="rvband">
-    <div class="rvtrack r1">
-      <figure class="rv"><span class="rvav" aria-hidden="true">😊</span><div><blockquote>설교 쇼츠 만드는 일이 이렇게 쉬울 줄 몰랐습니다. 30분 정도 익히고 나니 뚝딱 완성됩니다. AI가 자막과 싱크를 맞춰 주고, 배경 음악 넣기와 오타 고치기도 편해서 꼭 권해 드립니다.</blockquote><figcaption>OO교회 OOO 목사</figcaption></div></figure>
-      <figure class="rv"><span class="rvav" aria-hidden="true">🙏</span><div><blockquote>방송팀이 없는 작은 교회인데 영상 수준이 확 올라갔습니다. 설교 영상만 넣으면 AI가 핵심 자막을 뽑아 주니, 주일 설교를 한 주 내내 다시 나누기에 그만입니다.</blockquote><figcaption>OO교회 OOO 목사</figcaption></div></figure>
-      <figure class="rv"><span class="rvav" aria-hidden="true">☀️</span><div><blockquote>매일 아침 1분 큐티 영상을 만드는 데 5분이면 충분합니다. 어울리는 템플릿에 AI가 배경과 글을 알맞게 앉혀 주니, 목회의 아침 시간이 한결 여유로워졌습니다.</blockquote><figcaption>OO교회 OOO 목사</figcaption></div></figure>
-      <figure class="rv"><span class="rvav" aria-hidden="true">⛪</span><div><blockquote>주일 설교 한 편으로 쇼츠 여러 개를 한 번에 만들 수 있어 작업 시간이 80% 넘게 줄었습니다. 사역이 정말 가벼워졌습니다.</blockquote><figcaption>OO교회 OOO 목사</figcaption></div></figure>
-      <figure class="rv" aria-hidden="true"><span class="rvav" aria-hidden="true">😊</span><div><blockquote>설교 쇼츠 만드는 일이 이렇게 쉬울 줄 몰랐습니다. 30분 정도 익히고 나니 뚝딱 완성됩니다. AI가 자막과 싱크를 맞춰 주고, 배경 음악 넣기와 오타 고치기도 편해서 꼭 권해 드립니다.</blockquote><figcaption>OO교회 OOO 목사</figcaption></div></figure>
-      <figure class="rv" aria-hidden="true"><span class="rvav" aria-hidden="true">🙏</span><div><blockquote>방송팀이 없는 작은 교회인데 영상 수준이 확 올라갔습니다. 설교 영상만 넣으면 AI가 핵심 자막을 뽑아 주니, 주일 설교를 한 주 내내 다시 나누기에 그만입니다.</blockquote><figcaption>OO교회 OOO 목사</figcaption></div></figure>
-      <figure class="rv" aria-hidden="true"><span class="rvav" aria-hidden="true">☀️</span><div><blockquote>매일 아침 1분 큐티 영상을 만드는 데 5분이면 충분합니다. 어울리는 템플릿에 AI가 배경과 글을 알맞게 앉혀 주니, 목회의 아침 시간이 한결 여유로워졌습니다.</blockquote><figcaption>OO교회 OOO 목사</figcaption></div></figure>
-      <figure class="rv" aria-hidden="true"><span class="rvav" aria-hidden="true">⛪</span><div><blockquote>주일 설교 한 편으로 쇼츠 여러 개를 한 번에 만들 수 있어 작업 시간이 80% 넘게 줄었습니다. 사역이 정말 가벼워졌습니다.</blockquote><figcaption>OO교회 OOO 목사</figcaption></div></figure>
-    </div>
-    <div class="rvtrack r2">
-      <figure class="rv"><span class="rvav" aria-hidden="true">📣</span><div><blockquote>지역 주민 전도용 30초 메시지를 만드는 데 쓰고 있습니다. 화질 깨짐 없이 깔끔하게 나오고, 디자인도 언제든 바꿀 수 있어 만족합니다.</blockquote><figcaption>OO교회 OOO 목사</figcaption></div></figure>
-      <figure class="rv"><span class="rvav" aria-hidden="true">💛</span><div><blockquote>어르신 성도님들을 위해 글자를 큼직하게 키운 묵상 영상을 만들 때 씁니다. 글 고치기가 문서 작업하듯 쉬워서 편합니다.</blockquote><figcaption>OO교회 OOO 목사</figcaption></div></figure>
-      <figure class="rv"><span class="rvav" aria-hidden="true">🎉</span><div><blockquote>부활절 · 수련회 같은 교회 행사 영상도 10분이면 만듭니다. 디자인을 잘 몰라도 AI가 깔끔하게 균형을 잡아 줍니다.</blockquote><figcaption>OO교회 OOO 목사</figcaption></div></figure>
-      <figure class="rv"><span class="rvav" aria-hidden="true">🤝</span><div><blockquote>처음엔 단추 자리가 조금 낯설었지만 한두 번 해 보니 금방 익숙해졌습니다. 막힐 때 최완수 목사님께 여쭈니 친절히 알려 주셔서 쉽게 배웠습니다.</blockquote><figcaption>OO교회 OOO 목사</figcaption></div></figure>
-      <figure class="rv" aria-hidden="true"><span class="rvav" aria-hidden="true">📣</span><div><blockquote>지역 주민 전도용 30초 메시지를 만드는 데 쓰고 있습니다. 화질 깨짐 없이 깔끔하게 나오고, 디자인도 언제든 바꿀 수 있어 만족합니다.</blockquote><figcaption>OO교회 OOO 목사</figcaption></div></figure>
-      <figure class="rv" aria-hidden="true"><span class="rvav" aria-hidden="true">💛</span><div><blockquote>어르신 성도님들을 위해 글자를 큼직하게 키운 묵상 영상을 만들 때 씁니다. 글 고치기가 문서 작업하듯 쉬워서 편합니다.</blockquote><figcaption>OO교회 OOO 목사</figcaption></div></figure>
-      <figure class="rv" aria-hidden="true"><span class="rvav" aria-hidden="true">🎉</span><div><blockquote>부활절 · 수련회 같은 교회 행사 영상도 10분이면 만듭니다. 디자인을 잘 몰라도 AI가 깔끔하게 균형을 잡아 줍니다.</blockquote><figcaption>OO교회 OOO 목사</figcaption></div></figure>
-      <figure class="rv" aria-hidden="true"><span class="rvav" aria-hidden="true">🤝</span><div><blockquote>처음엔 단추 자리가 조금 낯설었지만 한두 번 해 보니 금방 익숙해졌습니다. 막힐 때 최완수 목사님께 여쭈니 친절히 알려 주셔서 쉽게 배웠습니다.</blockquote><figcaption>OO교회 OOO 목사</figcaption></div></figure>
-    </div>
-  </div>
-</section>
 
 <section class="price" id="price"><div class="in">
   <h2 class="center">먼저 무료로 써 보세요</h2>
